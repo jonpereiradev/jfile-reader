@@ -15,11 +15,11 @@ final class BigIntegerTypeConfiguratorImpl
 
     @Override
     public BigIntegerTypeConfigurator min(BigInteger min) {
-        return rule(new MinBigIntegerRule(position, min));
+        return rule(position -> new MinBigIntegerRule(position, min));
     }
 
     @Override
     public BigIntegerTypeConfigurator max(BigInteger max) {
-        return rule(new MaxBigIntegerRule(position, max));
+        return rule(position -> new MaxBigIntegerRule(position, max));
     }
 }

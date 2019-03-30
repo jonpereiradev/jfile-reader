@@ -6,14 +6,14 @@ import com.jonpereiradev.jfile.reader.stream.StreamReader;
 import java.io.IOException;
 import java.util.List;
 
-final class CsvFileReader implements JFileReader {
+final class JFileReaderImpl implements JFileReader {
 
     private final JFileReaderContext context;
     private final StreamReader streamReader;
 
     private JFileReaderIterator iterator;
 
-    CsvFileReader(JFileReaderContext context) {
+    JFileReaderImpl(JFileReaderContext context) {
         this.context = context;
         this.streamReader = context.getStreamReader();
     }

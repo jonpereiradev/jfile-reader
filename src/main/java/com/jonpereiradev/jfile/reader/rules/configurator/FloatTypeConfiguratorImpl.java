@@ -12,12 +12,12 @@ final class FloatTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<FloatTyp
 
     @Override
     public FloatTypeConfigurator min(float min) {
-        return rule(new MinFloatRule(position, min));
+        return rule(position -> new MinFloatRule(position, min));
     }
 
     @Override
     public FloatTypeConfigurator max(float max) {
-        return rule(new MaxFloatRule(position, max));
+        return rule(position -> new MaxFloatRule(position, max));
     }
 
 }

@@ -1,6 +1,6 @@
 package com.jonpereiradev.jfile.reader.rules.column;
 
-abstract class AbstractColumnRule implements ColumnRule {
+public abstract class AbstractColumnRule implements ColumnRule {
 
     private final int position;
 

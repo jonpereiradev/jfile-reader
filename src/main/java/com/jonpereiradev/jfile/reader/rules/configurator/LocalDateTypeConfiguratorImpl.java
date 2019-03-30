@@ -20,21 +20,21 @@ final class LocalDateTypeConfiguratorImpl
 
     @Override
     public LocalDateTypeConfigurator future() {
-        return rule(new LocalDateFutureRule(position, dateTimeFormatter));
+        return rule(position -> new LocalDateFutureRule(position, dateTimeFormatter));
     }
 
     @Override
     public LocalDateTypeConfigurator futureOrPresent() {
-        return rule(new LocalDateFutureOrPresentRule(position, dateTimeFormatter));
+        return rule(position -> new LocalDateFutureOrPresentRule(position, dateTimeFormatter));
     }
 
     @Override
     public LocalDateTypeConfigurator past() {
-        return rule(new LocalDatePastRule(position, dateTimeFormatter));
+        return rule(position -> new LocalDatePastRule(position, dateTimeFormatter));
     }
 
     @Override
     public LocalDateTypeConfigurator pastOrPresent() {
-        return rule(new LocalDatePastOrPresentRule(position, dateTimeFormatter));
+        return rule(position -> new LocalDatePastOrPresentRule(position, dateTimeFormatter));
     }
 }

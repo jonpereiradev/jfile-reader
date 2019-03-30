@@ -19,12 +19,12 @@ final class BigDecimalTypeConfiguratorImpl
 
     @Override
     public BigDecimalTypeConfigurator min(BigDecimal min) {
-        return rule(new MinBigDecimalRule(position, min, decimalFormat));
+        return rule(position -> new MinBigDecimalRule(position, min, decimalFormat));
     }
 
     @Override
     public BigDecimalTypeConfigurator max(BigDecimal max) {
-        return rule(new MaxBigDecimalRule(position, max, decimalFormat));
+        return rule(position -> new MaxBigDecimalRule(position, max, decimalFormat));
     }
 
 }

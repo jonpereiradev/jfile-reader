@@ -54,6 +54,14 @@ public class JFileColumn implements Comparable<JFileColumn> {
         return content;
     }
 
+    public Character getCharacter() {
+        if (StringUtils.isBlank(content)) {
+            return null;
+        }
+
+        return content.charAt(0);
+    }
+
     public Short getShort() {
         if (StringUtils.isBlank(content)) {
             return null;

@@ -21,41 +21,41 @@ final class StringTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<StringT
 
     @Override
     public StringTypeConfigurator notEmpty() {
-        return rule(new NotEmptyRule(position));
+        return rule(NotEmptyRule::new);
     }
 
     @Override
     public StringTypeConfigurator min(int min) {
-        return rule(new MinStringRule(position, min));
+        return rule(position -> new MinStringRule(position, min));
     }
 
     @Override
     public StringTypeConfigurator max(int max) {
-        return rule(new MaxStringRule(position, max));
+        return rule(position -> new MaxStringRule(position, max));
     }
 
     @Override
     public StringTypeConfigurator domain(String... values) {
-        return rule(new DomainStringRule(position, Arrays.asList(values)));
+        return rule(position -> new DomainStringRule(position, Arrays.asList(values)));
     }
 
     @Override
     public StringTypeConfigurator email() {
-        return rule(new EmailRule(position));
+        return rule(EmailRule::new);
     }
 
     @Override
     public StringTypeConfigurator cpf() {
-        return rule(new CpfRule(position));
+        return rule(CpfRule::new);
     }
 
     @Override
     public StringTypeConfigurator cnpj() {
-        return rule(new CnpjRule(position));
+        return rule(CnpjRule::new);
     }
 
     @Override
     public StringTypeConfigurator regex(Pattern pattern) {
-        return rule(new RegexRule(position, pattern));
+        return rule(position -> new RegexRule(position, pattern));
     }
 }

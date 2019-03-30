@@ -57,4 +57,5 @@ public class JFileLine implements Comparable<JFileLine> {
     public SortedSet<JFileColumn> getColumns() {
         return columns;
     }
+
 }

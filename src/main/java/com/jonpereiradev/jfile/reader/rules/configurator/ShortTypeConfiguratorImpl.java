@@ -15,16 +15,16 @@ final class ShortTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<ShortTyp
 
     @Override
     public ShortTypeConfigurator min(short min) {
-        return rule(new MinShortRule(position, min));
+        return rule(position -> new MinShortRule(position, min));
     }
 
     @Override
     public ShortTypeConfigurator max(short max) {
-        return rule(new MaxShortRule(position, max));
+        return rule(position -> new MaxShortRule(position, max));
     }
 
     @Override
     public ShortTypeConfigurator domain(Short... values) {
-        return rule(new DomainShortRule(position, Arrays.asList(values)));
+        return rule(position -> new DomainShortRule(position, Arrays.asList(values)));
     }
 }

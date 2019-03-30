@@ -9,6 +9,7 @@ import com.jonpereiradev.jfile.reader.stream.StreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -65,6 +66,8 @@ final class JFileReaderIteratorImpl implements JFileReaderIterator {
 
     @Override
     public List<RuleViolation> validate() {
+        Objects.requireNonNull(context.getRuleConfiguration(), "No rule configuration provided.");
+
         if (!cached) {
             forEachRemaining(line -> {
                 List<RuleViolation> currentViolations = new JFileValidatorEngine(context).validate(line);

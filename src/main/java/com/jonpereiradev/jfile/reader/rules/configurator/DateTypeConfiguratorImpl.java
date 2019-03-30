@@ -19,21 +19,21 @@ final class DateTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<DateTypeC
 
     @Override
     public DateTypeConfigurator future() {
-        return rule(new DateFutureRule(position, dateFormat));
+        return rule(position -> new DateFutureRule(position, dateFormat));
     }
 
     @Override
     public DateTypeConfigurator futureOrPresent() {
-        return rule(new DateFutureOrPresentRule(position, dateFormat));
+        return rule(position -> new DateFutureOrPresentRule(position, dateFormat));
     }
 
     @Override
     public DateTypeConfigurator past() {
-        return rule(new DatePastRule(position, dateFormat));
+        return rule(position -> new DatePastRule(position, dateFormat));
     }
 
     @Override
     public DateTypeConfigurator pastOrPresent() {
-        return rule(new DatePastOrPresentRule(position, dateFormat));
+        return rule(position -> new DatePastOrPresentRule(position, dateFormat));
     }
 }

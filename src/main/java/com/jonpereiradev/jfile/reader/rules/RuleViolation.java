@@ -6,7 +6,6 @@ public class RuleViolation {
     private int column;
     private String content;
     private String rule;
-    private String message;
 
     public int getRow() {
         return row;
@@ -40,11 +39,4 @@ public class RuleViolation {
         this.rule = rule;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

@@ -29,7 +29,7 @@ public final class JFileReaderFactory {
     public static JFileReader newInstance(InputStream inputStream, ReaderConfiguration configuration) {
         Objects.requireNonNull(inputStream, "InputStream is required.");
         JFileReaderContext context = new JFileReaderContext(inputStream, configuration);
-        return new CsvFileReader(context);
+        return new JFileReaderImpl(context);
     }
 
 }

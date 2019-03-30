@@ -12,11 +12,11 @@ final class DoubleTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<DoubleT
 
     @Override
     public DoubleTypeConfigurator min(double min) {
-        return rule(new MinDoubleRule(position, min));
+        return rule(position -> new MinDoubleRule(position, min));
     }
 
     @Override
     public DoubleTypeConfigurator max(double max) {
-        return rule(new MaxDoubleRule(position, max));
+        return rule(position -> new MaxDoubleRule(position, max));
     }
 }

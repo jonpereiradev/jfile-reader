@@ -22,7 +22,7 @@ public class CsvFileReaderTest extends AbstractFileReaderTest {
         Path path = Files.createTempFile("tmp", "1");
 
         try (JFileReader fileReader = JFileReaderFactory.newInstance(path, ReaderConfiguration.utf8Reader("."))) {
-            Assert.assertEquals(CsvFileReader.class, fileReader.getClass());
+            Assert.assertEquals(JFileReaderImpl.class, fileReader.getClass());
         }
     }
 

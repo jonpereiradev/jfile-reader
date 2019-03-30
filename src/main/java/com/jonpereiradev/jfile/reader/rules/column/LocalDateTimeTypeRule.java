@@ -7,17 +7,17 @@ import java.time.format.DateTimeParseException;
 
 public class LocalDateTimeTypeRule extends AbstractColumnRule {
 
-    private final DateTimeFormatter pattern;
+    private final DateTimeFormatter dateTimeFormatter;
 
-    public LocalDateTimeTypeRule(int position, DateTimeFormatter pattern) {
+    public LocalDateTimeTypeRule(int position, DateTimeFormatter dateTimeFormatter) {
         super(position);
-        this.pattern = pattern;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
         try {
-            return fileColumn.getLocalDateTime(pattern) != null;
+            return fileColumn.getLocalDateTime(dateTimeFormatter) != null;
         } catch (DateTimeParseException e) {
             return false;
         }

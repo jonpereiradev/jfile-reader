@@ -7,18 +7,23 @@ import java.time.format.DateTimeFormatter;
 
 public class LocalDateTimePastOrPresentRule extends AbstractColumnRule {
 
-    private final DateTimeFormatter dateFormat;
+    private final DateTimeFormatter dateTimeFormatter;
 
-    public LocalDateTimePastOrPresentRule(int position, DateTimeFormatter dateFormat) {
+    public LocalDateTimePastOrPresentRule(int position, DateTimeFormatter dateTimeFormatter) {
         super(position);
-        this.dateFormat = dateFormat;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        LocalDateTime date = fileColumn.getLocalDateTime(dateFormat);
+        LocalDateTime date = fileColumn.getLocalDateTime(dateTimeFormatter);
         LocalDateTime current = LocalDateTime.now();
 
         return current.compareTo(date) >= 0;
+    }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return new LocalDateTimeTypeRule(getPosition(), dateTimeFormatter).isValid(fileColumn);
     }
 }

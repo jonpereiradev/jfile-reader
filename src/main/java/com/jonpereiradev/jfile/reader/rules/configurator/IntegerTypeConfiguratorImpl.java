@@ -15,17 +15,17 @@ final class IntegerTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<Intege
 
     @Override
     public IntegerTypeConfigurator min(int min) {
-        return rule(new MinIntegerRule(position, min));
+        return rule(position -> new MinIntegerRule(position, min));
     }
 
     @Override
     public IntegerTypeConfigurator max(int max) {
-        return rule(new MaxIntegerRule(position, max));
+        return rule(position -> new MaxIntegerRule(position, max));
     }
 
     @Override
     public IntegerTypeConfigurator domain(Integer... values) {
-        return rule(new DomainIntegerRule(position, Arrays.asList(values)));
+        return rule(position -> new DomainIntegerRule(position, Arrays.asList(values)));
     }
 
 }

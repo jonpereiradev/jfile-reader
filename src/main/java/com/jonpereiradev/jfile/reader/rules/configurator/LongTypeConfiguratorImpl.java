@@ -15,16 +15,16 @@ final class LongTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<LongTypeC
 
     @Override
     public LongTypeConfigurator min(long min) {
-        return rule(new MinLongRule(position, min));
+        return rule(position -> new MinLongRule(position, min));
     }
 
     @Override
     public LongTypeConfigurator max(long max) {
-        return rule(new MaxLongRule(position, max));
+        return rule(position -> new MaxLongRule(position, max));
     }
 
     @Override
     public LongTypeConfigurator domain(Long... values) {
-        return rule(new DomainLongRule(position, Arrays.asList(values)));
+        return rule(position -> new DomainLongRule(position, Arrays.asList(values)));
     }
 }

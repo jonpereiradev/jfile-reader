@@ -2,13 +2,15 @@ package com.jonpereiradev.jfile.reader.rules.configurator;
 
 import com.jonpereiradev.jfile.reader.rules.column.ColumnRule;
 
+import java.util.function.Function;
+
 public interface TypedRuleConfigurator<T> {
 
     T notNull();
 
     T onlyNull();
 
-    T rule(ColumnRule rule);
+    T rule(Function<Integer, ColumnRule> rule);
 
     GenericTypeConfigurator column(int position);
 

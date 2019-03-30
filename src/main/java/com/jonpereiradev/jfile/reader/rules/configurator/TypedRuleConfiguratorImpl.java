@@ -5,6 +5,8 @@ import com.jonpereiradev.jfile.reader.rules.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.rules.column.NotNullRule;
 import com.jonpereiradev.jfile.reader.rules.column.OnlyNullRule;
 
+import java.util.function.Function;
+
 abstract class TypedRuleConfiguratorImpl<T> implements TypedRuleConfigurator<T> {
 
     protected final int position;
@@ -17,18 +19,18 @@ abstract class TypedRuleConfiguratorImpl<T> implements TypedRuleConfigurator<T> 
 
     @Override
     public T notNull() {
-        return rule(new NotNullRule(position));
+        return rule(NotNullRule::new);
     }
 
     @Override
     public T onlyNull() {
-        return rule(new OnlyNullRule(position));
+        return rule(OnlyNullRule::new);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public T rule(ColumnRule rule) {
-        context.getRuleConfiguration().getColumnRules().add(rule);
+    public T rule(Function<Integer, ColumnRule> rule) {
+        context.getRuleConfiguration().getColumnRules().add(rule.apply(position));
         return (T) this;
     }
 

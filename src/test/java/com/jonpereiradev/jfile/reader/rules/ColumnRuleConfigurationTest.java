@@ -89,7 +89,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(ShortTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(ShortTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -109,7 +109,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinShortRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinShortRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxShortRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxShortRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DomainShortRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DomainShortRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -139,7 +139,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(IntegerTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(IntegerTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -149,7 +149,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -159,7 +159,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinIntegerRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinIntegerRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -169,7 +169,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxIntegerRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxIntegerRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -179,7 +179,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DomainIntegerRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DomainIntegerRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -189,7 +189,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LongTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LongTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -199,7 +199,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -209,7 +209,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinLongRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinLongRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -219,7 +219,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxLongRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxLongRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -229,7 +229,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DomainLongRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DomainLongRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -239,7 +239,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(FloatTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(FloatTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -249,7 +249,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -259,7 +259,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinFloatRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinFloatRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -269,7 +269,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxFloatRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxFloatRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -279,7 +279,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DoubleTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DoubleTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -289,7 +289,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -299,7 +299,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinDoubleRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinDoubleRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -309,7 +309,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxDoubleRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxDoubleRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -319,7 +319,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(BigIntegerTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(BigIntegerTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -329,7 +329,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -339,7 +339,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinBigIntegerRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinBigIntegerRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -349,7 +349,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxBigIntegerRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxBigIntegerRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -359,7 +359,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(BigDecimalTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(BigDecimalTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -375,7 +375,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -391,7 +391,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinBigDecimalRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinBigDecimalRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -407,7 +407,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxBigDecimalRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxBigDecimalRule.class.getName(), violations.get(0).getRule());
     }
 
     private DecimalFormat getBigDecimalFormat() {
@@ -424,7 +424,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DateTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DateTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -435,7 +435,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -446,7 +446,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DateFutureRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DateFutureRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -457,7 +457,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DateFutureOrPresentRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DateFutureOrPresentRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -469,7 +469,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DatePastRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DatePastRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -481,7 +481,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DatePastOrPresentRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DatePastOrPresentRule.class.getName(), violations.get(0).getRule());
     }
 
     private String getDataUmDiaAposAtual() {
@@ -499,7 +499,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -510,7 +510,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -521,7 +521,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateFutureRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateFutureRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -532,7 +532,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateFutureOrPresentRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateFutureOrPresentRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -544,7 +544,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDatePastRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDatePastRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -556,7 +556,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDatePastOrPresentRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDatePastOrPresentRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -567,7 +567,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTimeTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTimeTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -578,7 +578,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -595,7 +595,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTimeFutureRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTimeFutureRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -612,7 +612,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTimeFutureOrPresentRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTimeFutureOrPresentRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -630,7 +630,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTimePastRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTimePastRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -648,7 +648,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTimePastOrPresentRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTimePastOrPresentRule.class.getName(), violations.get(0).getRule());
     }
 
     private String getDataHoraUmDiaAposAtual() {
@@ -665,7 +665,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -675,7 +675,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotEmptyRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(NotEmptyRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -685,7 +685,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinStringRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MinStringRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -695,7 +695,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxStringRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxStringRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -705,7 +705,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DomainStringRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(DomainStringRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -716,7 +716,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(RegexRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(RegexRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -726,7 +726,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(EmailRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(EmailRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -736,7 +736,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(CnpjRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(CnpjRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -746,7 +746,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(CpfRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(CpfRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -756,7 +756,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(BooleanTypeRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(BooleanTypeRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -766,7 +766,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(OnlyNullRule.class.getSimpleName(), violations.get(0).getRule());
+        Assert.assertEquals(OnlyNullRule.class.getName(), violations.get(0).getRule());
     }
 
     private List<RuleViolation> validate(Path path) {

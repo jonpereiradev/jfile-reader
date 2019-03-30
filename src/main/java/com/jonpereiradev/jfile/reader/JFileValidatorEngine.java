@@ -7,6 +7,7 @@ import com.jonpereiradev.jfile.reader.rules.column.ColumnRule;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 final class JFileValidatorEngine {
 
@@ -32,22 +33,27 @@ final class JFileValidatorEngine {
             }
         });
 
-        line.getColumns().forEach(column -> {
-            List<ColumnRule> rules = context.getRuleConfiguration().getColumnRules();
+        if (violations.isEmpty()) {
+            line.getColumns().forEach(column -> {
+                List<ColumnRule> rules = context.getRuleConfiguration().getColumnRules();
+                List<ColumnRule> filtered = rules.stream().filter(o -> o.getPosition() == column.getPosition()).collect(Collectors.toList());
 
-            rules.stream().filter(o -> o.getPosition() == column.getPosition()).forEach(o -> {
-                if (o.canValidate(column) && !o.isValid(column)) {
-                    RuleViolation violation = new RuleViolation();
+                for (ColumnRule columnRule : filtered) {
+                    if (columnRule.canValidate(column) && !columnRule.isValid(column)) {
+                        RuleViolation violation = new RuleViolation();
 
-                    violation.setRow(line.getRow());
-                    violation.setColumn(column.getPosition());
-                    violation.setContent(column.getText());
-                    violation.setRule(o.getClass().getSimpleName());
+                        violation.setRow(line.getRow());
+                        violation.setColumn(column.getPosition());
+                        violation.setContent(column.getText());
+                        violation.setRule(columnRule.getClass().getName());
 
-                    violations.add(violation);
+                        violations.add(violation);
+
+                        break;
+                    }
                 }
             });
-        });
+        }
 
         return Collections.unmodifiableList(violations);
     }
