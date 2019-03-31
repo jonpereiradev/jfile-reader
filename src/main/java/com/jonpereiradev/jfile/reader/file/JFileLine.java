@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class JFileLine implements Comparable<JFileLine> {
 
-    private static final ConcurrentMap<Integer, JFileColumn> CACHE = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Integer, JFileColumn> columnsByPosition = new ConcurrentHashMap<>();
 
     private final int row;
     private final String content;
@@ -39,11 +39,11 @@ public class JFileLine implements Comparable<JFileLine> {
     }
 
     public JFileColumn getColumn(int position) {
-        if (!CACHE.containsKey(position)) {
-            CACHE.put(position, getColumns().stream().filter(o -> o.getPosition() == position).findFirst().orElse(null));
+        if (!columnsByPosition.containsKey(position)) {
+            columnsByPosition.put(position, getColumns().stream().filter(o -> o.getPosition() == position).findFirst().orElse(null));
         }
 
-        return CACHE.get(position);
+        return columnsByPosition.get(position);
     }
 
     public int getRow() {
