@@ -9,7 +9,7 @@ import com.jonpereiradev.jfile.reader.rules.column.LocalDatePastRule;
 import java.time.format.DateTimeFormatter;
 
 final class LocalDateTypeConfiguratorImpl
-    extends TypedRuleConfiguratorImpl<LocalDateTypeConfigurator> implements LocalDateTypeConfigurator {
+    extends AbstractRuleConfigurator<LocalDateTypeConfigurator> implements LocalDateTypeConfigurator {
 
     private final DateTimeFormatter dateTimeFormatter;
 

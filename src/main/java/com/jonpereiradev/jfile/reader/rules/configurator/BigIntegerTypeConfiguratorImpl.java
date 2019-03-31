@@ -7,7 +7,7 @@ import com.jonpereiradev.jfile.reader.rules.column.MinBigIntegerRule;
 import java.math.BigInteger;
 
 final class BigIntegerTypeConfiguratorImpl
-    extends TypedRuleConfiguratorImpl<BigIntegerTypeConfigurator> implements BigIntegerTypeConfigurator {
+    extends AbstractRuleConfigurator<BigIntegerTypeConfigurator> implements BigIntegerTypeConfigurator {
 
     BigIntegerTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
         super(position, context);

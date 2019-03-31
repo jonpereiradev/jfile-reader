@@ -7,12 +7,12 @@ import com.jonpereiradev.jfile.reader.rules.column.OnlyNullRule;
 
 import java.util.function.Function;
 
-abstract class TypedRuleConfiguratorImpl<T> implements TypedRuleConfigurator<T> {
+abstract class AbstractRuleConfigurator<T> implements TypedRuleConfigurator<T> {
 
     private final int position;
     private final RuleConfiguratorContext context;
 
-    TypedRuleConfiguratorImpl(int position, RuleConfiguratorContext context) {
+    AbstractRuleConfigurator(int position, RuleConfiguratorContext context) {
         this.position = position;
         this.context = context;
     }

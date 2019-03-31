@@ -7,7 +7,7 @@ import com.jonpereiradev.jfile.reader.rules.column.MinIntegerRule;
 
 import java.util.Arrays;
 
-final class IntegerTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<IntegerTypeConfigurator> implements IntegerTypeConfigurator {
+final class IntegerTypeConfiguratorImpl extends AbstractRuleConfigurator<IntegerTypeConfigurator> implements IntegerTypeConfigurator {
 
     IntegerTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
         super(position, context);

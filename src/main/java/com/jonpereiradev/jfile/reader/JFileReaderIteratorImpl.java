@@ -28,7 +28,11 @@ final class JFileReaderIteratorImpl implements JFileReaderIterator {
 
     @Override
     public boolean hasNext() {
-        return cached ? index < lines.size() : iterator.hasNext();
+        if (cached) {
+            return index < lines.size();
+        }
+
+        return iterator.hasNext();
     }
 
     @Override

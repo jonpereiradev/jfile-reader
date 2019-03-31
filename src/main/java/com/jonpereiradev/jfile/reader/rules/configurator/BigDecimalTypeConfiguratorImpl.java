@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 final class BigDecimalTypeConfiguratorImpl
-    extends TypedRuleConfiguratorImpl<BigDecimalTypeConfigurator> implements BigDecimalTypeConfigurator {
+    extends AbstractRuleConfigurator<BigDecimalTypeConfigurator> implements BigDecimalTypeConfigurator {
 
     private final DecimalFormat decimalFormat;
 

@@ -8,7 +8,7 @@ import com.jonpereiradev.jfile.reader.rules.column.DatePastRule;
 
 import java.text.DateFormat;
 
-final class DateTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<DateTypeConfigurator> implements DateTypeConfigurator {
+final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeConfigurator> implements DateTypeConfigurator {
 
     private final DateFormat dateFormat;
 

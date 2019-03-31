@@ -1,19 +1,12 @@
 package com.jonpereiradev.jfile.reader.rules.configurator;
 
 import com.jonpereiradev.jfile.reader.rules.RuleConfiguratorContext;
-import com.jonpereiradev.jfile.reader.rules.column.CnpjRule;
-import com.jonpereiradev.jfile.reader.rules.column.CpfRule;
-import com.jonpereiradev.jfile.reader.rules.column.DomainStringRule;
-import com.jonpereiradev.jfile.reader.rules.column.EmailRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxStringRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinStringRule;
-import com.jonpereiradev.jfile.reader.rules.column.NotEmptyRule;
-import com.jonpereiradev.jfile.reader.rules.column.RegexRule;
+import com.jonpereiradev.jfile.reader.rules.column.*;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-final class StringTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<StringTypeConfigurator> implements StringTypeConfigurator {
+final class StringTypeConfiguratorImpl extends AbstractRuleConfigurator<StringTypeConfigurator> implements StringTypeConfigurator {
 
     StringTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
         super(position, context);

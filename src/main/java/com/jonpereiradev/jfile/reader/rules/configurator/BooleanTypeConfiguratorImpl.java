@@ -5,9 +5,9 @@ import com.jonpereiradev.jfile.reader.rules.column.DomainCharacterRule;
 
 import java.util.Arrays;
 
-final class BooleanTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<BooleanTypeConfigurator> implements BooleanTypeConfigurator {
+final class BooleanTypeConfiguratorImpl extends AbstractRuleConfigurator<BooleanTypeConfigurator> implements BooleanTypeConfigurator {
 
-    public BooleanTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
+    BooleanTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
         super(position, context);
     }
 

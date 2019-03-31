@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-final class DefaultStreamReader extends StreamReader {
+final class DefaultStreamReader extends AbstractStreamReader {
 
     private final BufferedReader reader;
 

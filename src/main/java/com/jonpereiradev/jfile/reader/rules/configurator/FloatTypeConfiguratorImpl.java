@@ -4,7 +4,7 @@ import com.jonpereiradev.jfile.reader.rules.RuleConfiguratorContext;
 import com.jonpereiradev.jfile.reader.rules.column.MaxFloatRule;
 import com.jonpereiradev.jfile.reader.rules.column.MinFloatRule;
 
-final class FloatTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<FloatTypeConfigurator> implements FloatTypeConfigurator {
+final class FloatTypeConfiguratorImpl extends AbstractRuleConfigurator<FloatTypeConfigurator> implements FloatTypeConfigurator {
 
     FloatTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
         super(position, context);

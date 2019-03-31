@@ -7,7 +7,7 @@ import com.jonpereiradev.jfile.reader.rules.column.MinLongRule;
 
 import java.util.Arrays;
 
-final class LongTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<LongTypeConfigurator> implements LongTypeConfigurator {
+final class LongTypeConfiguratorImpl extends AbstractRuleConfigurator<LongTypeConfigurator> implements LongTypeConfigurator {
 
     LongTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
         super(position, context);

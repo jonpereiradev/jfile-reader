@@ -7,7 +7,7 @@ import com.jonpereiradev.jfile.reader.rules.column.MinShortRule;
 
 import java.util.Arrays;
 
-final class ShortTypeConfiguratorImpl extends TypedRuleConfiguratorImpl<ShortTypeConfigurator> implements ShortTypeConfigurator {
+final class ShortTypeConfiguratorImpl extends AbstractRuleConfigurator<ShortTypeConfigurator> implements ShortTypeConfigurator {
 
     ShortTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
         super(position, context);
