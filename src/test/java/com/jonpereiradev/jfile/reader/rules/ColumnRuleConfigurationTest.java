@@ -4,56 +4,7 @@ import com.jonpereiradev.jfile.reader.AbstractFileReaderTest;
 import com.jonpereiradev.jfile.reader.JFileReader;
 import com.jonpereiradev.jfile.reader.JFileReaderFactory;
 import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
-import com.jonpereiradev.jfile.reader.rules.column.BigDecimalTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.BigIntegerTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.BooleanTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.CnpjRule;
-import com.jonpereiradev.jfile.reader.rules.column.CpfRule;
-import com.jonpereiradev.jfile.reader.rules.column.DateFutureOrPresentRule;
-import com.jonpereiradev.jfile.reader.rules.column.DateFutureRule;
-import com.jonpereiradev.jfile.reader.rules.column.DatePastOrPresentRule;
-import com.jonpereiradev.jfile.reader.rules.column.DatePastRule;
-import com.jonpereiradev.jfile.reader.rules.column.DateTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.DomainIntegerRule;
-import com.jonpereiradev.jfile.reader.rules.column.DomainLongRule;
-import com.jonpereiradev.jfile.reader.rules.column.DomainShortRule;
-import com.jonpereiradev.jfile.reader.rules.column.DomainStringRule;
-import com.jonpereiradev.jfile.reader.rules.column.DoubleTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.EmailRule;
-import com.jonpereiradev.jfile.reader.rules.column.FloatTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.IntegerTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateFutureOrPresentRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateFutureRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDatePastOrPresentRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDatePastRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTimeFutureOrPresentRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTimeFutureRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTimePastOrPresentRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTimePastRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTimeTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.LongTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxBigDecimalRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxBigIntegerRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxDoubleRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxFloatRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxIntegerRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxLongRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxShortRule;
-import com.jonpereiradev.jfile.reader.rules.column.MaxStringRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinBigDecimalRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinBigIntegerRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinDoubleRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinFloatRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinIntegerRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinLongRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinShortRule;
-import com.jonpereiradev.jfile.reader.rules.column.MinStringRule;
-import com.jonpereiradev.jfile.reader.rules.column.NotEmptyRule;
-import com.jonpereiradev.jfile.reader.rules.column.NotNullRule;
-import com.jonpereiradev.jfile.reader.rules.column.OnlyNullRule;
-import com.jonpereiradev.jfile.reader.rules.column.RegexRule;
-import com.jonpereiradev.jfile.reader.rules.column.ShortTypeRule;
+import com.jonpereiradev.jfile.reader.rules.column.*;
 import com.jonpereiradev.jfile.reader.rules.configurator.LineRuleConfigurator;
 import org.junit.Assert;
 import org.junit.Before;
@@ -180,6 +131,26 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
 
         Assert.assertFalse(violations.isEmpty());
         Assert.assertEquals(DomainIntegerRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateIntegerFilledRefNotNullRuleColumn() throws IOException {
+        Path path = createFileWithContent("1||3");
+        ruleConfigurator.column(2).integerType().ref(1).filled().notNull().build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateIntegerDomainRefNotNullRuleColumn() throws IOException {
+        Path path = createFileWithContent("1||3");
+        ruleConfigurator.column(2).integerType().ref(1).domain('1').notNull().build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
@@ -750,13 +721,43 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
     }
 
     @Test
-    public void mustViolateBooleanRuleColumn() throws IOException {
+    public void mustViolateBooleanTypeRuleColumn() throws IOException {
         Path path = createFileWithContent("a|a|c");
         ruleConfigurator.column(2).booleanType().build();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
         Assert.assertEquals(BooleanTypeRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateBooleanDomainRuleColumn() throws IOException {
+        Path path = createFileWithContent("a|t|c");
+        ruleConfigurator.column(2).booleanType().domain('0', '1').build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(DomainCharacterRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateCharacterTypeRuleColumn() throws IOException {
+        Path path = createFileWithContent("a|ab|c");
+        ruleConfigurator.column(2).characterType().build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(CharacterTypeRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateCharacterDomainRuleColumn() throws IOException {
+        Path path = createFileWithContent("a|a|c");
+        ruleConfigurator.column(2).characterType().domain('0').build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(DomainCharacterRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test

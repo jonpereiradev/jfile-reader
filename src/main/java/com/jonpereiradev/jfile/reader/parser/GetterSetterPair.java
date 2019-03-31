@@ -5,46 +5,46 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 
-public final class GetterSetterPair {
+final class GetterSetterPair {
 
     private Field field;
     private Method getter;
     private Method setter;
     private FileColumn annotation;
 
-    public Field getField() {
+    Field getField() {
         return field;
     }
 
-    public void setField(Field field) {
+    void setField(Field field) {
         this.field = field;
     }
 
-    public Method getGetter() {
+    Method getGetter() {
         return getter;
     }
 
-    public void setGetter(Method getter) {
+    void setGetter(Method getter) {
         this.getter = getter;
     }
 
-    public Method getSetter() {
+    Method getSetter() {
         return setter;
     }
 
-    public void setSetter(Method setter) {
+    void setSetter(Method setter) {
         this.setter = setter;
     }
 
-    public FileColumn getAnnotation() {
+    FileColumn getAnnotation() {
         return annotation;
     }
 
-    public void setAnnotation(FileColumn annotation) {
+    void setAnnotation(FileColumn annotation) {
         this.annotation = annotation;
     }
 
-    public boolean hasGetterAndSetter() {
+    boolean hasGetterAndSetter() {
         return getter != null && setter != null;
     }
 

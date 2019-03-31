@@ -30,30 +30,28 @@ final class ObjectReader {
             if (isJavaBeanGetterMethod(method)) {
                 objectName = methodName.substring(PREFIX_GETTER_METHOD.length());
                 Optional<Field> fieldByName = findFieldByName(clazz, objectName);
-                putIfAbsent(objectName, fieldByName, o -> o.setGetter(method));
+                fieldByName.ifPresent(field -> putIfAbsent(field, o -> o.setGetter(method)));
             } else if (isJavaBeanSetterMethod(method)) {
                 objectName = methodName.substring(PREFIX_SETTER_METHOD.length());
                 Optional<Field> fieldByName = findFieldByName(clazz, objectName);
-                putIfAbsent(objectName, fieldByName, o -> o.setSetter(method));
+                fieldByName.ifPresent(field -> putIfAbsent(field, o -> o.setSetter(method)));
             } else if (isJavaBeanBooleanGetterMethod(method)) {
                 objectName = methodName.substring(PREFIX_IS_METHOD.length());
                 Optional<Field> fieldByName = findFieldByName(clazz, objectName);
-                putIfAbsent(objectName, fieldByName, o -> o.setGetter(method));
+                fieldByName.ifPresent(field -> putIfAbsent(field, o -> o.setGetter(method)));
             }
         }
 
         return getterSetterMapping;
     }
 
-    private void putIfAbsent(String objectName, Optional<Field> optional, Consumer<GetterSetterPair> consumer) {
-        optional.ifPresent(o -> {
-            if (o.isAnnotationPresent(FileColumn.class)) {
-                FileColumn annotation = o.getAnnotation(FileColumn.class);
-                GetterSetterPair getterSettingPair = getPairOrCreateIfNotExists(annotation);
-                getterSettingPair.setField(o);
-                consumer.accept(getterSettingPair);
-            }
-        });
+    private void putIfAbsent(Field field, Consumer<GetterSetterPair> consumer) {
+        if (field.isAnnotationPresent(FileColumn.class)) {
+            FileColumn annotation = field.getAnnotation(FileColumn.class);
+            GetterSetterPair getterSettingPair = getPairOrCreateIfNotExists(annotation);
+            getterSettingPair.setField(field);
+            consumer.accept(getterSettingPair);
+        }
     }
 
     private Optional<Field> findFieldByName(Class<?> clazz, String fieldName) {

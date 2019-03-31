@@ -1,17 +1,7 @@
 package com.jonpereiradev.jfile.reader.rules.configurator;
 
 import com.jonpereiradev.jfile.reader.rules.RuleConfiguratorContext;
-import com.jonpereiradev.jfile.reader.rules.column.BigDecimalTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.BigIntegerTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.BooleanTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.DateTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.DoubleTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.FloatTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.IntegerTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTimeTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.LocalDateTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.LongTypeRule;
-import com.jonpereiradev.jfile.reader.rules.column.ShortTypeRule;
+import com.jonpereiradev.jfile.reader.rules.column.*;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -61,6 +51,12 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
     public BooleanTypeConfigurator booleanType() {
         context.getRuleConfiguration().getColumnRules().add(new BooleanTypeRule(position));
         return new BooleanTypeConfiguratorImpl(position, context);
+    }
+
+    @Override
+    public CharacterTypeConfigurator characterType() {
+        context.getRuleConfiguration().getColumnRules().add(new CharacterTypeRule(position));
+        return new CharacterTypeConfiguratorImpl(position, context);
     }
 
     @Override

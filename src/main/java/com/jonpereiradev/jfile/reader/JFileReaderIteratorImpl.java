@@ -5,13 +5,9 @@ import com.jonpereiradev.jfile.reader.file.JFileLine;
 import com.jonpereiradev.jfile.reader.parser.FileLineParser;
 import com.jonpereiradev.jfile.reader.rules.RuleViolation;
 import com.jonpereiradev.jfile.reader.stream.StreamReader;
+import com.jonpereiradev.jfile.reader.validation.JFileValidatorEngine;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 final class JFileReaderIteratorImpl implements JFileReaderIterator {
 
@@ -69,8 +65,10 @@ final class JFileReaderIteratorImpl implements JFileReaderIterator {
         Objects.requireNonNull(context.getRuleConfiguration(), "No rule configuration provided.");
 
         if (!cached) {
+            JFileValidatorEngine engine = JFileValidatorEngine.defaultEngine(context);
+
             forEachRemaining(line -> {
-                List<RuleViolation> currentViolations = new JFileValidatorEngine(context).validate(line);
+                List<RuleViolation> currentViolations = engine.validate(line);
 
                 if (!currentViolations.isEmpty()) {
                     violations.addAll(currentViolations);

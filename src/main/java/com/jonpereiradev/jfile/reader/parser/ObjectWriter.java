@@ -11,31 +11,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.function.Function;
 
 
 final class ObjectWriter {
-
-
-    private static final ConcurrentMap<Class<?>, Function<JFileColumn, ?>> MAPPER = new ConcurrentHashMap<>();
-
-    static {
-        MAPPER.putIfAbsent(String.class, JFileColumn::getText);
-        MAPPER.putIfAbsent(short.class, JFileColumn::getShort);
-        MAPPER.putIfAbsent(Short.class, JFileColumn::getShort);
-        MAPPER.putIfAbsent(int.class, JFileColumn::getInt);
-        MAPPER.putIfAbsent(Integer.class, JFileColumn::getInt);
-        MAPPER.putIfAbsent(long.class, JFileColumn::getLong);
-        MAPPER.putIfAbsent(Long.class, JFileColumn::getLong);
-        MAPPER.putIfAbsent(boolean.class, JFileColumn::getBoolean);
-        MAPPER.putIfAbsent(Boolean.class, JFileColumn::getBoolean);
-        MAPPER.putIfAbsent(float.class, JFileColumn::getFloat);
-        MAPPER.putIfAbsent(Float.class, JFileColumn::getFloat);
-        MAPPER.putIfAbsent(double.class, JFileColumn::getDouble);
-        MAPPER.putIfAbsent(Double.class, JFileColumn::getDouble);
-    }
 
     private final ReaderConfiguration configuration;
 
@@ -81,7 +59,7 @@ final class ObjectWriter {
             return createLocalDateTimeObject(fileColumn, field);
         }
 
-        return MAPPER.get(clazz).apply(fileColumn);
+        return fileColumn.getContent(clazz);
     }
 
     private BigDecimal createBigDecimalObject(JFileColumn fileColumn, Field field) {

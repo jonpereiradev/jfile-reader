@@ -4,6 +4,6 @@ public interface RefRuleConfigurator<T> {
 
     T filled();
 
-    T when(Object... value);
+    T domain(Object... value);
 
 }

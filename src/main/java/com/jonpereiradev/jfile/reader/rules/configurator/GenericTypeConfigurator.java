@@ -18,6 +18,8 @@ public interface GenericTypeConfigurator {
 
     BooleanTypeConfigurator booleanType();
 
+    CharacterTypeConfigurator characterType();
+
     StringTypeConfigurator stringType();
 
     BigIntegerTypeConfigurator bigIntegerType();

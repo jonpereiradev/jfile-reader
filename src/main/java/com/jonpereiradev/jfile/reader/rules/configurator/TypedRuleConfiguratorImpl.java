@@ -9,8 +9,8 @@ import java.util.function.Function;
 
 abstract class TypedRuleConfiguratorImpl<T> implements TypedRuleConfigurator<T> {
 
-    protected final int position;
-    protected final RuleConfiguratorContext context;
+    private final int position;
+    private final RuleConfiguratorContext context;
 
     TypedRuleConfiguratorImpl(int position, RuleConfiguratorContext context) {
         this.position = position;
@@ -40,8 +40,9 @@ abstract class TypedRuleConfiguratorImpl<T> implements TypedRuleConfigurator<T> 
     }
 
     @Override
-    public RefRuleConfigurator<T> ref(int position) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public RefRuleConfigurator<T> ref(int refPosition) {
+        return new RefRuleConfiguratorImpl<>(refPosition, position, context, (T) this);
     }
 
     @Override

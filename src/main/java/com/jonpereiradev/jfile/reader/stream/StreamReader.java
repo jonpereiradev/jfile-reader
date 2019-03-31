@@ -18,4 +18,11 @@ public abstract class StreamReader implements Iterable<String>, Closeable {
         return new DefaultStreamReader(inputStream, charset);
     }
 
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+
+    public Charset getCharset() {
+        return charset;
+    }
 }

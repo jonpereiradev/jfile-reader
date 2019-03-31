@@ -14,8 +14,36 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 
 public class JFileColumn implements Comparable<JFileColumn> {
+
+    private static final ConcurrentMap<Class<?>, Function<JFileColumn, ?>> MAPPER = new ConcurrentHashMap<>();
+
+    static {
+        MAPPER.putIfAbsent(char.class, JFileColumn::getCharacter);
+        MAPPER.putIfAbsent(Character.class, JFileColumn::getCharacter);
+        MAPPER.putIfAbsent(String.class, JFileColumn::getText);
+        MAPPER.putIfAbsent(short.class, JFileColumn::getShort);
+        MAPPER.putIfAbsent(Short.class, JFileColumn::getShort);
+        MAPPER.putIfAbsent(int.class, JFileColumn::getInt);
+        MAPPER.putIfAbsent(Integer.class, JFileColumn::getInt);
+        MAPPER.putIfAbsent(long.class, JFileColumn::getLong);
+        MAPPER.putIfAbsent(Long.class, JFileColumn::getLong);
+        MAPPER.putIfAbsent(float.class, JFileColumn::getFloat);
+        MAPPER.putIfAbsent(Float.class, JFileColumn::getFloat);
+        MAPPER.putIfAbsent(double.class, JFileColumn::getDouble);
+        MAPPER.putIfAbsent(Double.class, JFileColumn::getDouble);
+        MAPPER.putIfAbsent(boolean.class, JFileColumn::getBoolean);
+        MAPPER.putIfAbsent(Boolean.class, JFileColumn::getBoolean);
+        MAPPER.putIfAbsent(BigInteger.class, JFileColumn::getBigInteger);
+        MAPPER.putIfAbsent(BigDecimal.class, JFileColumn::getBigDecimal);
+        MAPPER.putIfAbsent(Date.class, JFileColumn::getDate);
+        MAPPER.putIfAbsent(LocalDate.class, JFileColumn::getLocalDate);
+        MAPPER.putIfAbsent(LocalDateTime.class, JFileColumn::getLocalDateTime);
+    }
 
     private final JFileReaderContext context;
 
@@ -50,12 +78,17 @@ public class JFileColumn implements Comparable<JFileColumn> {
         return position;
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> T getContent(Class<T> clazz) {
+        return (T) MAPPER.get(clazz).apply(this);
+    }
+
     public String getText() {
         return content;
     }
 
     public Character getCharacter() {
-        if (StringUtils.isBlank(content)) {
+        if (StringUtils.isBlank(content) || content.length() > 1) {
             return null;
         }
 
@@ -142,16 +175,20 @@ public class JFileColumn implements Comparable<JFileColumn> {
         }
     }
 
-    public Date getDate() throws ParseException {
+    public Date getDate() {
         return getDate(context.getDateFormat());
     }
 
-    public Date getDate(DateFormat pattern) throws ParseException {
+    public Date getDate(DateFormat pattern) {
         if (StringUtils.isBlank(content)) {
             return null;
         }
 
-        return pattern.parse(content);
+        try {
+            return pattern.parse(content);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     public LocalDate getLocalDate() {

@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 final class DefaultStreamReader extends StreamReader {
 
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
     DefaultStreamReader(InputStream inputStream, Charset charset) {
         super(inputStream, charset);

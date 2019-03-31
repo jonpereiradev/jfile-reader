@@ -3,7 +3,6 @@ package com.jonpereiradev.jfile.reader.rules.column;
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,13 +17,9 @@ public class DateFutureRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        try {
-            Date date = fileColumn.getDate(formatter);
-            Date current = Calendar.getInstance().getTime();
+        Date date = fileColumn.getDate(formatter);
+        Date current = Calendar.getInstance().getTime();
 
-            return current.before(date);
-        } catch (ParseException e) {
-            return true;
-        }
+        return current.before(date);
     }
 }
