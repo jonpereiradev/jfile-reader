@@ -1,7 +1,6 @@
 package com.jonpereiradev.jfile.reader.parser;
 
 
-import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -19,7 +18,7 @@ final class ObjectReader {
 
     private Map<Integer, GetterSetterPair> getterSetterMapping;
 
-    public Map<Integer, GetterSetterPair> read(@NotNull Class<?> clazz) {
+    public Map<Integer, GetterSetterPair> read(Class<?> clazz) {
         getterSetterMapping = new TreeMap<>();
 
         for (final Method method : clazz.getMethods()) {

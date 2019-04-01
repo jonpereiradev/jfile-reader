@@ -4,47 +4,35 @@ import com.jonpereiradev.jfile.reader.parser.DateTimeFormatter;
 import com.jonpereiradev.jfile.reader.parser.DecimalFormatter;
 import com.jonpereiradev.jfile.reader.parser.FileColumn;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Example {
 
-    @NotNull
     @FileColumn(1)
     private Short tipoDispendio;
 
-    @NotEmpty
-    @Size(max = 100)
     @FileColumn(2)
     private String descricao;
 
-    @NotNull
     @FileColumn(3)
     private Short tipoApropriacao;
 
     @FileColumn(4)
     private Short outroTipoApropriacao;
 
-    @NotNull
     @FileColumn(5)
     @DecimalFormatter("#,##0.0#")
     private BigDecimal valorDispendio;
 
-    @NotNull
     @FileColumn(6)
     @DecimalFormatter("#,##0.0#")
     private BigDecimal valorDispendioDepreciacao;
 
-    @NotNull
     @FileColumn(7)
     @DateTimeFormatter("ddMMyyyy")
     private LocalDate dataAquisicao;
 
-    @NotEmpty
-    @Size(max = 500)
     @FileColumn(8)
     private String justificativa;
 
