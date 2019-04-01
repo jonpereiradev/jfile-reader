@@ -2,7 +2,7 @@ package com.jonpereiradev.jfile.reader;
 
 import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 import com.jonpereiradev.jfile.reader.parser.FileLineParser;
-import com.jonpereiradev.jfile.reader.rules.RuleConfiguration;
+import com.jonpereiradev.jfile.reader.rule.RuleConfiguration;
 import com.jonpereiradev.jfile.reader.stream.StreamReader;
 
 import java.io.InputStream;
@@ -12,6 +12,9 @@ import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
+/**
+ * Context to access all necessary information of the current reading operation.
+ */
 public class JFileReaderContext {
 
     private final InputStream inputStream;

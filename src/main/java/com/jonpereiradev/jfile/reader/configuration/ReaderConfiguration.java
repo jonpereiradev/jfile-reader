@@ -1,7 +1,7 @@
 package com.jonpereiradev.jfile.reader.configuration;
 
 import com.jonpereiradev.jfile.reader.parser.FileLineParser;
-import com.jonpereiradev.jfile.reader.rules.RuleConfiguration;
+import com.jonpereiradev.jfile.reader.rule.RuleConfiguration;
 import com.jonpereiradev.jfile.reader.stream.StreamReader;
 
 import java.io.InputStream;

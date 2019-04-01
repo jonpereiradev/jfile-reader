@@ -76,7 +76,8 @@ public class CsvFileReaderTest extends AbstractFileReaderTest {
         ReaderConfiguration configuration = ReaderConfiguration.utf8Reader("\\;");
 
         try (JFileReader fileReader = JFileReaderFactory.newInstance(path, configuration)) {
-            Example example = fileReader.iterator().next(Example.class);
+            JFileLine line = fileReader.iterator().next();
+            Example example = fileReader.parse(line, Example.class);
             Short id = (short) 1;
 
             Assert.assertEquals(id, example.getTipoDispendio());

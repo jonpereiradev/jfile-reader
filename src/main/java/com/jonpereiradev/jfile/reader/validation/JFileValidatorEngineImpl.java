@@ -3,9 +3,9 @@ package com.jonpereiradev.jfile.reader.validation;
 import com.jonpereiradev.jfile.reader.JFileReaderContext;
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
 import com.jonpereiradev.jfile.reader.file.JFileLine;
-import com.jonpereiradev.jfile.reader.rules.RuleViolation;
-import com.jonpereiradev.jfile.reader.rules.column.ColumnRule;
-import com.jonpereiradev.jfile.reader.rules.column.RefRule;
+import com.jonpereiradev.jfile.reader.rule.RuleViolation;
+import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
+import com.jonpereiradev.jfile.reader.rule.column.RefRule;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -9,9 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
+/**
+ * Factory to create the {@link JFileReader} implementation.
+ */
 public final class JFileReaderFactory {
 
     private JFileReaderFactory() {
+        throw new UnsupportedOperationException();
     }
 
     public static JFileReader newInstance(File file, ReaderConfiguration configuration) {

@@ -2,7 +2,7 @@ package com.jonpereiradev.jfile.reader.validation;
 
 import com.jonpereiradev.jfile.reader.JFileReaderContext;
 import com.jonpereiradev.jfile.reader.file.JFileLine;
-import com.jonpereiradev.jfile.reader.rules.RuleViolation;
+import com.jonpereiradev.jfile.reader.rule.RuleViolation;
 
 import java.util.List;
 
