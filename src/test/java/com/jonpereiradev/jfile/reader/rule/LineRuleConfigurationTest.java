@@ -20,7 +20,7 @@ public class LineRuleConfigurationTest extends AbstractFileReaderTest {
         RuleConfigurator.defaultConfigurator(readerConfiguration).files().lines().columns(5).build();
 
         JFileReader reader = JFileReaderFactory.newInstance(path, readerConfiguration);
-        List<RuleViolation> violations = reader.validate();
+        List<RuleViolation> violations = reader.validate().getViolations();
 
         Assert.assertFalse(violations.isEmpty());
     }
@@ -32,7 +32,7 @@ public class LineRuleConfigurationTest extends AbstractFileReaderTest {
         RuleConfigurator.defaultConfigurator(readerConfiguration).files().lines().columns(5).build();
 
         JFileReader reader = JFileReaderFactory.newInstance(path, readerConfiguration);
-        List<RuleViolation> violations = reader.validate();
+        List<RuleViolation> violations = reader.validate().getViolations();
 
         Assert.assertTrue(violations.isEmpty());
     }

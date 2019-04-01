@@ -772,7 +772,7 @@ public class ColumnRuleConfigurationTest extends AbstractFileReaderTest {
 
     private List<RuleViolation> validate(Path path) {
         JFileReader reader = JFileReaderFactory.newInstance(path, readerConfiguration);
-        return reader.validate();
+        return reader.validate().getViolations();
     }
 
 }

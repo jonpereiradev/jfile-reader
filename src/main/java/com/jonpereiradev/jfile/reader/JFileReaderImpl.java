@@ -4,6 +4,7 @@ import com.jonpereiradev.jfile.reader.file.JFileLine;
 import com.jonpereiradev.jfile.reader.rule.RuleViolation;
 import com.jonpereiradev.jfile.reader.stream.StreamReader;
 import com.jonpereiradev.jfile.reader.validation.JFileValidatorEngine;
+import com.jonpereiradev.jfile.reader.validation.ReportValidation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,28 +33,34 @@ final class JFileReaderImpl implements JFileReader {
     }
 
     @Override
-    public List<RuleViolation> validate() {
+    public ReportValidation validate() {
         Objects.requireNonNull(context.getRuleConfiguration(), "No rule configuration provided.");
 
         if (iterator != null) {
             throw new IllegalStateException("Iterator already initialized. You can't use this method after called iterator().");
         }
 
-        List<RuleViolation> violations = new ArrayList<>();
         List<JFileLine> lines = new ArrayList<>();
+        ReportValidation report = ReportValidation.defaultReport();
 
         iterator().forEachRemaining(line -> {
-            violations.addAll(validate(line));
+            report.put(line.getRow(), validateLine(line));
             lines.add(line);
         });
 
         iterator = new InMemoryJFileReaderIterator(lines);
 
-        return violations;
+        return report;
     }
 
     @Override
-    public List<RuleViolation> validate(JFileLine line) {
+    public ReportValidation validate(JFileLine line) {
+        ReportValidation report = ReportValidation.defaultReport();
+        report.put(line.getRow(), validateLine(line));
+        return report;
+    }
+
+    private List<RuleViolation> validateLine(JFileLine line) {
         Objects.requireNonNull(context.getRuleConfiguration(), "No rule configuration provided.");
 
         if (line == null) {

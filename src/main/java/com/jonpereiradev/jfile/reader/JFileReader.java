@@ -1,10 +1,9 @@
 package com.jonpereiradev.jfile.reader;
 
 import com.jonpereiradev.jfile.reader.file.JFileLine;
-import com.jonpereiradev.jfile.reader.rule.RuleViolation;
+import com.jonpereiradev.jfile.reader.validation.ReportValidation;
 
 import java.io.Closeable;
-import java.util.List;
 
 /**
  * Point of access for file reading and validation.
@@ -24,14 +23,14 @@ public interface JFileReader extends Iterable<JFileLine>, Closeable {
      *
      * @return all violations of the file.
      */
-    List<RuleViolation> validate();
+    ReportValidation validate();
 
     /**
      * Validates all lines of the file with the configurated rule.
      *
      * @return all violations of the file.
      */
-    List<RuleViolation> validate(JFileLine line);
+    ReportValidation validate(JFileLine line);
 
     /**
      * Parses a line to the type of the class.
