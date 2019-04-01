@@ -76,18 +76,18 @@ public class CsvFileReaderTest extends AbstractFileReaderTest {
         ReaderConfiguration configuration = ReaderConfiguration.utf8Reader("\\;");
 
         try (JFileReader fileReader = JFileReaderFactory.newInstance(path, configuration)) {
-            JFileLine line = fileReader.iterator().next();
-            Example example = fileReader.parse(line, Example.class);
-            Short id = (short) 1;
+            fileReader.forEach(Example.class, example -> {
+                Short id = (short) 1;
 
-            Assert.assertEquals(id, example.getTipoDispendio());
-            Assert.assertEquals("descricao", example.getDescricao());
-            Assert.assertEquals(id, example.getTipoApropriacao());
-            Assert.assertEquals(id, example.getOutroTipoApropriacao());
-            Assert.assertEquals(new BigDecimal("100.37"), example.getValorDispendio());
-            Assert.assertEquals(new BigDecimal("93.42"), example.getValorDispendioDepreciacao());
-            Assert.assertEquals(LocalDate.parse("1991-12-19"), example.getDataAquisicao());
-            Assert.assertEquals("justificativa", example.getJustificativa());
+                Assert.assertEquals(id, example.getTipoDispendio());
+                Assert.assertEquals("descricao", example.getDescricao());
+                Assert.assertEquals(id, example.getTipoApropriacao());
+                Assert.assertEquals(id, example.getOutroTipoApropriacao());
+                Assert.assertEquals(new BigDecimal("100.37"), example.getValorDispendio());
+                Assert.assertEquals(new BigDecimal("93.42"), example.getValorDispendioDepreciacao());
+                Assert.assertEquals(LocalDate.parse("1991-12-19"), example.getDataAquisicao());
+                Assert.assertEquals("justificativa", example.getJustificativa());
+            });
         }
     }
 }
