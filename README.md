@@ -125,4 +125,4 @@ public class Main {
 
 # License
 
-Diff-Objects is available under the [MIT license](https://tldrlegal.com/license/mit-license).
+JFile-Reader is available under the [MIT license](https://tldrlegal.com/license/mit-license).
