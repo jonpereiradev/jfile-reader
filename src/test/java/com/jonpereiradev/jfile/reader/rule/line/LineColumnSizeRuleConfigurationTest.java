@@ -1,9 +1,9 @@
 package com.jonpereiradev.jfile.reader.rule.line;
 
-import com.jonpereiradev.jfile.reader.AbstractFileReaderTest;
 import com.jonpereiradev.jfile.reader.JFileReader;
 import com.jonpereiradev.jfile.reader.JFileReaderFactory;
 import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
+import com.jonpereiradev.jfile.reader.infrastructure.AbstractFileReaderTest;
 import com.jonpereiradev.jfile.reader.rule.RuleConfigurator;
 import com.jonpereiradev.jfile.reader.rule.RuleViolation;
 import org.junit.Assert;

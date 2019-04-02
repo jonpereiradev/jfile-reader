@@ -1,4 +1,4 @@
-package com.jonpereiradev.jfile.reader;
+package com.jonpereiradev.jfile.reader.infrastructure;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

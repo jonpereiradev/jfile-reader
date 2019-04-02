@@ -2,6 +2,7 @@ package com.jonpereiradev.jfile.reader;
 
 import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 import com.jonpereiradev.jfile.reader.file.JFileLine;
+import com.jonpereiradev.jfile.reader.infrastructure.AbstractFileReaderTest;
 import com.jonpereiradev.jfile.reader.model.Example;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
-public class CsvFileReaderTest extends AbstractFileReaderTest {
+public class JFileReaderTest extends AbstractFileReaderTest {
 
     @Test
     public void mustCreateImplementationPerFileType() throws IOException {
