@@ -1,6 +1,6 @@
 package com.jonpereiradev.jfile.reader.rule;
 
-public interface GenericRule<T> {
+public interface Rule<T> {
 
     boolean isValid(T object);
 

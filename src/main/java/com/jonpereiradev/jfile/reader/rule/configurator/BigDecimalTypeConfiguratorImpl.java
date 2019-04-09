@@ -1,6 +1,8 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
+import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.rule.column.MaxBigDecimalRule;
 import com.jonpereiradev.jfile.reader.rule.column.MinBigDecimalRule;
 
@@ -12,8 +14,13 @@ final class BigDecimalTypeConfiguratorImpl
 
     private final DecimalFormat decimalFormat;
 
-    BigDecimalTypeConfiguratorImpl(int position, DecimalFormat decimalFormat, RuleConfiguratorContext context) {
-        super(position, context);
+    BigDecimalTypeConfiguratorImpl(
+        int position,
+        DecimalFormat decimalFormat,
+        RuleConfiguratorContext context,
+        RuleNode<ColumnRule> ruleNode
+    ) {
+        super(position, context, ruleNode);
         this.decimalFormat = decimalFormat;
     }
 

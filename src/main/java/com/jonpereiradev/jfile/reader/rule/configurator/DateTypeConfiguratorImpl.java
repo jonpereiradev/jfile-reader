@@ -1,19 +1,18 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
-import com.jonpereiradev.jfile.reader.rule.column.DateFutureOrPresentRule;
-import com.jonpereiradev.jfile.reader.rule.column.DateFutureRule;
-import com.jonpereiradev.jfile.reader.rule.column.DatePastOrPresentRule;
-import com.jonpereiradev.jfile.reader.rule.column.DatePastRule;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
+import com.jonpereiradev.jfile.reader.rule.column.*;
 
 import java.text.DateFormat;
+import java.util.Date;
 
 final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeConfigurator> implements DateTypeConfigurator {
 
     private final DateFormat dateFormat;
 
-    DateTypeConfiguratorImpl(int position, DateFormat dateFormat, RuleConfiguratorContext context) {
-        super(position, context);
+    DateTypeConfiguratorImpl(int position, DateFormat dateFormat, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
+        super(position, context, ruleNode);
         this.dateFormat = dateFormat;
     }
 
@@ -35,5 +34,15 @@ final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeCo
     @Override
     public DateTypeConfigurator pastOrPresent() {
         return rule(position -> new DatePastOrPresentRule(position, dateFormat));
+    }
+
+    @Override
+    public DateTypeConfigurator min(Date min) {
+        return rule(position -> new DateMinRule(position, dateFormat, min));
+    }
+
+    @Override
+    public DateTypeConfigurator max(Date max) {
+        return rule(position -> new DateMaxRule(position, dateFormat, max));
     }
 }

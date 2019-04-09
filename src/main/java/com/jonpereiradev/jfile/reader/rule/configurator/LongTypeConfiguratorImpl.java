@@ -1,6 +1,8 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
+import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.rule.column.DomainLongRule;
 import com.jonpereiradev.jfile.reader.rule.column.MaxLongRule;
 import com.jonpereiradev.jfile.reader.rule.column.MinLongRule;
@@ -9,8 +11,8 @@ import java.util.Arrays;
 
 final class LongTypeConfiguratorImpl extends AbstractRuleConfigurator<LongTypeConfigurator> implements LongTypeConfigurator {
 
-    LongTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
-        super(position, context);
+    LongTypeConfiguratorImpl(int position, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
+        super(position, context, ruleNode);
     }
 
     @Override

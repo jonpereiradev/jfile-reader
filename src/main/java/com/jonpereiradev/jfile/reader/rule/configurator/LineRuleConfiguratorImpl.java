@@ -13,13 +13,13 @@ final class LineRuleConfiguratorImpl implements LineRuleConfigurator {
 
     @Override
     public LineRuleConfigurator columns(int size) {
-        context.getRuleConfiguration().getLineRules().add(new LineColumnSizeRule(size));
+        context.getRuleConfiguration().getLineRootNode().add(new LineColumnSizeRule(size));
         return this;
     }
 
     @Override
     public GenericTypeConfigurator column(int position) {
-        return new GenericTypeConfiguratorImpl(position, context);
+        return new GenericTypeConfiguratorImpl(position, context, context.getRuleConfiguration().getColumnRootNode());
     }
 
     @Override

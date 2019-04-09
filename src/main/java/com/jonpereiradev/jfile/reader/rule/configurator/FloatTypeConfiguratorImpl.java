@@ -1,13 +1,15 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
+import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.rule.column.MaxFloatRule;
 import com.jonpereiradev.jfile.reader.rule.column.MinFloatRule;
 
 final class FloatTypeConfiguratorImpl extends AbstractRuleConfigurator<FloatTypeConfigurator> implements FloatTypeConfigurator {
 
-    FloatTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
-        super(position, context);
+    FloatTypeConfiguratorImpl(int position, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
+        super(position, context, ruleNode);
     }
 
     @Override

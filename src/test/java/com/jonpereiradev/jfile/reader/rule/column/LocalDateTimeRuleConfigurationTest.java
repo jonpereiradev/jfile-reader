@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
@@ -104,6 +105,32 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
 
         Assert.assertFalse(violations.isEmpty());
         Assert.assertEquals(LocalDateTimePastOrPresentRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateMinRule() throws IOException {
+        String dataAtual = getDataHoraUmDiaAposAtual();
+        Path path = createFileWithContent(dataAtual);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
+        LocalDateTime min = LocalDateTime.now().plusDays(1);
+        getRuleConfigurator().column(1).localDateTimeType(formatter).min(min).build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(LocalDateTimeMinRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateMaxRule() throws IOException {
+        String dataAtual = getDataHoraUmDiaAposAtual();
+        Path path = createFileWithContent(dataAtual);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
+        LocalDateTime max = LocalDateTime.now().minusDays(1);
+        getRuleConfigurator().column(1).localDateTimeType(formatter).max(max).build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(LocalDateTimeMaxRule.class.getName(), violations.get(0).getRule());
     }
 
     private String getDataHoraUmDiaAposAtual() {

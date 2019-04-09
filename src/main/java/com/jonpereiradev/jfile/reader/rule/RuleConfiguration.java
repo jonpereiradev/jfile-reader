@@ -4,14 +4,12 @@ import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.rule.file.FileRule;
 import com.jonpereiradev.jfile.reader.rule.line.LineRule;
 
-import java.util.List;
-
 public interface RuleConfiguration {
 
-    List<FileRule> getFileRules();
+    RuleNode<FileRule> getFileRootNode();
 
-    List<LineRule> getLineRules();
+    RuleNode<LineRule> getLineRootNode();
 
-    List<ColumnRule> getColumnRules();
+    RuleNode<ColumnRule> getColumnRootNode();
 
 }

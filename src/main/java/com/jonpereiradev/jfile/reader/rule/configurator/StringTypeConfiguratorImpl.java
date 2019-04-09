@@ -1,6 +1,7 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.rule.column.*;
 
 import java.util.Arrays;
@@ -8,8 +9,8 @@ import java.util.regex.Pattern;
 
 final class StringTypeConfiguratorImpl extends AbstractRuleConfigurator<StringTypeConfigurator> implements StringTypeConfigurator {
 
-    StringTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
-        super(position, context);
+    StringTypeConfiguratorImpl(int position, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
+        super(position, context, ruleNode);
     }
 
     @Override

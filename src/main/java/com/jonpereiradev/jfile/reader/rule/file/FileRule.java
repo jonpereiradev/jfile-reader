@@ -1,6 +1,9 @@
 package com.jonpereiradev.jfile.reader.rule.file;
 
-public interface FileRule {
+import com.jonpereiradev.jfile.reader.rule.Rule;
 
+import java.io.File;
+
+public interface FileRule extends Rule<File> {
 
 }

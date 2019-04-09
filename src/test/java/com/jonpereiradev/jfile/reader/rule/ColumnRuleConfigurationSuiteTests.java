@@ -18,7 +18,8 @@ import org.junit.runners.Suite;
     LocalDateTimeRuleConfigurationTest.class,
     LongRuleConfigurationTest.class,
     ShortRuleConfigurationTest.class,
-    StringRuleConfigurationTest.class
+    StringRuleConfigurationTest.class,
+    RefRuleConfigurationTest.class
 })
 public class ColumnRuleConfigurationSuiteTests {
 }

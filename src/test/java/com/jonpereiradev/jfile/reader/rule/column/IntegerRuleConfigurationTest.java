@@ -60,24 +60,4 @@ public class IntegerRuleConfigurationTest extends AbstractColumnRuleConfiguratio
         Assert.assertEquals(DomainIntegerRule.class.getName(), violations.get(0).getRule());
     }
 
-    @Test
-    public void mustViolateFilledRefNotNullRule() throws IOException {
-        Path path = createFileWithContent("1||3");
-        getRuleConfigurator().column(2).integerType().ref(1).filled().notNull().build();
-        List<RuleViolation> violations = validate(path);
-
-        Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
-    }
-
-    @Test
-    public void mustViolateDomainRefNotNullRule() throws IOException {
-        Path path = createFileWithContent("1||3");
-        getRuleConfigurator().column(2).integerType().ref(1).filled('1').notNull().build();
-        List<RuleViolation> violations = validate(path);
-
-        Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(NotNullRule.class.getName(), violations.get(0).getRule());
-    }
-
 }

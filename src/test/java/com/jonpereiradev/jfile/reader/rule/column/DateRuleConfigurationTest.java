@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -81,9 +82,40 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
         Assert.assertEquals(DatePastOrPresentRule.class.getName(), violations.get(0).getRule());
     }
 
+    @Test
+    public void mustViolateMinRule() throws IOException {
+        String dataAtual = getDataUmDiaAntesAtual();
+        Path path = createFileWithContent(dataAtual);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        getRuleConfigurator().column(1).dateType(dateFormat).min(new Date()).build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(DateMinRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateMaxRule() throws IOException {
+        String dataAtual = getDataUmDiaAposAtual();
+        Path path = createFileWithContent(dataAtual);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        getRuleConfigurator().column(1).dateType(dateFormat).max(new Date()).build();
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(DateMaxRule.class.getName(), violations.get(0).getRule());
+    }
+
     private String getDataUmDiaAposAtual() {
         Calendar instance = Calendar.getInstance();
         instance.add(Calendar.DAY_OF_MONTH, 1);
+        Locale locale = new Locale("pt", "BR");
+        return new SimpleDateFormat("dd/MM/yyyy", locale).format(instance.getTime());
+    }
+
+    private String getDataUmDiaAntesAtual() {
+        Calendar instance = Calendar.getInstance();
+        instance.add(Calendar.DAY_OF_MONTH, -1);
         Locale locale = new Locale("pt", "BR");
         return new SimpleDateFormat("dd/MM/yyyy", locale).format(instance.getTime());
     }

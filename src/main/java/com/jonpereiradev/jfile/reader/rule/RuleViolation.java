@@ -1,11 +1,28 @@
 package com.jonpereiradev.jfile.reader.rule;
 
-public class RuleViolation {
+import java.util.Objects;
+
+public final class RuleViolation {
 
     private int row;
     private int column;
     private String content;
     private String rule;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RuleViolation that = (RuleViolation) o;
+        return row == that.row &&
+            column == that.column &&
+            Objects.equals(rule, that.rule);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column, rule);
+    }
 
     public int getRow() {
         return row;

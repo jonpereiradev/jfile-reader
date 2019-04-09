@@ -5,7 +5,7 @@ package com.jonpereiradev.jfile.reader.rule.configurator;
  *
  * @param <T> the type of rule configurator returned.
  */
-public interface RefRuleConfigurator<T> {
+public interface RefRuleConfigurator<T extends TypedRuleConfigurator<?>> {
 
     /**
      * creates a rule for not empty column.
@@ -16,5 +16,10 @@ public interface RefRuleConfigurator<T> {
      * creates a rule for column with specific values.
      */
     T filled(Object... values);
+
+    /**
+     * creates a rule for column with empty value.
+     */
+    T empty();
 
 }

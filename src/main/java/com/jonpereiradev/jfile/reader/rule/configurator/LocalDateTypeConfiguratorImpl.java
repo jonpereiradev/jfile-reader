@@ -1,11 +1,10 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
-import com.jonpereiradev.jfile.reader.rule.column.LocalDateFutureOrPresentRule;
-import com.jonpereiradev.jfile.reader.rule.column.LocalDateFutureRule;
-import com.jonpereiradev.jfile.reader.rule.column.LocalDatePastOrPresentRule;
-import com.jonpereiradev.jfile.reader.rule.column.LocalDatePastRule;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
+import com.jonpereiradev.jfile.reader.rule.column.*;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 final class LocalDateTypeConfiguratorImpl
@@ -13,8 +12,13 @@ final class LocalDateTypeConfiguratorImpl
 
     private final DateTimeFormatter dateTimeFormatter;
 
-    LocalDateTypeConfiguratorImpl(int position, DateTimeFormatter dateTimeFormatter, RuleConfiguratorContext context) {
-        super(position, context);
+    LocalDateTypeConfiguratorImpl(
+        int position,
+        DateTimeFormatter dateTimeFormatter,
+        RuleConfiguratorContext context,
+        RuleNode<ColumnRule> ruleNode
+    ) {
+        super(position, context, ruleNode);
         this.dateTimeFormatter = dateTimeFormatter;
     }
 
@@ -36,5 +40,15 @@ final class LocalDateTypeConfiguratorImpl
     @Override
     public LocalDateTypeConfigurator pastOrPresent() {
         return rule(position -> new LocalDatePastOrPresentRule(position, dateTimeFormatter));
+    }
+
+    @Override
+    public LocalDateTypeConfigurator min(LocalDate min) {
+        return rule(position -> new LocalDateMinRule(position, dateTimeFormatter, min));
+    }
+
+    @Override
+    public LocalDateTypeConfigurator max(LocalDate max) {
+        return rule(position -> new LocalDateMaxRule(position, dateTimeFormatter, max));
     }
 }

@@ -1,6 +1,7 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.rule.column.*;
 
 import java.text.DateFormat;
@@ -11,63 +12,65 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     private final int position;
     private final RuleConfiguratorContext context;
+    private final RuleNode<ColumnRule> ruleNode;
 
-    GenericTypeConfiguratorImpl(int position, RuleConfiguratorContext context) {
+    GenericTypeConfiguratorImpl(int position, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
         this.position = position;
         this.context = context;
+        this.ruleNode = ruleNode;
     }
 
     @Override
     public ShortTypeConfigurator shortType() {
-        context.getRuleConfiguration().getColumnRules().add(new ShortTypeRule(position));
-        return new ShortTypeConfiguratorImpl(position, context);
+        ruleNode.add(new ShortTypeRule(position));
+        return new ShortTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public IntegerTypeConfigurator integerType() {
-        context.getRuleConfiguration().getColumnRules().add(new IntegerTypeRule(position));
-        return new IntegerTypeConfiguratorImpl(position, context);
+        ruleNode.add(new IntegerTypeRule(position));
+        return new IntegerTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public LongTypeConfigurator longType() {
-        context.getRuleConfiguration().getColumnRules().add(new LongTypeRule(position));
-        return new LongTypeConfiguratorImpl(position, context);
+        ruleNode.add(new LongTypeRule(position));
+        return new LongTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public FloatTypeConfigurator floatType() {
-        context.getRuleConfiguration().getColumnRules().add(new FloatTypeRule(position));
-        return new FloatTypeConfiguratorImpl(position, context);
+        ruleNode.add(new FloatTypeRule(position));
+        return new FloatTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public DoubleTypeConfigurator doubleType() {
-        context.getRuleConfiguration().getColumnRules().add(new DoubleTypeRule(position));
-        return new DoubleTypeConfiguratorImpl(position, context);
+        ruleNode.add(new DoubleTypeRule(position));
+        return new DoubleTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public BooleanTypeConfigurator booleanType() {
-        context.getRuleConfiguration().getColumnRules().add(new BooleanTypeRule(position));
-        return new BooleanTypeConfiguratorImpl(position, context);
+        ruleNode.add(new BooleanTypeRule(position));
+        return new BooleanTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public CharacterTypeConfigurator characterType() {
-        context.getRuleConfiguration().getColumnRules().add(new CharacterTypeRule(position));
-        return new CharacterTypeConfiguratorImpl(position, context);
+        ruleNode.add(new CharacterTypeRule(position));
+        return new CharacterTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public StringTypeConfigurator stringType() {
-        return new StringTypeConfiguratorImpl(position, context);
+        return new StringTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
     public BigIntegerTypeConfigurator bigIntegerType() {
-        context.getRuleConfiguration().getColumnRules().add(new BigIntegerTypeRule(position));
-        return new BigIntegerTypeConfiguratorImpl(position, context);
+        ruleNode.add(new BigIntegerTypeRule(position));
+        return new BigIntegerTypeConfiguratorImpl(position, context, ruleNode);
     }
 
     @Override
@@ -77,8 +80,8 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public BigDecimalTypeConfigurator bigDecimalType(DecimalFormat decimalFormat) {
-        context.getRuleConfiguration().getColumnRules().add(new BigDecimalTypeRule(position, decimalFormat));
-        return new BigDecimalTypeConfiguratorImpl(position, decimalFormat, context);
+        ruleNode.add(new BigDecimalTypeRule(position, decimalFormat));
+        return new BigDecimalTypeConfiguratorImpl(position, decimalFormat, context, ruleNode);
     }
 
     @Override
@@ -88,8 +91,8 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public DateTypeConfigurator dateType(DateFormat dateFormat) {
-        context.getRuleConfiguration().getColumnRules().add(new DateTypeRule(position, dateFormat));
-        return new DateTypeConfiguratorImpl(position, dateFormat, context);
+        ruleNode.add(new DateTypeRule(position, dateFormat));
+        return new DateTypeConfiguratorImpl(position, dateFormat, context, ruleNode);
     }
 
     @Override
@@ -99,19 +102,19 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public LocalDateTypeConfigurator localDateType(DateTimeFormatter dateTimeFormatter) {
-        context.getRuleConfiguration().getColumnRules().add(new LocalDateTypeRule(position, dateTimeFormatter));
-        return new LocalDateTypeConfiguratorImpl(position, dateTimeFormatter, context);
+        ruleNode.add(new LocalDateTypeRule(position, dateTimeFormatter));
+        return new LocalDateTypeConfiguratorImpl(position, dateTimeFormatter, context, ruleNode);
     }
 
     @Override
-    public LocalDateTimeConfigurator localDateTimeType() {
+    public LocalDateTimeTypeConfigurator localDateTimeType() {
         return localDateTimeType(context.getReaderConfiguration().getLocalDateTimeFormatter());
     }
 
     @Override
-    public LocalDateTimeConfigurator localDateTimeType(DateTimeFormatter dateTimeFormatter) {
-        context.getRuleConfiguration().getColumnRules().add(new LocalDateTimeTypeRule(position, dateTimeFormatter));
-        return new LocalDateTimeConfiguratorImpl(position, dateTimeFormatter, context);
+    public LocalDateTimeTypeConfigurator localDateTimeType(DateTimeFormatter dateTimeFormatter) {
+        ruleNode.add(new LocalDateTimeTypeRule(position, dateTimeFormatter));
+        return new LocalDateTimeTypeConfiguratorImpl(position, dateTimeFormatter, context, ruleNode);
     }
 
     @Override

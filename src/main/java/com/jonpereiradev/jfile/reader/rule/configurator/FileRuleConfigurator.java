@@ -8,5 +8,8 @@ public interface FileRuleConfigurator {
         return new FileRuleConfiguratorImpl(context);
     }
 
+    /**
+     * creates the rule configurator for lines.
+     */
     LineRuleConfigurator lines();
 }

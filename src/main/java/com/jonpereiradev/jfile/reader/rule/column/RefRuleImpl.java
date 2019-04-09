@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 final class RefRuleImpl extends AbstractRefRule {
 
     RefRuleImpl(int refPosition, int position) {
-        super(refPosition, position);
+        super(refPosition, position, null);
     }
 
     @Override
