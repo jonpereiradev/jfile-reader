@@ -11,10 +11,14 @@ public class LongTypeRule extends AbstractColumnRule {
     @Override
     public boolean isValid(JFileColumn fileColumn) {
         try {
-            return fileColumn.getLong() != null;
+            return fileColumn.getText().isEmpty() || fileColumn.getLong() != null;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return true;
+    }
 }

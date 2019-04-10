@@ -5,6 +5,7 @@ import com.jonpereiradev.jfile.reader.file.JFileColumn;
 import com.jonpereiradev.jfile.reader.file.JFileLine;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.rule.RuleViolation;
+import com.jonpereiradev.jfile.reader.rule.column.ArrayOfTypeRule;
 import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.rule.column.RefRule;
 
@@ -66,21 +67,13 @@ final class JFileValidatorEngineImpl implements JFileValidatorEngine {
         List<RuleViolation> violations = new ArrayList<>();
 
         for (ColumnRule rule : filtered) {
-            if (isRefRule(rule)) {
-                RefRule refRule = (RefRule) rule;
+            JFileColumn fileColumn = isRefRule(rule) ? getDependsColumn(line, (RefRule) rule) : column;
 
-                if (canValidateRefRules(line, refRule)) {
-                    violations.addAll(validateColumnRules(line, column, refRule.getRules()));
-                }
-            } else if (rule.canValidate(column) && !rule.isValid(column)) {
-                RuleViolation violation = new RuleViolation();
-
-                violation.setRow(line.getRow());
-                violation.setColumn(column.getPosition());
-                violation.setContent(column.getText());
-                violation.setRule(rule.getClass().getName());
-
-                violations.add(violation);
+            if (rule instanceof ArrayOfTypeRule) {
+                ArrayOfTypeRule arrayOf = (ArrayOfTypeRule) rule;
+                arrayOf.split(column).forEach(o -> violations.addAll(validateColumnRules(line, o, rule.getRuleNode())));
+            } else if (rule.canValidate(fileColumn)) {
+                recursivelyValidate(line, column, rule, violations);
             }
 
             if (!violations.isEmpty()) {
@@ -91,18 +84,37 @@ final class JFileValidatorEngineImpl implements JFileValidatorEngine {
         return violations;
     }
 
+    private void recursivelyValidate(JFileLine line, JFileColumn column, ColumnRule rule, List<RuleViolation> violations) {
+        if (!rule.isValid(column)) {
+            createViolation(line, column, rule, violations);
+        } else {
+            violations.addAll(validateColumnRules(line, column, rule.getRuleNode()));
+        }
+    }
+
+    private void createViolation(JFileLine line, JFileColumn column, ColumnRule rule, List<RuleViolation> violations) {
+        RuleViolation violation = new RuleViolation();
+
+        violation.setRow(line.getRow());
+        violation.setColumn(column.getPosition());
+        violation.setContent(column.getText());
+        violation.setRule(rule.getClass().getName());
+
+        violations.add(violation);
+    }
+
     private boolean isRefRule(ColumnRule rule) {
         return rule instanceof RefRule && ((RefRule) rule).getRefPosition() != -1;
     }
 
-    private boolean canValidateRefRules(JFileLine line, RefRule refRule) {
+    private JFileColumn getDependsColumn(JFileLine line, RefRule refRule) {
         JFileColumn refColumn = line.getColumn(refRule.getRefPosition());
 
         if (refColumn == null) {
-            throw new NullPointerException("RefColumn doesn't exists at " + refRule.getRefPosition() + "position");
+            throw new NullPointerException("Column doesn't exists at " + refRule.getRefPosition() + "position");
         }
 
-        return refRule.canValidate(refColumn) && refRule.isValid(refColumn);
+        return refColumn;
     }
 
 }

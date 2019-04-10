@@ -2,22 +2,21 @@ package com.jonpereiradev.jfile.reader.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
-import com.jonpereiradev.jfile.reader.rule.RuleNodeImpl;
 
 public abstract class AbstractRefRule implements RefRule {
 
     private final int refPosition;
     private final int position;
-    private final RuleNode<ColumnRule> refRules;
 
-    public AbstractRefRule(int refPosition, int position, RuleNode<ColumnRule> rootNode) {
+    private RuleNode<ColumnRule> ruleNode;
+
+    public AbstractRefRule(int refPosition, int position) {
         this.refPosition = refPosition;
         this.position = position;
-        this.refRules = new RuleNodeImpl<>(rootNode);
     }
 
     @Override
-    public boolean canValidate(JFileColumn fileColumn) {
+    public boolean isValid(JFileColumn fileColumn) {
         return true;
     }
 
@@ -32,8 +31,12 @@ public abstract class AbstractRefRule implements RefRule {
     }
 
     @Override
-    public RuleNode<ColumnRule> getRules() {
-        return refRules;
+    public RuleNode<ColumnRule> getRuleNode() {
+        return ruleNode;
     }
 
+    @Override
+    public void setRuleNode(RuleNode<ColumnRule> ruleNode) {
+        this.ruleNode = ruleNode;
+    }
 }

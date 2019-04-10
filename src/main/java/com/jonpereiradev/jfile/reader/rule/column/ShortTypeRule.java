@@ -11,10 +11,14 @@ public class ShortTypeRule extends AbstractColumnRule {
     @Override
     public boolean isValid(JFileColumn fileColumn) {
         try {
-            return fileColumn.getShort() != null;
+            return fileColumn.getText().isEmpty() || fileColumn.getShort() != null;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return true;
+    }
 }

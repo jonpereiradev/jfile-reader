@@ -1,29 +1,36 @@
 package com.jonpereiradev.jfile.reader.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractColumnRule implements ColumnRule {
 
     private final int position;
-    private final RefRule refRule;
+
+    private RuleNode<ColumnRule> ruleNode;
 
     public AbstractColumnRule(int position) {
         this.position = position;
-        this.refRule = new RefRuleImpl(-1, position);
-    }
-
-    public AbstractColumnRule(int position, RefRule refRule) {
-        this.position = position;
-        this.refRule = refRule;
     }
 
     @Override
     public boolean canValidate(JFileColumn fileColumn) {
-        return refRule.canValidate(fileColumn);
+        return StringUtils.isNotBlank(fileColumn.getText());
     }
 
     @Override
     public int getPosition() {
         return position;
+    }
+
+    @Override
+    public RuleNode<ColumnRule> getRuleNode() {
+        return ruleNode;
+    }
+
+    @Override
+    public void setRuleNode(RuleNode<ColumnRule> ruleNode) {
+        this.ruleNode = ruleNode;
     }
 }

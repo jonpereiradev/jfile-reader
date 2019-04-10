@@ -10,6 +10,11 @@ public class BooleanTypeRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        return fileColumn.getBoolean() != null;
+        return fileColumn.getText().isEmpty() || fileColumn.getBoolean() != null;
+    }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return true;
     }
 }

@@ -1,10 +1,8 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
-import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
-import com.jonpereiradev.jfile.reader.rule.column.DomainRefRule;
-import com.jonpereiradev.jfile.reader.rule.column.EmptyRefRule;
-import com.jonpereiradev.jfile.reader.rule.column.FilledRefRule;
+import com.jonpereiradev.jfile.reader.rule.RuleNodeImpl;
+import com.jonpereiradev.jfile.reader.rule.column.*;
 
 import java.util.Arrays;
 
@@ -24,26 +22,29 @@ final class RefRuleConfiguratorImpl<T extends TypedRuleConfigurator<?>> implemen
 
     @Override
     public T filled() {
-        FilledRefRule ref = new FilledRefRule(refPosition, position, rule);
+        RefRule ref = new FilledRefRule(refPosition, position);
+        ref.setRuleNode(new RuleNodeImpl<>(ref.getClass(), rule));
         rule.add(ref);
-        currentConfigurator.setRuleNode(ref.getRules());
+        currentConfigurator.setRuleNode(ref.getRuleNode());
         return currentConfigurator;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public T filled(Object... values) {
-        DomainRefRule ref = new DomainRefRule(refPosition, position, Arrays.asList(values), rule);
+        RefRule ref = new DomainRefRule(refPosition, position, Arrays.asList(values));
+        ref.setRuleNode(new RuleNodeImpl<>(ref.getClass(), rule));
         rule.add(ref);
-        currentConfigurator.setRuleNode(ref.getRules());
+        currentConfigurator.setRuleNode(ref.getRuleNode());
         return currentConfigurator;
     }
 
     @Override
     public T empty() {
-        EmptyRefRule ref = new EmptyRefRule(refPosition, position, rule);
+        RefRule ref = new EmptyRefRule(refPosition, position);
+        ref.setRuleNode(new RuleNodeImpl<>(ref.getClass(), rule));
         rule.add(ref);
-        currentConfigurator.setRuleNode(ref.getRules());
+        currentConfigurator.setRuleNode(ref.getRuleNode());
         return currentConfigurator;
     }
 }

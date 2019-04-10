@@ -3,9 +3,8 @@ package com.jonpereiradev.jfile.reader.rule.configurator;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Pattern;
 
-public interface GenericTypeConfigurator {
+public interface ArrayTypeConfigurator {
 
     /**
      * defines a rule for a column of short type.
@@ -93,17 +92,8 @@ public interface GenericTypeConfigurator {
     LocalDateTimeTypeConfigurator localDateTimeType(DateTimeFormatter dateTimeFormatter);
 
     /**
-     * defines a rule for a column of array type.
-     */
-    ArrayTypeConfigurator arrayOf();
-
-    /**
-     * defines a rule for a column of array type.
-     */
-    ArrayTypeConfigurator arrayOf(Pattern pattern);
-
-    /**
      * finish the configuration and apply to the reader.
      */
     void build();
+
 }

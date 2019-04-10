@@ -11,10 +11,14 @@ public class FloatTypeRule extends AbstractColumnRule {
     @Override
     public boolean isValid(JFileColumn fileColumn) {
         try {
-            return fileColumn.getFloat() != null;
+            return fileColumn.getText().isEmpty() || fileColumn.getFloat() != null;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return true;
+    }
 }

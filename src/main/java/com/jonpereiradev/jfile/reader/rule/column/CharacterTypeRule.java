@@ -10,6 +10,11 @@ public class CharacterTypeRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        return fileColumn.getCharacter() != null;
+        return fileColumn.getText().isEmpty() || fileColumn.getCharacter() != null;
+    }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return true;
     }
 }

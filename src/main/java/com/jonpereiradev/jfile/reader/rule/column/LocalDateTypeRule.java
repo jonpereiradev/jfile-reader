@@ -17,10 +17,14 @@ public class LocalDateTypeRule extends AbstractColumnRule {
     @Override
     public boolean isValid(JFileColumn fileColumn) {
         try {
-            return fileColumn.getLocalDate(dateTimeFormatter) != null;
+            return fileColumn.getText().isEmpty() || fileColumn.getLocalDate(dateTimeFormatter) != null;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return true;
+    }
 }

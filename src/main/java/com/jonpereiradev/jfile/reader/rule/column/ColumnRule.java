@@ -2,6 +2,7 @@ package com.jonpereiradev.jfile.reader.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
 import com.jonpereiradev.jfile.reader.rule.Rule;
+import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import org.apache.commons.lang3.StringUtils;
 
 public interface ColumnRule extends Rule<JFileColumn> {
@@ -16,4 +17,7 @@ public interface ColumnRule extends Rule<JFileColumn> {
 
     int getPosition();
 
+    RuleNode<ColumnRule> getRuleNode();
+
+    void setRuleNode(RuleNode<ColumnRule> ruleNode);
 }

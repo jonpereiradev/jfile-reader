@@ -214,4 +214,8 @@ public class JFileColumn implements Comparable<JFileColumn> {
 
         return LocalDateTime.parse(content, dateTimeFormatter);
     }
+
+    public JFileReaderContext getContext() {
+        return context;
+    }
 }

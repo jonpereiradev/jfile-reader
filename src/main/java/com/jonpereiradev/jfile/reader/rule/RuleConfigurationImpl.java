@@ -6,9 +6,9 @@ import com.jonpereiradev.jfile.reader.rule.line.LineRule;
 
 final class RuleConfigurationImpl implements RuleConfiguration {
 
-    private final RuleNode<FileRule> fileRuleNode = new RuleNodeImpl<>();
-    private final RuleNode<LineRule> lineRuleNode = new RuleNodeImpl<>();
-    private final RuleNode<ColumnRule> columnRuleNode = new RuleNodeImpl<>();
+    private final RuleNode<FileRule> fileRuleNode = new RuleNodeImpl<>(null, null);
+    private final RuleNode<LineRule> lineRuleNode = new RuleNodeImpl<>(null, null);
+    private final RuleNode<ColumnRule> columnRuleNode = new RuleNodeImpl<>(null, null);
 
     @Override
     public RuleNode<FileRule> getFileRootNode() {

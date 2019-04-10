@@ -7,20 +7,23 @@ import java.util.List;
 
 public class RuleNodeImpl<T extends Rule<?>> implements RuleNode<T> {
 
-    private final RuleNode<T> parentRoot;
+    private final Class<?> type;
+    private final RuleNode<T> parentNode;
     private final List<T> rules = new ArrayList<>();
 
-    public RuleNodeImpl() {
-        this.parentRoot = null;
-    }
-
-    public RuleNodeImpl(RuleNode<T> parentRoot) {
-        this.parentRoot = parentRoot;
+    public RuleNodeImpl(Class<?> type, RuleNode<T> parentNode) {
+        this.type = type;
+        this.parentNode = parentNode;
     }
 
     @Override
     public void add(T rule) {
         this.rules.add(rule);
+    }
+
+    @Override
+    public Class<?> getType() {
+        return type;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class RuleNodeImpl<T extends Rule<?>> implements RuleNode<T> {
 
     @Override
     public RuleNode<T> getParentNode() {
-        return parentRoot;
+        return parentNode;
     }
 
     @Override

@@ -15,7 +15,11 @@ public class DateTypeRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        return fileColumn.getDate(pattern) != null;
+        return fileColumn.getText().isEmpty() || fileColumn.getDate(pattern) != null;
     }
 
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return true;
+    }
 }

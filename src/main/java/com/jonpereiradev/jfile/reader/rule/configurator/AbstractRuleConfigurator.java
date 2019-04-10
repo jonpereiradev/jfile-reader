@@ -2,9 +2,11 @@ package com.jonpereiradev.jfile.reader.rule.configurator;
 
 import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
+import com.jonpereiradev.jfile.reader.rule.RuleNodeImpl;
 import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.rule.column.NotNullRule;
 import com.jonpereiradev.jfile.reader.rule.column.OnlyNullRule;
+import com.jonpereiradev.jfile.reader.rule.column.RefRule;
 
 import java.util.function.Function;
 
@@ -34,27 +36,37 @@ abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> impl
     @Override
     @SuppressWarnings("unchecked")
     public T rule(Function<Integer, ColumnRule> rule) {
-        ruleNode.add(rule.apply(position));
+        ColumnRule columnRule = rule.apply(position);
+        columnRule.setRuleNode(new RuleNodeImpl<>(columnRule.getClass(), ruleNode));
+        ruleNode.add(columnRule);
         return (T) this;
     }
 
     @Override
     public GenericTypeConfigurator column(int position) {
-        if (ruleNode.getParentNode() != null) {
-            return new GenericTypeConfiguratorImpl(position, context, ruleNode.getParentNode());
+        return new GenericTypeConfiguratorImpl(position, context, getParentNode());
+    }
+
+    private RuleNode<ColumnRule> getParentNode() {
+        RuleNode<ColumnRule> node = ruleNode;
+
+        while (node.getParentNode() != null) {
+            node = node.getParentNode();
         }
 
-        return new GenericTypeConfiguratorImpl(position, context, ruleNode);
+        return node;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public RefRuleConfigurator<T> depends(int column) {
-        if (ruleNode.getParentNode() != null) {
-            return new RefRuleConfiguratorImpl<>(column, position, ruleNode.getParentNode(), (T) this);
+        RuleNode<ColumnRule> parentNode = ruleNode;
+
+        if (ruleNode.getParentNode() != null && RefRule.class.isAssignableFrom(ruleNode.getType())) {
+            parentNode = ruleNode.getParentNode();
         }
 
-        return new RefRuleConfiguratorImpl<>(column, position, ruleNode, (T) this);
+        return new RefRuleConfiguratorImpl<>(column, position, parentNode, (T) this);
     }
 
     @Override
