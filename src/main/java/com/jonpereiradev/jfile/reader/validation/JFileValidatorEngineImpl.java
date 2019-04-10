@@ -61,19 +61,21 @@ final class JFileValidatorEngineImpl implements JFileValidatorEngine {
         });
     }
 
-    private List<RuleViolation> validateColumnRules(JFileLine line, JFileColumn column, RuleNode<ColumnRule> node) {
+    private List<RuleViolation> validateColumnRules(JFileLine fileLine, JFileColumn column, RuleNode<ColumnRule> node) {
         Stream<ColumnRule> stream = node.getChildrens().stream();
         List<ColumnRule> filtered = stream.filter(o -> o.getPosition() == column.getPosition()).collect(Collectors.toList());
         List<RuleViolation> violations = new ArrayList<>();
 
         for (ColumnRule rule : filtered) {
-            JFileColumn fileColumn = isRefRule(rule) ? getDependsColumn(line, (RefRule) rule) : column;
+            JFileColumn fileColumn = isRefRule(rule) ? getDependsColumn(fileLine, (RefRule) rule) : column;
+
+            rule.setFileLine(fileLine);
 
             if (rule instanceof ArrayOfTypeRule) {
                 ArrayOfTypeRule arrayOf = (ArrayOfTypeRule) rule;
-                arrayOf.split(column).forEach(o -> violations.addAll(validateColumnRules(line, o, rule.getRuleNode())));
+                arrayOf.split(column).forEach(o -> violations.addAll(validateColumnRules(fileLine, o, rule.getRuleNode())));
             } else if (rule.canValidate(fileColumn)) {
-                recursivelyValidate(line, column, rule, violations);
+                recursivelyValidate(fileLine, column, rule, violations);
             }
 
             if (!violations.isEmpty()) {

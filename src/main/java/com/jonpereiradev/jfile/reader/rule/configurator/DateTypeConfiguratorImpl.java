@@ -37,12 +37,22 @@ final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeCo
     }
 
     @Override
-    public DateTypeConfigurator min(Date min) {
-        return rule(position -> new DateMinRule(position, dateFormat, min));
+    public DateTypeConfigurator after(Date min) {
+        return rule(position -> new DateAfterRule(position, dateFormat, min));
     }
 
     @Override
-    public DateTypeConfigurator max(Date max) {
-        return rule(position -> new DateMaxRule(position, dateFormat, max));
+    public DateTypeConfigurator after(int columnPosition) {
+        return rule(position -> new DateAfterRule(position, dateFormat, columnPosition));
+    }
+
+    @Override
+    public DateTypeConfigurator before(Date max) {
+        return rule(position -> new DateBeforeRule(position, dateFormat, max));
+    }
+
+    @Override
+    public DateTypeConfigurator before(int columnPosition) {
+        return rule(position -> new DateBeforeRule(position, dateFormat, columnPosition));
     }
 }

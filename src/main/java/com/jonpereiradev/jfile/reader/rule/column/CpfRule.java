@@ -2,7 +2,23 @@ package com.jonpereiradev.jfile.reader.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CpfRule extends AbstractColumnRule {
+
+    private static final List<String> INVALID_CPFS = Arrays.asList(
+        "00000000000",
+        "11111111111",
+        "22222222222",
+        "33333333333",
+        "44444444444",
+        "55555555555",
+        "66666666666",
+        "77777777777",
+        "88888888888",
+        "99999999999"
+    );
 
     public CpfRule(int position) {
         super(position);
@@ -12,7 +28,7 @@ public class CpfRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         String cpf = fileColumn.getText();
 
-        if (cpf.equals("00000000000") || cpf.length() != 11) {
+        if (cpf.length() != 11 || INVALID_CPFS.contains(cpf)) {
             return false;
         }
 

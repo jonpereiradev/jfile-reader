@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Stream;
 
 public class JFileLine implements Comparable<JFileLine> {
 
@@ -40,7 +41,9 @@ public class JFileLine implements Comparable<JFileLine> {
 
     public JFileColumn getColumn(int position) {
         if (!columnsByPosition.containsKey(position)) {
-            columnsByPosition.put(position, getColumns().stream().filter(o -> o.getPosition() == position).findFirst().orElse(null));
+            Stream<JFileColumn> stream = getColumns().stream().filter(o -> o.getPosition() == position);
+            JFileColumn column = stream.findFirst().orElseThrow(() -> new IllegalArgumentException("Position doesn't exists in line."));
+            columnsByPosition.put(position, column);
         }
 
         return columnsByPosition.get(position);

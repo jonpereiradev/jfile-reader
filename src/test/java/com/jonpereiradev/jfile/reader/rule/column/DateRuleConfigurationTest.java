@@ -60,7 +60,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
 
     @Test
     public void mustViolatePastRule() throws IOException {
-        String dataAtual = getDataUmDiaAposAtual();
+        String dataAtual = getDateWithDayCalculated(1);
         Path path = createFileWithContent(dataAtual);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         getRuleConfigurator().column(1).dateType(dateFormat).past();
@@ -72,7 +72,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
 
     @Test
     public void mustViolatePastOrPresentRule() throws IOException {
-        String dataAtual = getDataUmDiaAposAtual();
+        String dataAtual = getDateWithDayCalculated(1);
         Path path = createFileWithContent(dataAtual);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         getRuleConfigurator().column(1).dateType(dateFormat).pastOrPresent();
@@ -83,39 +83,58 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     }
 
     @Test
-    public void mustViolateMinRule() throws IOException {
-        String dataAtual = getDataUmDiaAntesAtual();
+    public void mustViolateAfterRule() throws IOException {
+        String dataAtual = getDateWithDayCalculated(-1);
         Path path = createFileWithContent(dataAtual);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).min(new Date());
+        getRuleConfigurator().column(1).dateType(dateFormat).after(new Date());
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DateMinRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(DateAfterRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
-    public void mustViolateMaxRule() throws IOException {
-        String dataAtual = getDataUmDiaAposAtual();
-        Path path = createFileWithContent(dataAtual);
+    public void mustViolateAfterOtherColumnRule() throws IOException {
+        String dataInicio = getDateWithDayCalculated(1);
+        String dataFim = getDateWithDayCalculated(-1);
+        Path path = createFileWithContent(dataInicio + "|" + dataFim);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).max(new Date());
+        getRuleConfigurator().column(2).dateType(dateFormat).after(1);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(DateMaxRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(DateAfterRule.class.getName(), violations.get(0).getRule());
     }
 
-    private String getDataUmDiaAposAtual() {
-        Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.DAY_OF_MONTH, 1);
-        Locale locale = new Locale("pt", "BR");
-        return new SimpleDateFormat("dd/MM/yyyy", locale).format(instance.getTime());
+    @Test
+    public void mustViolateBeforeRule() throws IOException {
+        String dataAtual = getDateWithDayCalculated(1);
+        Path path = createFileWithContent(dataAtual);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        getRuleConfigurator().column(1).dateType(dateFormat).before(new Date());
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(DateBeforeRule.class.getName(), violations.get(0).getRule());
     }
 
-    private String getDataUmDiaAntesAtual() {
+    @Test
+    public void mustViolateBeforeOtherColumnRule() throws IOException {
+        String dataInicio = getDateWithDayCalculated(1);
+        String dataFim = getDateWithDayCalculated(-1);
+        Path path = createFileWithContent(dataInicio + "|" + dataFim);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        getRuleConfigurator().column(1).dateType(dateFormat).before(2);
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(DateBeforeRule.class.getName(), violations.get(0).getRule());
+    }
+
+    private String getDateWithDayCalculated(int amount) {
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.DAY_OF_MONTH, -1);
+        instance.add(Calendar.DAY_OF_MONTH, amount);
         Locale locale = new Locale("pt", "BR");
         return new SimpleDateFormat("dd/MM/yyyy", locale).format(instance.getTime());
     }
