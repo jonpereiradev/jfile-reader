@@ -82,7 +82,10 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public StringTypeConfigurator stringType() {
-        return new StringTypeConfiguratorImpl(position, context, ruleNode);
+        StringTypeRule rule = new StringTypeRule(position);
+        rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
+        ruleNode.add(rule);
+        return new StringTypeConfiguratorImpl(position, context, rule.getRuleNode());
     }
 
     @Override
