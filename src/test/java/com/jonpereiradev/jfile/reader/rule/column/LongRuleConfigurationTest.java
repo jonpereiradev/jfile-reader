@@ -13,7 +13,7 @@ public class LongRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     @Test
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
-        getRuleConfigurator().column(1).longType().build();
+        getRuleConfigurator().column(1).longType();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -23,7 +23,7 @@ public class LongRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     @Test
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
-        getRuleConfigurator().column(2).longType().notNull().build();
+        getRuleConfigurator().column(2).longType().notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -33,7 +33,7 @@ public class LongRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     @Test
     public void mustViolateMinLongRule() throws IOException {
         Path path = createFileWithContent("1");
-        getRuleConfigurator().column(1).longType().min(2).build();
+        getRuleConfigurator().column(1).longType().min(2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -43,7 +43,7 @@ public class LongRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     @Test
     public void mustViolateMaxLongRule() throws IOException {
         Path path = createFileWithContent("3");
-        getRuleConfigurator().column(1).longType().max(2).build();
+        getRuleConfigurator().column(1).longType().max(2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -53,7 +53,7 @@ public class LongRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     @Test
     public void mustViolateDomainLongRule() throws IOException {
         Path path = createFileWithContent("5");
-        getRuleConfigurator().column(1).longType().domain(1L, 2L).build();
+        getRuleConfigurator().column(1).longType().domain(1L, 2L);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

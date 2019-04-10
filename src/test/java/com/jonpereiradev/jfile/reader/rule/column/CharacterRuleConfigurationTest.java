@@ -13,7 +13,7 @@ public class CharacterRuleConfigurationTest extends AbstractColumnRuleConfigurat
     @Test
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a|ab|c");
-        getRuleConfigurator().column(2).characterType().build();
+        getRuleConfigurator().column(2).characterType();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -23,7 +23,7 @@ public class CharacterRuleConfigurationTest extends AbstractColumnRuleConfigurat
     @Test
     public void mustViolateDomainRule() throws IOException {
         Path path = createFileWithContent("a|a|c");
-        getRuleConfigurator().column(2).characterType().domain('0').build();
+        getRuleConfigurator().column(2).characterType().domain('0');
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

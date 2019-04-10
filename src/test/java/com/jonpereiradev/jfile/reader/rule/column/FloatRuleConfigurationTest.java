@@ -13,7 +13,7 @@ public class FloatRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
-        getRuleConfigurator().column(1).floatType().build();
+        getRuleConfigurator().column(1).floatType();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -23,7 +23,7 @@ public class FloatRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
-        getRuleConfigurator().column(2).floatType().notNull().build();
+        getRuleConfigurator().column(2).floatType().notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -33,7 +33,7 @@ public class FloatRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateMinRule() throws IOException {
         Path path = createFileWithContent("1");
-        getRuleConfigurator().column(1).floatType().min(2).build();
+        getRuleConfigurator().column(1).floatType().min(2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -43,7 +43,7 @@ public class FloatRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateMaxRule() throws IOException {
         Path path = createFileWithContent("3");
-        getRuleConfigurator().column(1).floatType().max(2).build();
+        getRuleConfigurator().column(1).floatType().max(2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

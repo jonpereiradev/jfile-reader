@@ -13,7 +13,7 @@ public class BooleanRuleConfigurationTest extends AbstractColumnRuleConfiguratio
     @Test
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a|a|c");
-        getRuleConfigurator().column(2).booleanType().build();
+        getRuleConfigurator().column(2).booleanType();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -23,7 +23,7 @@ public class BooleanRuleConfigurationTest extends AbstractColumnRuleConfiguratio
     @Test
     public void mustViolateDomainRule() throws IOException {
         Path path = createFileWithContent("a|t|c");
-        getRuleConfigurator().column(2).booleanType().domain('0', '1').build();
+        getRuleConfigurator().column(2).booleanType().domain('0', '1');
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

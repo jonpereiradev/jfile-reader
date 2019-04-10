@@ -6,7 +6,8 @@ import com.jonpereiradev.jfile.reader.rule.configurator.FileRuleConfigurator;
 public interface RuleConfigurator {
 
     static RuleConfigurator defaultConfigurator(ReaderConfiguration readerConfiguration) {
-        return new RuleConfiguratorImpl(new RuleConfiguratorContext(readerConfiguration, new RuleConfigurationImpl()));
+        readerConfiguration.withRuleConfiguration(new RuleConfigurationImpl());
+        return new RuleConfiguratorImpl(readerConfiguration);
     }
 
     FileRuleConfigurator files();

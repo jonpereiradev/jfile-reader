@@ -42,9 +42,4 @@ public interface TypedRuleConfigurator<T extends TypedRuleConfigurator<?>> {
      */
     void setRuleNode(RuleNode<ColumnRule> ruleNode);
 
-    /**
-     * finish the configuration and apply to the reader.
-     */
-    void build();
-
 }

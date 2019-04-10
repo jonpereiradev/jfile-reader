@@ -12,8 +12,4 @@ public interface LineRuleConfigurator {
      */
     GenericTypeConfigurator column(int position);
 
-    /**
-     * finish the configuration and apply to the reader.
-     */
-    void build();
 }

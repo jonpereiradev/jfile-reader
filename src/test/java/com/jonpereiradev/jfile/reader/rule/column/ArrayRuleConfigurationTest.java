@@ -13,10 +13,7 @@ public class ArrayRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustValidateArrayShortCommaSeparator() throws IOException {
         Path path = createFileWithContent("a, b, c");
-
         getRuleConfigurator().column(1).arrayOf().characterType().domain('1', '2', '3');
-        getRuleConfigurator().build();
-
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

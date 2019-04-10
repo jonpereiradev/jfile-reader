@@ -19,7 +19,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(1).localDateTimeType(formatter).build();
+        getRuleConfigurator().column(1).localDateTimeType(formatter);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -30,7 +30,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(2).localDateTimeType(formatter).notNull().build();
+        getRuleConfigurator().column(2).localDateTimeType(formatter).notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -45,8 +45,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
         getRuleConfigurator()
             .column(1)
             .localDateTimeType(formatter)
-            .future()
-            .build();
+            .future();
 
         List<RuleViolation> violations = validate(path);
 
@@ -62,8 +61,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
         getRuleConfigurator()
             .column(1)
             .localDateTimeType(formatter)
-            .futureOrPresent()
-            .build();
+            .futureOrPresent();
 
         List<RuleViolation> violations = validate(path);
 
@@ -80,8 +78,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
         getRuleConfigurator()
             .column(1)
             .localDateTimeType(formatter)
-            .past()
-            .build();
+            .past();
 
         List<RuleViolation> violations = validate(path);
 
@@ -98,8 +95,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
         getRuleConfigurator()
             .column(1)
             .localDateTimeType(formatter)
-            .pastOrPresent()
-            .build();
+            .pastOrPresent();
 
         List<RuleViolation> violations = validate(path);
 
@@ -113,7 +109,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
         LocalDateTime min = LocalDateTime.now().plusDays(1);
-        getRuleConfigurator().column(1).localDateTimeType(formatter).min(min).build();
+        getRuleConfigurator().column(1).localDateTimeType(formatter).min(min);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -126,7 +122,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
         LocalDateTime max = LocalDateTime.now().minusDays(1);
-        getRuleConfigurator().column(1).localDateTimeType(formatter).max(max).build();
+        getRuleConfigurator().column(1).localDateTimeType(formatter).max(max);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

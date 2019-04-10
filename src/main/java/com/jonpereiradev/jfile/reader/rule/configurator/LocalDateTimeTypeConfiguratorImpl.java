@@ -1,6 +1,6 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
-import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.rule.column.*;
 
@@ -15,10 +15,10 @@ final class LocalDateTimeTypeConfiguratorImpl
     LocalDateTimeTypeConfiguratorImpl(
         int position,
         DateTimeFormatter dateTimeFormatter,
-        RuleConfiguratorContext context,
+        ReaderConfiguration configuration,
         RuleNode<ColumnRule> ruleNode
     ) {
-        super(position, context, ruleNode);
+        super(position, configuration, ruleNode);
         this.dateTimeFormatter = dateTimeFormatter;
     }
 

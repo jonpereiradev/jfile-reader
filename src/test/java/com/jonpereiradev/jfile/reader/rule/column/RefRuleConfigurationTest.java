@@ -13,7 +13,7 @@ public class RefRuleConfigurationTest extends AbstractColumnRuleConfigurationTes
     @Test
     public void mustViolateRefFilledRule() throws IOException {
         Path path = createFileWithContent("1||3");
-        getRuleConfigurator().column(2).integerType().depends(1).filled().notNull().build();
+        getRuleConfigurator().column(2).integerType().depends(1).filled().notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -23,7 +23,7 @@ public class RefRuleConfigurationTest extends AbstractColumnRuleConfigurationTes
     @Test
     public void mustViolateRefFilledDomainRule() throws IOException {
         Path path = createFileWithContent("1||3");
-        getRuleConfigurator().column(2).integerType().depends(1).filled('1').notNull().build();
+        getRuleConfigurator().column(2).integerType().depends(1).filled('1').notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -33,7 +33,7 @@ public class RefRuleConfigurationTest extends AbstractColumnRuleConfigurationTes
     @Test
     public void mustViolateRefEmptyRule() throws IOException {
         Path path = createFileWithContent("||3");
-        getRuleConfigurator().column(1).integerType().depends(2).empty().notNull().build();
+        getRuleConfigurator().column(1).integerType().depends(2).empty().notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -52,8 +52,7 @@ public class RefRuleConfigurationTest extends AbstractColumnRuleConfigurationTes
             .notNull()
             .depends(3)
             .filled(3)
-            .max(1)
-            .build();
+            .max(1);
 
         List<RuleViolation> violations = validate(path);
 
@@ -72,8 +71,7 @@ public class RefRuleConfigurationTest extends AbstractColumnRuleConfigurationTes
             .filled(1)
             .notNull()
             .apply()
-            .onlyNull()
-            .build();
+            .onlyNull();
 
         List<RuleViolation> violations = validate(path);
 

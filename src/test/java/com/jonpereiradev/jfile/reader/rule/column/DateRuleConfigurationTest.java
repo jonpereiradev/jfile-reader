@@ -18,7 +18,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).build();
+        getRuleConfigurator().column(1).dateType(dateFormat);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -29,7 +29,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(2).dateType(dateFormat).notNull().build();
+        getRuleConfigurator().column(2).dateType(dateFormat).notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -40,7 +40,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     public void mustViolateFutureRule() throws IOException {
         Path path = createFileWithContent("19/12/1991");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).future().build();
+        getRuleConfigurator().column(1).dateType(dateFormat).future();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -51,7 +51,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
     public void mustViolateFutureOrPresentRule() throws IOException {
         Path path = createFileWithContent("19/12/1991");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).futureOrPresent().build();
+        getRuleConfigurator().column(1).dateType(dateFormat).futureOrPresent();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -63,7 +63,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
         String dataAtual = getDataUmDiaAposAtual();
         Path path = createFileWithContent(dataAtual);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).past().build();
+        getRuleConfigurator().column(1).dateType(dateFormat).past();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -75,7 +75,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
         String dataAtual = getDataUmDiaAposAtual();
         Path path = createFileWithContent(dataAtual);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).pastOrPresent().build();
+        getRuleConfigurator().column(1).dateType(dateFormat).pastOrPresent();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -87,7 +87,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
         String dataAtual = getDataUmDiaAntesAtual();
         Path path = createFileWithContent(dataAtual);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).min(new Date()).build();
+        getRuleConfigurator().column(1).dateType(dateFormat).min(new Date());
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -99,7 +99,7 @@ public class DateRuleConfigurationTest extends AbstractColumnRuleConfigurationTe
         String dataAtual = getDataUmDiaAposAtual();
         Path path = createFileWithContent(dataAtual);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        getRuleConfigurator().column(1).dateType(dateFormat).max(new Date()).build();
+        getRuleConfigurator().column(1).dateType(dateFormat).max(new Date());
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

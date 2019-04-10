@@ -19,7 +19,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(1).localDateType(formatter).build();
+        getRuleConfigurator().column(1).localDateType(formatter);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -30,7 +30,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(2).localDateType(formatter).notNull().build();
+        getRuleConfigurator().column(2).localDateType(formatter).notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -41,7 +41,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
     public void mustViolateFutureRule() throws IOException {
         Path path = createFileWithContent("19/12/1991");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(1).localDateType(formatter).future().build();
+        getRuleConfigurator().column(1).localDateType(formatter).future();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -52,7 +52,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
     public void mustViolateFutureOrPresentRule() throws IOException {
         Path path = createFileWithContent("19/12/1991");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(1).localDateType(formatter).futureOrPresent().build();
+        getRuleConfigurator().column(1).localDateType(formatter).futureOrPresent();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -64,7 +64,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
         String dataAtual = getDataUmDiaAposAtual();
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(1).localDateType(formatter).past().build();
+        getRuleConfigurator().column(1).localDateType(formatter).past();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -76,7 +76,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
         String dataAtual = getDataUmDiaAposAtual();
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        getRuleConfigurator().column(1).localDateType(formatter).pastOrPresent().build();
+        getRuleConfigurator().column(1).localDateType(formatter).pastOrPresent();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -88,7 +88,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
         Path path = createFileWithContent("19/12/1991");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate min = LocalDate.of(1992, 12, 19);
-        getRuleConfigurator().column(1).localDateType(formatter).min(min).build();
+        getRuleConfigurator().column(1).localDateType(formatter).min(min);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -100,7 +100,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
         Path path = createFileWithContent("19/12/1991");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate max = LocalDate.of(1991, 12, 18);
-        getRuleConfigurator().column(1).localDateType(formatter).max(max).build();
+        getRuleConfigurator().column(1).localDateType(formatter).max(max);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

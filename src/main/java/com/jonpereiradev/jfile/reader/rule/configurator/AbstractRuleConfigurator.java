@@ -1,6 +1,6 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
-import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.rule.RuleNodeImpl;
 import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
@@ -13,13 +13,13 @@ import java.util.function.Function;
 abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> implements TypedRuleConfigurator<T> {
 
     private final int position;
-    private final RuleConfiguratorContext context;
+    private final ReaderConfiguration configuration;
 
     private RuleNode<ColumnRule> ruleNode;
 
-    AbstractRuleConfigurator(int position, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
+    AbstractRuleConfigurator(int position, ReaderConfiguration configuration, RuleNode<ColumnRule> ruleNode) {
         this.position = position;
-        this.context = context;
+        this.configuration = configuration;
         this.ruleNode = ruleNode;
     }
 
@@ -44,7 +44,7 @@ abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> impl
 
     @Override
     public GenericTypeConfigurator column(int position) {
-        return new GenericTypeConfiguratorImpl(position, context, getParentNode());
+        return new GenericTypeConfiguratorImpl(position, configuration, getParentNode());
     }
 
     private RuleNode<ColumnRule> getParentNode() {
@@ -77,11 +77,6 @@ abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> impl
         }
 
         return (T) this;
-    }
-
-    @Override
-    public void build() {
-        context.getReaderConfiguration().withRuleConfiguration(context.getRuleConfiguration());
     }
 
     @Override

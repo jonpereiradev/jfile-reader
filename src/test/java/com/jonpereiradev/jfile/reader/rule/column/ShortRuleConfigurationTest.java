@@ -13,7 +13,7 @@ public class ShortRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
-        getRuleConfigurator().column(1).shortType().build();
+        getRuleConfigurator().column(1).shortType();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -23,7 +23,7 @@ public class ShortRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
-        getRuleConfigurator().column(2).shortType().notNull().build();
+        getRuleConfigurator().column(2).shortType().notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -33,7 +33,7 @@ public class ShortRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateMinRule() throws IOException {
         Path path = createFileWithContent("1");
-        getRuleConfigurator().column(1).shortType().min((short) 2).build();
+        getRuleConfigurator().column(1).shortType().min((short) 2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -43,7 +43,7 @@ public class ShortRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateMaxRule() throws IOException {
         Path path = createFileWithContent("3");
-        getRuleConfigurator().column(1).shortType().max((short) 2).build();
+        getRuleConfigurator().column(1).shortType().max((short) 2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -53,7 +53,7 @@ public class ShortRuleConfigurationTest extends AbstractColumnRuleConfigurationT
     @Test
     public void mustViolateDomainRule() throws IOException {
         Path path = createFileWithContent("5");
-        getRuleConfigurator().column(1).shortType().domain((short) 1).build();
+        getRuleConfigurator().column(1).shortType().domain((short) 1);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

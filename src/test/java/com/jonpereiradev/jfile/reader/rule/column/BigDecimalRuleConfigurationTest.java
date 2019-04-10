@@ -15,7 +15,7 @@ public class BigDecimalRuleConfigurationTest extends AbstractColumnRuleConfigura
     @Test
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
-        getRuleConfigurator().column(1).bigDecimalType(getBigDecimalFormat()).build();
+        getRuleConfigurator().column(1).bigDecimalType(getBigDecimalFormat());
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -29,8 +29,7 @@ public class BigDecimalRuleConfigurationTest extends AbstractColumnRuleConfigura
         getRuleConfigurator()
             .column(2)
             .bigDecimalType(getBigDecimalFormat())
-            .notNull()
-            .build();
+            .notNull();
 
         List<RuleViolation> violations = validate(path);
 
@@ -45,8 +44,7 @@ public class BigDecimalRuleConfigurationTest extends AbstractColumnRuleConfigura
         getRuleConfigurator()
             .column(1)
             .bigDecimalType(getBigDecimalFormat())
-            .min(BigDecimal.valueOf(2))
-            .build();
+            .min(BigDecimal.valueOf(2));
 
         List<RuleViolation> violations = validate(path);
 
@@ -61,8 +59,7 @@ public class BigDecimalRuleConfigurationTest extends AbstractColumnRuleConfigura
         getRuleConfigurator()
             .column(1)
             .bigDecimalType(getBigDecimalFormat())
-            .max(BigDecimal.valueOf(2))
-            .build();
+            .max(BigDecimal.valueOf(2));
 
         List<RuleViolation> violations = validate(path);
 

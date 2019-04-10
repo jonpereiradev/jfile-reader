@@ -1,6 +1,6 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
-import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.rule.column.ColumnRule;
 
@@ -12,8 +12,8 @@ final class ArrayTypeConfiguratorImpl implements ArrayTypeConfigurator {
 
     private final GenericTypeConfiguratorImpl genericTypeConfigurator;
 
-    ArrayTypeConfiguratorImpl(int position, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
-        this.genericTypeConfigurator = new GenericTypeConfiguratorImpl(position, context, ruleNode);
+    ArrayTypeConfiguratorImpl(int position, ReaderConfiguration configuration, RuleNode<ColumnRule> ruleNode) {
+        this.genericTypeConfigurator = new GenericTypeConfiguratorImpl(position, configuration, ruleNode);
     }
 
     @Override
@@ -101,8 +101,4 @@ final class ArrayTypeConfiguratorImpl implements ArrayTypeConfigurator {
         return genericTypeConfigurator.localDateTimeType(dateTimeFormatter);
     }
 
-    @Override
-    public void build() {
-        genericTypeConfigurator.build();
-    }
 }

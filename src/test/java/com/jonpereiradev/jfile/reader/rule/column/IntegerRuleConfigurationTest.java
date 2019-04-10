@@ -13,7 +13,7 @@ public class IntegerRuleConfigurationTest extends AbstractColumnRuleConfiguratio
     @Test
     public void mustViolateTypeRule() throws IOException {
         Path path = createFileWithContent("a");
-        getRuleConfigurator().column(1).integerType().build();
+        getRuleConfigurator().column(1).integerType();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -23,7 +23,7 @@ public class IntegerRuleConfigurationTest extends AbstractColumnRuleConfiguratio
     @Test
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
-        getRuleConfigurator().column(2).integerType().notNull().build();
+        getRuleConfigurator().column(2).integerType().notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -33,7 +33,7 @@ public class IntegerRuleConfigurationTest extends AbstractColumnRuleConfiguratio
     @Test
     public void mustViolateMinIntegerRule() throws IOException {
         Path path = createFileWithContent("1");
-        getRuleConfigurator().column(1).integerType().min(2).build();
+        getRuleConfigurator().column(1).integerType().min(2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -43,7 +43,7 @@ public class IntegerRuleConfigurationTest extends AbstractColumnRuleConfiguratio
     @Test
     public void mustViolateMaxIntegerRule() throws IOException {
         Path path = createFileWithContent("3");
-        getRuleConfigurator().column(1).integerType().max(2).build();
+        getRuleConfigurator().column(1).integerType().max(2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -53,7 +53,7 @@ public class IntegerRuleConfigurationTest extends AbstractColumnRuleConfiguratio
     @Test
     public void mustViolateDomainIntegerRule() throws IOException {
         Path path = createFileWithContent("5");
-        getRuleConfigurator().column(1).integerType().domain(1, 2).build();
+        getRuleConfigurator().column(1).integerType().domain(1, 2);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

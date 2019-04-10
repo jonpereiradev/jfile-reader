@@ -14,7 +14,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateNotNullRule() throws IOException {
         Path path = createFileWithContent("a||c");
-        getRuleConfigurator().column(2).stringType().notNull().build();
+        getRuleConfigurator().column(2).stringType().notNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -24,7 +24,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateNotEmptyRule() throws IOException {
         Path path = createFileWithContent("a|     |c");
-        getRuleConfigurator().column(2).stringType().notEmpty().build();
+        getRuleConfigurator().column(2).stringType().notEmpty();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -34,7 +34,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateMinRule() throws IOException {
         Path path = createFileWithContent("a| ab |c");
-        getRuleConfigurator().column(2).stringType().min(3).build();
+        getRuleConfigurator().column(2).stringType().min(3);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -44,7 +44,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateMaxRule() throws IOException {
         Path path = createFileWithContent("a| abcde |c");
-        getRuleConfigurator().column(2).stringType().max(3).build();
+        getRuleConfigurator().column(2).stringType().max(3);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -54,7 +54,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateDomainRule() throws IOException {
         Path path = createFileWithContent("a|2|c");
-        getRuleConfigurator().column(2).stringType().domain("1").build();
+        getRuleConfigurator().column(2).stringType().domain("1");
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -65,7 +65,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     public void mustViolateRegexRule() throws IOException {
         Path path = createFileWithContent("a|a|c");
         Pattern pattern = Pattern.compile("\\d+");
-        getRuleConfigurator().column(2).stringType().regex(pattern).build();
+        getRuleConfigurator().column(2).stringType().regex(pattern);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -75,7 +75,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateEmailRule() throws IOException {
         Path path = createFileWithContent("a|a|c");
-        getRuleConfigurator().column(2).stringType().email().build();
+        getRuleConfigurator().column(2).stringType().email();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -85,7 +85,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateCnpjRule() throws IOException {
         Path path = createFileWithContent("a|a|c");
-        getRuleConfigurator().column(2).stringType().cnpj().build();
+        getRuleConfigurator().column(2).stringType().cnpj();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -95,7 +95,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateCpfRule() throws IOException {
         Path path = createFileWithContent("a|a|c");
-        getRuleConfigurator().column(2).stringType().cpf().build();
+        getRuleConfigurator().column(2).stringType().cpf();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
@@ -105,7 +105,7 @@ public class StringRuleConfigurationTest extends AbstractColumnRuleConfiguration
     @Test
     public void mustViolateOnlyNullRule() throws IOException {
         Path path = createFileWithContent("a|a|c");
-        getRuleConfigurator().column(2).stringType().onlyNull().build();
+        getRuleConfigurator().column(2).stringType().onlyNull();
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());

@@ -1,6 +1,6 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
-import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.rule.column.*;
 
@@ -11,8 +11,8 @@ final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeCo
 
     private final DateFormat dateFormat;
 
-    DateTypeConfiguratorImpl(int position, DateFormat dateFormat, RuleConfiguratorContext context, RuleNode<ColumnRule> ruleNode) {
-        super(position, context, ruleNode);
+    DateTypeConfiguratorImpl(int position, DateFormat dateFormat, ReaderConfiguration configuration, RuleNode<ColumnRule> ruleNode) {
+        super(position, configuration, ruleNode);
         this.dateFormat = dateFormat;
     }
 

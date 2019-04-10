@@ -91,9 +91,4 @@ public interface ArrayTypeConfigurator {
      */
     LocalDateTimeTypeConfigurator localDateTimeType(DateTimeFormatter dateTimeFormatter);
 
-    /**
-     * finish the configuration and apply to the reader.
-     */
-    void build();
-
 }

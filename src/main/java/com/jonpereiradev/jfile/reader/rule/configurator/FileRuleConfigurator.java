@@ -1,11 +1,11 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
-import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 
 public interface FileRuleConfigurator {
 
-    static FileRuleConfigurator defaultConfigurator(RuleConfiguratorContext context) {
-        return new FileRuleConfiguratorImpl(context);
+    static FileRuleConfigurator defaultConfigurator(ReaderConfiguration configuration) {
+        return new FileRuleConfiguratorImpl(configuration);
     }
 
     /**

@@ -102,8 +102,4 @@ public interface GenericTypeConfigurator {
      */
     ArrayTypeConfigurator arrayOf(Pattern pattern);
 
-    /**
-     * finish the configuration and apply to the reader.
-     */
-    void build();
 }

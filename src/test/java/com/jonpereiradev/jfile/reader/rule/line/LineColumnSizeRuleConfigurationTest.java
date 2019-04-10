@@ -19,7 +19,7 @@ public class LineColumnSizeRuleConfigurationTest extends AbstractFileReaderTest 
     public void mustViolateRule() throws IOException {
         Path path = createFileWithContent("1|2|3|4");
         ReaderConfiguration readerConfiguration = ReaderConfiguration.utf8Reader("\\|");
-        RuleConfigurator.defaultConfigurator(readerConfiguration).files().lines().columns(5).build();
+        RuleConfigurator.defaultConfigurator(readerConfiguration).files().lines().columns(5);
 
         JFileReader reader = JFileReaderFactory.newInstance(path, readerConfiguration);
         List<RuleViolation> violations = reader.validate().getViolations();
@@ -31,7 +31,7 @@ public class LineColumnSizeRuleConfigurationTest extends AbstractFileReaderTest 
     public void mustSuccessRule() throws IOException {
         Path path = createFileWithContent("1|2|3|4|5");
         ReaderConfiguration readerConfiguration = ReaderConfiguration.utf8Reader("\\|");
-        RuleConfigurator.defaultConfigurator(readerConfiguration).files().lines().columns(5).build();
+        RuleConfigurator.defaultConfigurator(readerConfiguration).files().lines().columns(5);
 
         JFileReader reader = JFileReaderFactory.newInstance(path, readerConfiguration);
         List<RuleViolation> violations = reader.validate().getViolations();

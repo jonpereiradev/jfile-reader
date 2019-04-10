@@ -1,18 +1,18 @@
 package com.jonpereiradev.jfile.reader.rule.configurator;
 
-import com.jonpereiradev.jfile.reader.rule.RuleConfiguratorContext;
+import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
 
 final class FileRuleConfiguratorImpl implements FileRuleConfigurator {
 
-    private final RuleConfiguratorContext context;
+    private final ReaderConfiguration configuration;
 
-    FileRuleConfiguratorImpl(RuleConfiguratorContext context) {
-        this.context = context;
+    FileRuleConfiguratorImpl(ReaderConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     @Override
     public LineRuleConfigurator lines() {
-        return new LineRuleConfiguratorImpl(context);
+        return new LineRuleConfiguratorImpl(configuration);
     }
 
 }
