@@ -8,7 +8,7 @@ This project helps you to build functionalities that needs to read and validate 
 <dependency>
     <groupId>com.github.jonpereiradev</groupId>
     <artifactId>jfile-reader</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
