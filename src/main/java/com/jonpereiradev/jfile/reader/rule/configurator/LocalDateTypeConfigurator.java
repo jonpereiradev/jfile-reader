@@ -27,10 +27,21 @@ public interface LocalDateTypeConfigurator extends TypedRuleConfigurator<LocalDa
     /**
      * defines a min date rule validation.
      */
-    LocalDateTypeConfigurator min(LocalDate min);
+    LocalDateTypeConfigurator after(LocalDate min);
+
+    /**
+     * defines a min date rule validation comparing to another column.
+     */
+    LocalDateTypeConfigurator after(int columnPosition);
 
     /**
      * defines a max date rule validation.
      */
-    LocalDateTypeConfigurator max(LocalDate max);
+    LocalDateTypeConfigurator before(LocalDate max);
+
+    /**
+     * defines a max date rule validation comparing to another column.
+     */
+    LocalDateTypeConfigurator before(int columnPosition);
+
 }

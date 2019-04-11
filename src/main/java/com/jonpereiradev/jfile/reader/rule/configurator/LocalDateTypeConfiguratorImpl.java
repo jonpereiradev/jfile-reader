@@ -43,12 +43,24 @@ final class LocalDateTypeConfiguratorImpl
     }
 
     @Override
-    public LocalDateTypeConfigurator min(LocalDate min) {
-        return rule(position -> new LocalDateMinRule(position, dateTimeFormatter, min));
+    public LocalDateTypeConfigurator after(LocalDate min) {
+        return rule(position -> new LocalDateAfterRule(position, dateTimeFormatter, min));
     }
 
     @Override
-    public LocalDateTypeConfigurator max(LocalDate max) {
-        return rule(position -> new LocalDateMaxRule(position, dateTimeFormatter, max));
+    public LocalDateTypeConfigurator after(int columnPosition) {
+        return rule(position -> new LocalDateAfterRule(position, dateTimeFormatter, columnPosition));
     }
+
+    @Override
+    public LocalDateTypeConfigurator before(LocalDate max) {
+        return rule(position -> new LocalDateBeforeRule(position, dateTimeFormatter, max));
+    }
+
+    @Override
+    public LocalDateTypeConfigurator before(int columnPosition) {
+        return rule(position -> new LocalDateBeforeRule(position, dateTimeFormatter, columnPosition));
+    }
+
+
 }

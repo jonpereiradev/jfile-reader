@@ -61,7 +61,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
 
     @Test
     public void mustViolatePastRule() throws IOException {
-        String dataAtual = getDataUmDiaAposAtual();
+        String dataAtual = getDateWithDayCalculated(1);
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         getRuleConfigurator().column(1).localDateType(formatter).past();
@@ -73,7 +73,7 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
 
     @Test
     public void mustViolatePastOrPresentRule() throws IOException {
-        String dataAtual = getDataUmDiaAposAtual();
+        String dataAtual = getDateWithDayCalculated(1);
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         getRuleConfigurator().column(1).localDateType(formatter).pastOrPresent();
@@ -84,32 +84,54 @@ public class LocalDateRuleConfigurationTest extends AbstractColumnRuleConfigurat
     }
 
     @Test
-    public void mustViolateMinRule() throws IOException {
+    public void mustViolateAfterRule() throws IOException {
         Path path = createFileWithContent("19/12/1991");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate min = LocalDate.of(1992, 12, 19);
-        getRuleConfigurator().column(1).localDateType(formatter).min(min);
+        getRuleConfigurator().column(1).localDateType(formatter).after(min);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateMinRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateAfterRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
-    public void mustViolateMaxRule() throws IOException {
-        Path path = createFileWithContent("19/12/1991");
+    public void mustViolateAfterColumnRule() throws IOException {
+        Path path = createFileWithContent("19/12/1991|18/12/1991");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate max = LocalDate.of(1991, 12, 18);
-        getRuleConfigurator().column(1).localDateType(formatter).max(max);
+        getRuleConfigurator().column(2).localDateType(formatter).after(1);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateMaxRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateAfterRule.class.getName(), violations.get(0).getRule());
     }
 
-    private String getDataUmDiaAposAtual() {
+    @Test
+    public void mustViolateBeforeRule() throws IOException {
+        Path path = createFileWithContent("19/12/1991");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate max = LocalDate.of(1991, 12, 18);
+        getRuleConfigurator().column(1).localDateType(formatter).before(max);
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(LocalDateBeforeRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateBeforeColumnRule() throws IOException {
+        Path path = createFileWithContent("19/12/1991|18/12/1991");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        getRuleConfigurator().column(1).localDateType(formatter).before(2);
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(LocalDateBeforeRule.class.getName(), violations.get(0).getRule());
+    }
+
+    private String getDateWithDayCalculated(int amount) {
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.DAY_OF_MONTH, 1);
+        instance.add(Calendar.DAY_OF_MONTH, amount);
         Locale locale = new Locale("pt", "BR");
         return new SimpleDateFormat("dd/MM/yyyy", locale).format(instance.getTime());
     }

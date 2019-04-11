@@ -30,14 +30,14 @@ public interface DateTypeConfigurator extends TypedRuleConfigurator<DateTypeConf
     DateTypeConfigurator after(Date min);
 
     /**
-     * defines a max date rule validation.
-     */
-    DateTypeConfigurator before(Date max);
-
-    /**
      * defines a min date rule validation comparing to another column.
      */
     DateTypeConfigurator after(int columnPosition);
+
+    /**
+     * defines a max date rule validation.
+     */
+    DateTypeConfigurator before(Date max);
 
     /**
      * defines a max date rule validation comparing to another column.

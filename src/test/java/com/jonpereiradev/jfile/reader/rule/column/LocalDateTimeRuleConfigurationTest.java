@@ -71,7 +71,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
 
     @Test
     public void mustViolatePastRule() throws IOException {
-        String dataAtual = getDataHoraUmDiaAposAtual();
+        String dataAtual = getDateWithDayCalculated(1);
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
 
@@ -88,7 +88,7 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
 
     @Test
     public void mustViolatePastOrPresentRule() throws IOException {
-        String dataAtual = getDataHoraUmDiaAposAtual();
+        String dataAtual = getDateWithDayCalculated(1);
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
 
@@ -104,34 +104,60 @@ public class LocalDateTimeRuleConfigurationTest extends AbstractColumnRuleConfig
     }
 
     @Test
-    public void mustViolateMinRule() throws IOException {
-        String dataAtual = getDataHoraUmDiaAposAtual();
+    public void mustViolateAfterRule() throws IOException {
+        String dataAtual = getDateWithDayCalculated(1);
         Path path = createFileWithContent(dataAtual);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
         LocalDateTime min = LocalDateTime.now().plusDays(1);
-        getRuleConfigurator().column(1).localDateTimeType(formatter).min(min);
+        getRuleConfigurator().column(1).localDateTimeType(formatter).after(min);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTimeMinRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTimeAfterRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
-    public void mustViolateMaxRule() throws IOException {
-        String dataAtual = getDataHoraUmDiaAposAtual();
-        Path path = createFileWithContent(dataAtual);
+    public void mustViolateAfterColumnRule() throws IOException {
+        String dataInicio = getDateWithDayCalculated(1);
+        String dataFim = getDateWithDayCalculated(-1);
+        Path path = createFileWithContent(dataInicio + "|" + dataFim);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
-        LocalDateTime max = LocalDateTime.now().minusDays(1);
-        getRuleConfigurator().column(1).localDateTimeType(formatter).max(max);
+        getRuleConfigurator().column(2).localDateTimeType(formatter).after(1);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(LocalDateTimeMaxRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(LocalDateTimeAfterRule.class.getName(), violations.get(0).getRule());
     }
 
-    private String getDataHoraUmDiaAposAtual() {
+    @Test
+    public void mustViolateBeforeRule() throws IOException {
+        String dataAtual = getDateWithDayCalculated(1);
+        Path path = createFileWithContent(dataAtual);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
+        LocalDateTime max = LocalDateTime.now().minusDays(1);
+        getRuleConfigurator().column(1).localDateTimeType(formatter).before(max);
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(LocalDateTimeBeforeRule.class.getName(), violations.get(0).getRule());
+    }
+
+    @Test
+    public void mustViolateBeforeColumnRule() throws IOException {
+        String dataInicio = getDateWithDayCalculated(1);
+        String dataFim = getDateWithDayCalculated(-1);
+        Path path = createFileWithContent(dataInicio + "|" + dataFim);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
+        getRuleConfigurator().column(1).localDateTimeType(formatter).before(2);
+        List<RuleViolation> violations = validate(path);
+
+        Assert.assertFalse(violations.isEmpty());
+        Assert.assertEquals(LocalDateTimeBeforeRule.class.getName(), violations.get(0).getRule());
+    }
+
+    private String getDateWithDayCalculated(int amount) {
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.DAY_OF_MONTH, 1);
+        instance.add(Calendar.DAY_OF_MONTH, amount);
         Locale locale = new Locale("pt", "BR");
         return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS", locale).format(instance.getTime());
     }
