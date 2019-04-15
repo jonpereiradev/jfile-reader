@@ -57,7 +57,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     public JFileColumn(JFileReaderContext context, int position, String content) {
         this.context = context;
         this.position = position;
-        this.content = content;
+        this.content = StringUtils.trimToEmpty(content);
     }
 
     public int getPosition() {
