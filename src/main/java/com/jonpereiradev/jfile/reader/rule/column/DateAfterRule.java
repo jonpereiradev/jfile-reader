@@ -31,6 +31,11 @@ public class DateAfterRule extends AbstractColumnRule {
         return date.compareTo(getComparingDate()) > 0;
     }
 
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getDate(dateFormat) != null && getComparingDate() != null;
+    }
+
     private Date getComparingDate() {
         if (columnPosition == -1) {
             return min;

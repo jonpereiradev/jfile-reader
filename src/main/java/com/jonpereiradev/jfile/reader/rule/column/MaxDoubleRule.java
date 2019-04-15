@@ -15,4 +15,9 @@ public class MaxDoubleRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getDouble() <= max;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getDouble() != null;
+    }
 }

@@ -15,4 +15,9 @@ public class MinFloatRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getFloat() >= min;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getFloat() != null;
+    }
 }

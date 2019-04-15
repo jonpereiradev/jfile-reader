@@ -12,14 +12,18 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 public class JFileColumn implements Comparable<JFileColumn> {
 
+    private static final Pattern DEFAULT_ARRAY_SEPARATOR = Pattern.compile(",\\s*");
     private static final ConcurrentMap<Class<?>, Function<JFileColumn, ?>> MAPPER = new ConcurrentHashMap<>();
 
     static {
@@ -56,24 +60,6 @@ public class JFileColumn implements Comparable<JFileColumn> {
         this.content = content;
     }
 
-    @Override
-    public int compareTo(JFileColumn o) {
-        return Integer.compare(position, o.position);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        JFileColumn that = (JFileColumn) o;
-        return position == that.position;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
     public int getPosition() {
         return position;
     }
@@ -87,6 +73,14 @@ public class JFileColumn implements Comparable<JFileColumn> {
         return content;
     }
 
+    public String[] getTextArray() {
+        return getTextArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public String[] getTextArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getText).toArray(String[]::new));
+    }
+
     public Character getCharacter() {
         if (StringUtils.isBlank(content) || content.length() > 1) {
             return null;
@@ -95,12 +89,32 @@ public class JFileColumn implements Comparable<JFileColumn> {
         return content.charAt(0);
     }
 
+    public Character[] getCharacterArray() {
+        return getCharacterArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Character[] getCharacterArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getCharacter).toArray(Character[]::new));
+    }
+
     public Short getShort() {
         if (StringUtils.isBlank(content)) {
             return null;
         }
 
-        return Short.valueOf(content);
+        try {
+            return Short.valueOf(content);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public Short[] getShortArray() {
+        return getShortArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Short[] getShortArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getShort).toArray(Short[]::new));
     }
 
     public Integer getInt() {
@@ -108,7 +122,19 @@ public class JFileColumn implements Comparable<JFileColumn> {
             return null;
         }
 
-        return Integer.valueOf(content);
+        try {
+            return Integer.valueOf(content);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public Integer[] getIntArray() {
+        return getIntArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Integer[] getIntArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getInt).toArray(Integer[]::new));
     }
 
     public Long getLong() {
@@ -116,7 +142,19 @@ public class JFileColumn implements Comparable<JFileColumn> {
             return null;
         }
 
-        return Long.valueOf(content);
+        try {
+            return Long.valueOf(content);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public Long[] getLongArray() {
+        return getLongArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Long[] getLongArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getLong).toArray(Long[]::new));
     }
 
     public Float getFloat() {
@@ -124,7 +162,19 @@ public class JFileColumn implements Comparable<JFileColumn> {
             return null;
         }
 
-        return Float.valueOf(content);
+        try {
+            return Float.valueOf(content);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public Float[] getFloatArray() {
+        return getFloatArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Float[] getFloatArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getFloat).toArray(Float[]::new));
     }
 
     public Double getDouble() {
@@ -132,7 +182,19 @@ public class JFileColumn implements Comparable<JFileColumn> {
             return null;
         }
 
-        return Double.valueOf(content);
+        try {
+            return Double.valueOf(content);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public Double[] getDoubleArray() {
+        return getDoubleArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Double[] getDoubleArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getDouble).toArray(Double[]::new));
     }
 
     public Boolean getBoolean() {
@@ -151,12 +213,32 @@ public class JFileColumn implements Comparable<JFileColumn> {
         return BooleanUtils.toBooleanObject(booleanString);
     }
 
+    public Boolean[] getBooleanArray() {
+        return getBooleanArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Boolean[] getBooleanArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getBoolean).toArray(Boolean[]::new));
+    }
+
     public BigInteger getBigInteger() {
         if (StringUtils.isBlank(content)) {
             return null;
         }
 
-        return new BigInteger(content);
+        try {
+            return new BigInteger(content);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public BigInteger[] getBigIntegerArray() {
+        return getBigIntegerArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public BigInteger[] getBigIntegerArray(Pattern pattern) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(JFileColumn::getBigInteger).toArray(BigInteger[]::new));
     }
 
     public BigDecimal getBigDecimal() {
@@ -171,8 +253,20 @@ public class JFileColumn implements Comparable<JFileColumn> {
         try {
             return (BigDecimal) bigDecimalFormatter.parse(content);
         } catch (ParseException e) {
-            throw new NumberFormatException(e.getMessage());
+            return null;
         }
+    }
+
+    public BigDecimal[] getBigDecimalArray() {
+        return getBigDecimalArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public BigDecimal[] getBigDecimalArray(Pattern pattern) {
+        return getBigDecimalArray(pattern, context.getBigDecimalFormatter());
+    }
+
+    public BigDecimal[] getBigDecimalArray(Pattern pattern, DecimalFormat bigDecimalFormatter) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(o -> o.getBigDecimal(bigDecimalFormatter)).toArray(BigDecimal[]::new));
     }
 
     public Date getDate() {
@@ -191,6 +285,18 @@ public class JFileColumn implements Comparable<JFileColumn> {
         }
     }
 
+    public Date[] getDateArray() {
+        return getDateArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public Date[] getDateArray(Pattern pattern) {
+        return getDateArray(pattern, context.getDateFormat());
+    }
+
+    public Date[] getDateArray(Pattern pattern, DateFormat dateFormat) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(o -> o.getDate(dateFormat)).toArray(Date[]::new));
+    }
+
     public LocalDate getLocalDate() {
         return getLocalDate(context.getLocalDateFormatter());
     }
@@ -200,7 +306,23 @@ public class JFileColumn implements Comparable<JFileColumn> {
             return null;
         }
 
-        return LocalDate.parse(content, dateTimeFormatter);
+        try {
+            return LocalDate.parse(content, dateTimeFormatter);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    public LocalDate[] getLocalDateArray() {
+        return getLocalDateArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public LocalDate[] getLocalDateArray(Pattern pattern) {
+        return getLocalDateArray(pattern, context.getLocalDateFormatter());
+    }
+
+    public LocalDate[] getLocalDateArray(Pattern pattern, DateTimeFormatter dateTimeFormatter) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(o -> o.getLocalDate(dateTimeFormatter)).toArray(LocalDate[]::new));
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -212,10 +334,49 @@ public class JFileColumn implements Comparable<JFileColumn> {
             return null;
         }
 
-        return LocalDateTime.parse(content, dateTimeFormatter);
+        try {
+            return LocalDateTime.parse(content, dateTimeFormatter);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    public LocalDateTime[] getLocalDateTimeArray() {
+        return getLocalDateTimeArray(DEFAULT_ARRAY_SEPARATOR);
+    }
+
+    public LocalDateTime[] getLocalDateTimeArray(Pattern pattern) {
+        return getLocalDateTimeArray(pattern, context.getLocalDateTimeFormatter());
+    }
+
+    public LocalDateTime[] getLocalDateTimeArray(Pattern pattern, DateTimeFormatter dateTimeFormatter) {
+        return getArrayOf(pattern, array -> Arrays.stream(array).map(o -> o.getLocalDateTime(dateTimeFormatter)).toArray(LocalDateTime[]::new));
+    }
+
+    private <T> T[] getArrayOf(Pattern pattern, Function<JFileColumn[], T[]> function) {
+        String[] split = pattern.split(content);
+        return function.apply(Arrays.stream(split).map(s -> new JFileColumn(context, position, s)).toArray(JFileColumn[]::new));
     }
 
     public JFileReaderContext getContext() {
         return context;
+    }
+
+    @Override
+    public int compareTo(JFileColumn o) {
+        return Integer.compare(position, o.position);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JFileColumn that = (JFileColumn) o;
+        return position == that.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 }

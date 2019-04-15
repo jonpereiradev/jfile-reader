@@ -15,4 +15,9 @@ public class MinIntegerRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getInt() >= min;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getInt() != null;
+    }
 }

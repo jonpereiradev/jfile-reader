@@ -20,4 +20,9 @@ public class MaxBigDecimalRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getBigDecimal(decimalFormat).compareTo(max) <= 0;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getBigDecimal(decimalFormat) != null;
+    }
 }

@@ -15,4 +15,9 @@ public class MaxIntegerRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getInt() <= max;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getInt() != null;
+    }
 }

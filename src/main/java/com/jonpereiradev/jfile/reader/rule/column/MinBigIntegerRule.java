@@ -17,4 +17,9 @@ public class MinBigIntegerRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getBigInteger().compareTo(min) >= 0;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getBigInteger() != null;
+    }
 }

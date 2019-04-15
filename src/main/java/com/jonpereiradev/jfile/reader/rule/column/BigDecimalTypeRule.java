@@ -15,11 +15,7 @@ public class BigDecimalTypeRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        try {
-            return fileColumn.getText().isEmpty() || fileColumn.getBigDecimal(decimalFormat) != null;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return fileColumn.getText().isEmpty() || fileColumn.getBigDecimal(decimalFormat) != null;
     }
 
     @Override

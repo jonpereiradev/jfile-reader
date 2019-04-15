@@ -33,7 +33,7 @@ public class LocalDateBeforeRule extends AbstractColumnRule {
 
     @Override
     public boolean canValidate(JFileColumn fileColumn) {
-        return new LocalDateTypeRule(getPosition(), dateTimeFormatter).isValid(fileColumn);
+        return fileColumn.getLocalDate(dateTimeFormatter) != null && getComparingDate() != null;
     }
 
     private LocalDate getComparingDate() {

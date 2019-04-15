@@ -17,4 +17,9 @@ public class DomainIntegerRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return domains.contains(fileColumn.getInt());
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getInt() != null;
+    }
 }

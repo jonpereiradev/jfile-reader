@@ -22,4 +22,9 @@ public class DatePastOrPresentRule extends AbstractColumnRule {
 
         return current.compareTo(date) >= 0;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getDate(dateFormat) != null;
+    }
 }

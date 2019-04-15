@@ -4,20 +4,19 @@ import com.jonpereiradev.jfile.reader.file.JFileColumn;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class LocalDateTimePastRule extends AbstractColumnRule {
 
-    private final DateTimeFormatter formatter;
+    private final DateTimeFormatter dateTimeFormatter;
 
-    public LocalDateTimePastRule(int position, DateTimeFormatter formatter) {
+    public LocalDateTimePastRule(int position, DateTimeFormatter dateTimeFormatter) {
         super(position);
-        this.formatter = formatter;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        LocalDateTime date = fileColumn.getLocalDateTime(formatter);
+        LocalDateTime date = fileColumn.getLocalDateTime(dateTimeFormatter);
         LocalDateTime current = LocalDateTime.now();
 
         return current.compareTo(date) > 0;
@@ -25,10 +24,6 @@ public class LocalDateTimePastRule extends AbstractColumnRule {
 
     @Override
     public boolean canValidate(JFileColumn fileColumn) {
-        try {
-            return fileColumn.getLocalDateTime(formatter) != null;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+        return fileColumn.getLocalDateTime(dateTimeFormatter) != null;
     }
 }

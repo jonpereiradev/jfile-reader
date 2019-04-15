@@ -15,4 +15,9 @@ public class MinShortRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getShort() >= min;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getShort() != null;
+    }
 }

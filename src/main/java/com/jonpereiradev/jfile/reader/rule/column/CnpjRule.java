@@ -2,7 +2,23 @@ package com.jonpereiradev.jfile.reader.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CnpjRule extends AbstractColumnRule {
+
+    private static final List<String> INVALID_CNPJS = Arrays.asList(
+        "00000000000000",
+        "11111111111111",
+        "22222222222222",
+        "33333333333333",
+        "44444444444444",
+        "55555555555555",
+        "66666666666666",
+        "77777777777777",
+        "88888888888888",
+        "99999999999999"
+    );
 
     public CnpjRule(int position) {
         super(position);
@@ -12,7 +28,7 @@ public class CnpjRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         String cnpj = fileColumn.getText();
 
-        if (cnpj.equals("00000000000000") || cnpj.length() != 14) {
+        if (cnpj.length() != 14 || INVALID_CNPJS.contains(cnpj)) {
             return false;
         }
 

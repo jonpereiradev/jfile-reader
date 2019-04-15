@@ -10,11 +10,7 @@ public class BigIntegerTypeRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        try {
-            return fileColumn.getText().isEmpty() || fileColumn.getBigInteger() != null;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return fileColumn.getText().isEmpty() || fileColumn.getBigInteger() != null;
     }
 
     @Override

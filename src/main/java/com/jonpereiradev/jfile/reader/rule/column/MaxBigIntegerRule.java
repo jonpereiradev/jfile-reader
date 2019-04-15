@@ -17,4 +17,9 @@ public class MaxBigIntegerRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getBigInteger().compareTo(max) <= 0;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getBigInteger() != null;
+    }
 }

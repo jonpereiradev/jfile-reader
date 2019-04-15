@@ -17,4 +17,9 @@ public class DomainShortRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return domains.contains(fileColumn.getShort());
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getShort() != null;
+    }
 }

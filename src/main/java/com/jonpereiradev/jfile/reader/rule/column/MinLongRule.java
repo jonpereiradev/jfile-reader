@@ -15,4 +15,9 @@ public class MinLongRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getLong() >= min;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getLong() != null;
+    }
 }

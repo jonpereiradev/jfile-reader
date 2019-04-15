@@ -10,11 +10,7 @@ public class DoubleTypeRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        try {
-            return fileColumn.getText().isEmpty() || fileColumn.getDouble() != null;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return fileColumn.getText().isEmpty() || fileColumn.getDouble() != null;
     }
 
     @Override

@@ -17,4 +17,9 @@ public class DomainCharacterRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return domains.contains(fileColumn.getCharacter());
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getCharacter() != null;
+    }
 }

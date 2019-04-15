@@ -15,4 +15,9 @@ public class MinDoubleRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getDouble() >= min;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getDouble() != null;
+    }
 }

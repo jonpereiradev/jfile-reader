@@ -15,4 +15,9 @@ public class MaxLongRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getLong() <= max;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getLong() != null;
+    }
 }

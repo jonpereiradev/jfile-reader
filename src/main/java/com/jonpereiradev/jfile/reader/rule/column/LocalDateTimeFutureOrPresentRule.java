@@ -24,6 +24,6 @@ public class LocalDateTimeFutureOrPresentRule extends AbstractColumnRule {
 
     @Override
     public boolean canValidate(JFileColumn fileColumn) {
-        return new LocalDateTimeTypeRule(getPosition(), dateTimeFormatter).isValid(fileColumn);
+        return fileColumn.getLocalDateTime(dateTimeFormatter) != null;
     }
 }

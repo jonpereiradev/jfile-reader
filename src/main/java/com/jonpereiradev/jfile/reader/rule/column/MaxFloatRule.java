@@ -15,4 +15,9 @@ public class MaxFloatRule extends AbstractColumnRule {
     public boolean isValid(JFileColumn fileColumn) {
         return fileColumn.getFloat() <= max;
     }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getFloat() != null;
+    }
 }

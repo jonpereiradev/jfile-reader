@@ -8,18 +8,23 @@ import java.util.Date;
 
 public class DatePastRule extends AbstractColumnRule {
 
-    private final DateFormat formatter;
+    private final DateFormat dateFormat;
 
-    public DatePastRule(int position, DateFormat formatter) {
+    public DatePastRule(int position, DateFormat dateFormat) {
         super(position);
-        this.formatter = formatter;
+        this.dateFormat = dateFormat;
     }
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        Date date = fileColumn.getDate(formatter);
+        Date date = fileColumn.getDate(dateFormat);
         Date current = Calendar.getInstance().getTime();
 
         return current.after(date);
+    }
+
+    @Override
+    public boolean canValidate(JFileColumn fileColumn) {
+        return fileColumn.getDate(dateFormat) != null;
     }
 }
