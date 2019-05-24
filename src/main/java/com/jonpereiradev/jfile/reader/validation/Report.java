@@ -4,10 +4,10 @@ import com.jonpereiradev.jfile.reader.rule.RuleViolation;
 
 import java.util.List;
 
-public interface ReportValidation {
+public interface Report {
 
-    static ReportValidation defaultReport() {
-        return new ReportValidationImpl();
+    static Report defaultReport() {
+        return new ReportImpl();
     }
 
     void put(int row, RuleViolation violation);

@@ -6,24 +6,24 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-final class ReportValidationImpl implements ReportValidation {
+final class ReportImpl implements Report {
 
-    private final Map<Integer, ReportLineValidation> violationsPerLine = new TreeMap<>();
+    private final Map<Integer, ReportLineValidation> violationsPerRow = new TreeMap<>();
 
     public void put(int row, RuleViolation violation) {
-        if (!violationsPerLine.containsKey(row)) {
-            violationsPerLine.put(row, new ReportLineValidation());
+        if (!violationsPerRow.containsKey(row)) {
+            violationsPerRow.put(row, new ReportLineValidation());
         }
 
-        violationsPerLine.get(row).add(violation);
+        violationsPerRow.get(row).add(violation);
     }
 
     public void put(int row, List<RuleViolation> violations) {
-        if (!violationsPerLine.containsKey(row)) {
-            violationsPerLine.put(row, new ReportLineValidation());
+        if (!violationsPerRow.containsKey(row)) {
+            violationsPerRow.put(row, new ReportLineValidation());
         }
 
-        violationsPerLine.get(row).addAll(violations);
+        violationsPerRow.get(row).addAll(violations);
     }
 
     @Override
@@ -38,8 +38,8 @@ final class ReportValidationImpl implements ReportValidation {
 
     @Override
     public List<RuleViolation> getViolations(int row) {
-        if (violationsPerLine.containsKey(row)) {
-            return Collections.unmodifiableList(violationsPerLine.get(row).violations);
+        if (violationsPerRow.containsKey(row)) {
+            return Collections.unmodifiableList(violationsPerRow.get(row).violations);
         }
 
         return Collections.emptyList();
@@ -47,8 +47,8 @@ final class ReportValidationImpl implements ReportValidation {
 
     @Override
     public List<RuleViolation> getViolations(int row, int position) {
-        if (violationsPerLine.containsKey(row)) {
-            Stream<RuleViolation> stream = violationsPerLine.get(row).violations.stream().filter(o -> o.getColumn() == position);
+        if (violationsPerRow.containsKey(row)) {
+            Stream<RuleViolation> stream = violationsPerRow.get(row).violations.stream().filter(o -> o.getColumn() == position);
             return Collections.unmodifiableList(stream.collect(Collectors.toList()));
         }
 
@@ -57,7 +57,7 @@ final class ReportValidationImpl implements ReportValidation {
 
     @Override
     public List<RuleViolation> getViolations() {
-        return violationsPerLine.entrySet().stream().flatMap(o -> o.getValue().violations.stream()).collect(Collectors.toList());
+        return violationsPerRow.entrySet().stream().flatMap(o -> o.getValue().violations.stream()).collect(Collectors.toList());
     }
 
     private class ReportLineValidation {

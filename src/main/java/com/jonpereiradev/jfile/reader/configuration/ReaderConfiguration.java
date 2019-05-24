@@ -35,6 +35,8 @@ public interface ReaderConfiguration {
 
     ReaderConfiguration withStreamReader(Function<InputStream, StreamReader> streamReader);
 
+    ReaderConfiguration withMaxViolationSize(int maxViolationSize);
+
     Pattern getPattern();
 
     Charset getCharset();
@@ -52,4 +54,6 @@ public interface ReaderConfiguration {
     Function<? super InputStream, ? extends StreamReader> getStreamReader();
 
     FileLineParser getFileLineParser();
+
+    int getMaxViolationSize();
 }

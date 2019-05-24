@@ -24,6 +24,7 @@ final class ReaderConfigurationImpl implements ReaderConfiguration {
     private DecimalFormat bigDecimalFormatter;
     private RuleConfiguration ruleConfiguration;
     private Function<InputStream, StreamReader> streamReader;
+    private int maxViolationSize = -1;
 
     ReaderConfigurationImpl(Pattern pattern, Charset charset) {
         this.pattern = pattern;
@@ -74,6 +75,12 @@ final class ReaderConfigurationImpl implements ReaderConfiguration {
     }
 
     @Override
+    public ReaderConfiguration withMaxViolationSize(int maxViolationSize) {
+        this.maxViolationSize = maxViolationSize;
+        return this;
+    }
+
+    @Override
     public Pattern getPattern() {
         return pattern;
     }
@@ -116,5 +123,10 @@ final class ReaderConfigurationImpl implements ReaderConfiguration {
     @Override
     public FileLineParser getFileLineParser() {
         return fileLineParser;
+    }
+
+    @Override
+    public int getMaxViolationSize() {
+        return maxViolationSize;
     }
 }

@@ -4,7 +4,7 @@ import com.jonpereiradev.jfile.reader.file.JFileLine;
 import com.jonpereiradev.jfile.reader.rule.RuleViolation;
 import com.jonpereiradev.jfile.reader.stream.StreamReader;
 import com.jonpereiradev.jfile.reader.validation.JFileValidatorEngine;
-import com.jonpereiradev.jfile.reader.validation.ReportValidation;
+import com.jonpereiradev.jfile.reader.validation.Report;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ final class JFileReaderImpl implements JFileReader {
     }
 
     @Override
-    public ReportValidation validate() {
+    public Report validate() {
         Objects.requireNonNull(context.getRuleConfiguration(), "No rule configuration provided.");
 
         if (iterator != null) {
@@ -41,22 +41,34 @@ final class JFileReaderImpl implements JFileReader {
         }
 
         List<JFileLine> lines = new ArrayList<>();
-        ReportValidation report = ReportValidation.defaultReport();
+        Report report = Report.defaultReport();
+        int maxViolationSize = context.getReaderConfiguration().getMaxViolationSize();
+        JFileReaderIterator iterator = iterator();
 
-        iterator().forEachRemaining(line -> {
-            report.put(line.getRow(), validateLine(line));
+        while (iterator.hasNext()) {
+            JFileLine line = iterator.next();
+            List<RuleViolation> violations = validateLine(line);
+
+            report.put(line.getRow(), violations);
             lines.add(line);
-        });
 
-        iterator = new InMemoryJFileReaderIterator(lines);
+            if (maxViolationSize > 0 && report.getViolations().size() > maxViolationSize) {
+                break;
+            }
+        }
+
+        this.iterator = new InMemoryJFileReaderIterator(lines);
 
         return report;
     }
 
     @Override
-    public ReportValidation validate(JFileLine line) {
-        ReportValidation report = ReportValidation.defaultReport();
-        report.put(line.getRow(), validateLine(line));
+    public Report validate(JFileLine line) {
+        Report report = Report.defaultReport();
+        List<RuleViolation> violations = validateLine(line);
+
+        report.put(line.getRow(), violations);
+
         return report;
     }
 
@@ -71,8 +83,8 @@ final class JFileReaderImpl implements JFileReader {
     }
 
     @Override
-    public <T> T parse(JFileLine line, Class<T> clazz) {
-        return context.getFileLineParser().parse(line, clazz);
+    public <T> T parse(JFileLine line, Class<T> toClass) {
+        return context.getFileLineParser().parse(line, toClass);
     }
 
     @Override
