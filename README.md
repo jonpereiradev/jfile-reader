@@ -8,7 +8,7 @@ This project helps you to build functionalities that needs to read and validate 
 <dependency>
     <groupId>com.github.jonpereiradev</groupId>
     <artifactId>jfile-reader</artifactId>
-    <version>0.5.0</version>
+    <version>0.7.0</version>
 </dependency>
 ```
 
@@ -106,8 +106,7 @@ public class Main {
             .pastOrPresent()
             .column(2)
             .stringType()
-            .regex(Pattern.compile("\\d+"))
-            .build();
+            .regex(Pattern.compile("\\d+"));
         
         try (JFileReader jFileReader = JFileReaderFactory.newInstance(path, readerConfiguration)) {
             List<RuleViolation> violations = jFileReader.validate();
