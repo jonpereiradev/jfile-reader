@@ -10,8 +10,14 @@ public interface StreamReader extends Iterable<String>, Closeable {
         return new DefaultStreamReader(inputStream, charset);
     }
 
+    /**
+     * @return the input stream with the file content.
+     */
     InputStream getInputStream();
 
+    /**
+     * @return the charset of the file content.
+     */
     Charset getCharset();
 
 }

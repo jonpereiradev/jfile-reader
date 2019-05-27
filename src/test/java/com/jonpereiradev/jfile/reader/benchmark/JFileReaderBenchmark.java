@@ -7,7 +7,6 @@ import com.jonpereiradev.jfile.reader.file.JFileLine;
 import com.jonpereiradev.jfile.reader.infrastructure.AbstractFileReaderTest;
 import com.jonpereiradev.jfile.reader.parser.FileColumn;
 import com.jonpereiradev.jfile.reader.rule.RuleConfigurator;
-import com.jonpereiradev.jfile.reader.rule.RuleViolation;
 import com.jonpereiradev.jfile.reader.validation.Report;
 import org.junit.Assert;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -26,8 +25,6 @@ import org.openjdk.jmh.annotations.Warmup;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Thread)
@@ -108,7 +105,7 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
 
     @Benchmark
     public void measureValidatingAllFileWithViolationPerformance() {
-        ReaderConfiguration configuration = ReaderConfiguration.utf8Reader(";").withMaxViolationSize(10000);
+        ReaderConfiguration configuration = ReaderConfiguration.utf8Reader(";").withMaxViolationSize(100);
 
         RuleConfigurator.defaultConfigurator(configuration).files().lines()
             .column(1).integerType().notNull()
@@ -119,30 +116,10 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
             .column(6).stringType().notNull();
 
         JFileReader reader = JFileReaderFactory.newInstance(pathToFakeFile, configuration);
-        List<RuleViolation> violations = new ArrayList<>();
-
-
-//        for (JFileLine line : reader) {
-//            Report validation = reader.validate(line);
-//
-//            if (validation.isInvalid()) {
-//                violations.addAll(validation.getViolations());
-//            }
-//
-//            if (violations.size() > 1000) {
-//                break;
-//            }
-//            Assert.assertTrue(validation.isInvalid());
-//            Assert.assertFalse(validation.getViolations().isEmpty());
-//        }
-//
-//        ReportValidation validation = reader.validate();
-
         Report report = reader.validate();
+
         Assert.assertTrue(report.isInvalid());
         Assert.assertFalse(report.getViolations().isEmpty());
-
-//        Assert.assertFalse(violations.isEmpty());
     }
 
     @Benchmark
