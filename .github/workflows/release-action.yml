@@ -1,9 +1,9 @@
-name: Sonatype Deploy
+name: Deploy
 
-on:
-  push:
-    branches:
-      - master
+on: ["push"]
+#  push:
+#    branches:
+#      - master
 
 jobs:
   release:
@@ -30,10 +30,13 @@ jobs:
       - name: Build Maven package
         run: mvn -B package --file pom.xml
 
-      - name: Release Maven package
-        uses: samuelmeuli/action-maven-publish@v1
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          nexus_username: ${{ secrets.OSSRH_USERNAME }}
-          nexus_password: ${{ secrets.OSSRH_PASSWORD }}
+#      - name: Release Sonatype
+#        uses: samuelmeuli/action-maven-publish@v1
+#        with:
+#          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+#          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+#          nexus_username: ${{ secrets.OSSRH_USERNAME }}
+#          nexus_password: ${{ secrets.OSSRH_PASSWORD }}
+
+      - name: Release Github
+        run: mvn deploy -Dregistry=https://maven.pkg.github.com/jonpereiradev -Dtoken=GH_TOKEN
