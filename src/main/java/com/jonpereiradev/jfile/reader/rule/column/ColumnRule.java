@@ -4,7 +4,7 @@ import com.jonpereiradev.jfile.reader.file.JFileColumn;
 import com.jonpereiradev.jfile.reader.file.JFileLine;
 import com.jonpereiradev.jfile.reader.rule.Rule;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
-import org.apache.commons.lang3.StringUtils;
+import com.jonpereiradev.jfile.reader.rule.RuleUtils;
 
 public interface ColumnRule extends Rule<JFileColumn> {
 
@@ -13,7 +13,7 @@ public interface ColumnRule extends Rule<JFileColumn> {
 
     @Override
     default boolean canValidate(JFileColumn fileColumn) {
-        return StringUtils.isNotBlank(fileColumn.getText());
+        return RuleUtils.isNotBlank(fileColumn.getText());
     }
 
     int getPosition();

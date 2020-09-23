@@ -1,8 +1,7 @@
 package com.jonpereiradev.jfile.reader.file;
 
 import com.jonpereiradev.jfile.reader.JFileReaderContext;
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.jonpereiradev.jfile.reader.rule.RuleUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -57,7 +56,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     public JFileColumn(JFileReaderContext context, int position, String content) {
         this.context = context;
         this.position = position;
-        this.content = StringUtils.trimToEmpty(content);
+        this.content = RuleUtils.trimToEmpty(content);
     }
 
     public int getPosition() {
@@ -82,7 +81,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Character getCharacter() {
-        if (StringUtils.isBlank(content) || content.length() > 1) {
+        if (RuleUtils.isBlank(content) || content.length() > 1) {
             return null;
         }
 
@@ -98,7 +97,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Short getShort() {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -118,7 +117,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Integer getInt() {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -138,7 +137,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Long getLong() {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -158,7 +157,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Float getFloat() {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -178,7 +177,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Double getDouble() {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -198,7 +197,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Boolean getBoolean() {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -210,7 +209,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
             booleanString = "true";
         }
 
-        return BooleanUtils.toBooleanObject(booleanString);
+        return RuleUtils.toBooleanObject(booleanString);
     }
 
     public Boolean[] getBooleanArray() {
@@ -222,7 +221,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public BigInteger getBigInteger() {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -246,7 +245,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public BigDecimal getBigDecimal(DecimalFormat bigDecimalFormatter) {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -274,7 +273,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public Date getDate(DateFormat pattern) {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -302,7 +301,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public LocalDate getLocalDate(DateTimeFormatter dateTimeFormatter) {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 
@@ -330,7 +329,7 @@ public class JFileColumn implements Comparable<JFileColumn> {
     }
 
     public LocalDateTime getLocalDateTime(DateTimeFormatter dateTimeFormatter) {
-        if (StringUtils.isBlank(content)) {
+        if (RuleUtils.isBlank(content)) {
             return null;
         }
 

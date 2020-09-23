@@ -3,7 +3,7 @@ package com.jonpereiradev.jfile.reader.rule.column;
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
 import com.jonpereiradev.jfile.reader.file.JFileLine;
 import com.jonpereiradev.jfile.reader.rule.RuleNode;
-import org.apache.commons.lang3.StringUtils;
+import com.jonpereiradev.jfile.reader.rule.RuleUtils;
 
 public abstract class AbstractColumnRule implements ColumnRule {
 
@@ -18,7 +18,7 @@ public abstract class AbstractColumnRule implements ColumnRule {
 
     @Override
     public boolean canValidate(JFileColumn fileColumn) {
-        return StringUtils.isNotBlank(fileColumn.getText());
+        return RuleUtils.isNotBlank(fileColumn.getText());
     }
 
     @Override
