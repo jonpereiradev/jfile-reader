@@ -1,9 +1,9 @@
 name: Deploy
 
-on: ["push"]
-#  push:
-#    branches:
-#      - master
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   release:
@@ -28,15 +28,12 @@ jobs:
         run: mvn -B test --file pom.xml
 
       - name: Build Maven package
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml -DskipTests
 
-#      - name: Release Sonatype
-#        uses: samuelmeuli/action-maven-publish@v1
-#        with:
-#          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-#          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
-#          nexus_username: ${{ secrets.OSSRH_USERNAME }}
-#          nexus_password: ${{ secrets.OSSRH_PASSWORD }}
-
-      - name: Release Github
-        run: mvn deploy -Dregistry=https://maven.pkg.github.com/jonpereiradev -Dtoken=GH_TOKEN
+      - name: Release Sonatype
+        uses: samuelmeuli/action-maven-publish@v1
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          nexus_username: ${{ secrets.OSSRH_USERNAME }}
+          nexus_password: ${{ secrets.OSSRH_PASSWORD }}

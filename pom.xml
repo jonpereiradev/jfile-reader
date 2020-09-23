@@ -72,7 +72,7 @@
   </build>
   <profiles>
     <profile>
-      <id>deploy</id>
+      <id>ossrh</id>
       <distributionManagement>
         <snapshotRepository>
           <id>ossrh</id>
