@@ -1,7 +1,7 @@
 package com.jonpereiradev.jfile.reader.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.JFileColumn;
-import org.apache.commons.lang3.StringUtils;
+import com.jonpereiradev.jfile.reader.rule.RuleUtils;
 
 public class OnlyNullRule extends AbstractColumnRule {
 
@@ -11,7 +11,7 @@ public class OnlyNullRule extends AbstractColumnRule {
 
     @Override
     public boolean isValid(JFileColumn fileColumn) {
-        return StringUtils.isBlank(fileColumn.getText());
+        return RuleUtils.isBlank(fileColumn.getText());
     }
 
     @Override
