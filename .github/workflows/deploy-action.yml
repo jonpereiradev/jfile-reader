@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  release:
+  deploy:
     runs-on: ubuntu-18.04
     steps:
       - name: Check out Git repository
@@ -30,7 +30,7 @@ jobs:
       - name: Build Maven package
         run: mvn -B package --file pom.xml -DskipTests
 
-      - name: Release Sonatype
+      - name: Deploy Sonatype
         uses: samuelmeuli/action-maven-publish@v1
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
