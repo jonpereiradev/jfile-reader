@@ -16,14 +16,14 @@ This project provides an easy use and extensible API for read, validate, and par
 
 **Version:** 0.8.0
 
-- Removing commons-lang dependency;
-- Migrating documentation to Githug Wiki;
+- [x] Removing commons-lang dependency;
+- [x] Migrating documentation to Githug Wiki;
 
 **Version:** 0.7.0
 
-- Inclusion of method canValidate for Rules;
-- LocalDate and LocalDateTime validation Rules;
-- Benchmark implementation with JMH;
+- [x] Inclusion of method canValidate for Rules;
+- [x] LocalDate and LocalDateTime validation Rules;
+- [x] Benchmark implementation with JMH;
 
 ## License
 
