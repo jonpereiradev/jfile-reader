@@ -1,14 +1,17 @@
 package com.jonpereiradev.jfile.reader.benchmark;
 
 import com.jonpereiradev.jfile.reader.JFileReader;
+import com.jonpereiradev.jfile.reader.JFileReaderConfig;
 import com.jonpereiradev.jfile.reader.JFileReaderFactory;
-import com.jonpereiradev.jfile.reader.configuration.ReaderConfiguration;
-import com.jonpereiradev.jfile.reader.file.JFileLine;
+import com.jonpereiradev.jfile.reader.converter.FileColumn;
+import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.infrastructure.AbstractFileReaderTest;
-import com.jonpereiradev.jfile.reader.parser.FileColumn;
-import com.jonpereiradev.jfile.reader.rule.RuleConfigurator;
-import com.jonpereiradev.jfile.reader.validation.Report;
+import com.jonpereiradev.jfile.reader.validator.JFileValidator;
+import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
+import com.jonpereiradev.jfile.reader.validator.JFileValidatorFactory;
+import com.jonpereiradev.jfile.reader.validator.ValidationReport;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -51,12 +54,13 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
     }
 
     @Benchmark
-    public void measureReadingPerformance() {
-        JFileReader reader = JFileReaderFactory.newInstance(pathToFakeFile, ReaderConfiguration.utf8Reader(";"));
+    public void measureReadingPerformance() throws IOException {
+        JFileReaderConfig readerConfig = JFileReaderFactory.newUtf8ReaderConfig(";");
+        JFileReader reader = JFileReaderFactory.newJFileReader(pathToFakeFile, readerConfig);
 
         int countNumberOfLines = 0;
 
-        for (JFileLine line : reader) {
+        for (LineValue line : reader) {
             countNumberOfLines++;
         }
 
@@ -64,10 +68,12 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
     }
 
     @Benchmark
-    public void measureValidatingWithSuccessPerformance() {
-        ReaderConfiguration configuration = ReaderConfiguration.utf8Reader(";");
+    public void measureValidatingWithSuccessPerformance() throws IOException {
+        JFileReaderConfig configuration = JFileReaderFactory.newUtf8ReaderConfig(";");
+        JFileValidatorConfig validatorConfig = JFileValidatorFactory.newValidatorConfig();
 
-        RuleConfigurator.defaultConfigurator(configuration).files().lines()
+        validatorConfig
+            .columns()
             .column(1).stringType().notNull()
             .column(2).stringType().notNull()
             .column(3).integerType().notNull()
@@ -75,18 +81,21 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
             .column(5).stringType().notNull()
             .column(6).stringType().notNull();
 
-        JFileReader reader = JFileReaderFactory.newInstance(pathToFakeFile, configuration);
+        JFileReader reader = JFileReaderFactory.newJFileReader(pathToFakeFile, configuration);
+        JFileValidator validator = JFileValidatorFactory.newJFileValidator(validatorConfig);
 
-        for (JFileLine line : reader) {
-            reader.validate(line);
+        for (LineValue line : reader) {
+            validator.validate(line);
         }
     }
 
     @Benchmark
-    public void measureValidatingWithViolationPerformance() {
-        ReaderConfiguration configuration = ReaderConfiguration.utf8Reader(";");
+    public void measureValidatingWithViolationPerformance() throws IOException {
+        JFileReaderConfig configuration = JFileReaderFactory.newUtf8ReaderConfig(";");
+        JFileValidatorConfig validatorConfig = JFileValidatorFactory.newValidatorConfig();
 
-        RuleConfigurator.defaultConfigurator(configuration).files().lines()
+        validatorConfig
+            .columns()
             .column(1).integerType().notNull()
             .column(2).stringType().notNull()
             .column(3).integerType().notNull()
@@ -94,20 +103,24 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
             .column(5).stringType().notNull()
             .column(6).stringType().notNull();
 
-        JFileReader reader = JFileReaderFactory.newInstance(pathToFakeFile, configuration);
+        JFileReader reader = JFileReaderFactory.newJFileReader(pathToFakeFile, configuration);
+        JFileValidator validator = JFileValidatorFactory.newJFileValidator(validatorConfig);
 
-        for (JFileLine line : reader) {
-            Report validation = reader.validate(line);
-            Assert.assertTrue(validation.isInvalid());
+        for (LineValue line : reader) {
+            ValidationReport validation = validator.validate(line);
+            Assert.assertTrue(validation.isNotValid());
             Assert.assertFalse(validation.getViolations().isEmpty());
         }
     }
 
     @Benchmark
-    public void measureValidatingAllFileWithViolationPerformance() {
-        ReaderConfiguration configuration = ReaderConfiguration.utf8Reader(";").withMaxViolationSize(100);
+    @Ignore
+    public void measureValidatingAllFileWithViolationPerformance() throws IOException {
+        JFileReaderConfig configuration = JFileReaderFactory.newUtf8ReaderConfig(";");
+        JFileValidatorConfig validatorConfig = JFileValidatorFactory.newValidatorConfig().maxViolationSize(100);
 
-        RuleConfigurator.defaultConfigurator(configuration).files().lines()
+        validatorConfig
+            .columns()
             .column(1).integerType().notNull()
             .column(2).stringType().notNull()
             .column(3).integerType().notNull()
@@ -115,21 +128,22 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
             .column(5).stringType().notNull()
             .column(6).stringType().notNull();
 
-        JFileReader reader = JFileReaderFactory.newInstance(pathToFakeFile, configuration);
-        Report report = reader.validate();
+        JFileReader reader = JFileReaderFactory.newJFileReader(pathToFakeFile, configuration);
+        JFileValidator validator = JFileValidatorFactory.newJFileValidator(validatorConfig);
+        ValidationReport report = validator.validate(reader);
 
-        Assert.assertTrue(report.isInvalid());
+        Assert.assertTrue(report.isNotValid());
         Assert.assertFalse(report.getViolations().isEmpty());
     }
 
     @Benchmark
-    public void measureConvertingPerformance() {
-        ReaderConfiguration configuration = ReaderConfiguration.utf8Reader(";");
-        JFileReader reader = JFileReaderFactory.newInstance(pathToFakeFile, configuration);
+    public void measureConvertingPerformance() throws IOException {
+        JFileReaderConfig configuration = JFileReaderFactory.newUtf8ReaderConfig(";");
+        JFileReader reader = JFileReaderFactory.newJFileReader(pathToFakeFile, configuration);
 
         int countNumberOfLines = 0;
 
-        for (JFileLine line : reader) {
+        for (LineValue line : reader) {
             reader.parse(line, PerformanceObject.class);
             countNumberOfLines++;
         }
@@ -138,10 +152,12 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
     }
 
     @Benchmark
-    public void measureValidatingAndConvertingPerformance() {
-        ReaderConfiguration configuration = ReaderConfiguration.utf8Reader(";");
+    public void measureValidatingAndConvertingPerformance() throws IOException {
+        JFileReaderConfig configuration = JFileReaderFactory.newUtf8ReaderConfig(";");
+        JFileValidatorConfig validatorConfig = JFileValidatorFactory.newValidatorConfig();
 
-        RuleConfigurator.defaultConfigurator(configuration).files().lines()
+        validatorConfig
+            .columns()
             .column(1).stringType().notNull()
             .column(2).stringType().notNull()
             .column(3).integerType().notNull()
@@ -149,12 +165,13 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
             .column(5).stringType().notNull()
             .column(6).stringType().notNull();
 
-        JFileReader reader = JFileReaderFactory.newInstance(pathToFakeFile, configuration);
+        JFileReader reader = JFileReaderFactory.newJFileReader(pathToFakeFile, configuration);
+        JFileValidator validator = JFileValidatorFactory.newJFileValidator(validatorConfig);
 
         int countNumberOfLines = 0;
 
-        for (JFileLine line : reader) {
-            reader.validate(line);
+        for (LineValue line : reader) {
+            validator.validate(line);
             reader.parse(line, PerformanceObject.class);
             countNumberOfLines++;
         }
