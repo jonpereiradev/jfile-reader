@@ -27,6 +27,8 @@ This project provides an easy use and extensible API for read, validate, and par
 - [X] Refactory ReaderConfiguration to JFileReaderConfig
 - [X] Removing internal complexities
 - [X] Add throws IOException in some methods of JFileReaderFactory
+- [x] MIT License
+- [] Enrich the API documentation
 
 **Version:** 0.7.0
 
