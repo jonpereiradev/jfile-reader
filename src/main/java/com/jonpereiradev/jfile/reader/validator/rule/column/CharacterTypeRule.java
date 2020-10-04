@@ -27,17 +27,21 @@ import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 public class CharacterTypeRule extends AbstractColumnRule {
 
-    public CharacterTypeRule(int position) {
-        super(position);
+    public CharacterTypeRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getText().isEmpty() || fileColumn.getCharacter() != null;
+    public boolean isValid(ColumnValue columnValue) {
+        try {
+            return columnValue.getText().isEmpty() || columnValue.getCharacter() != null;
+        } catch (IllegalStateException e) {
+            return false;
+        }
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

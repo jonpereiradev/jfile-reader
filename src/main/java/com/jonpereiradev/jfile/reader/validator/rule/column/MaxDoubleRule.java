@@ -29,18 +29,18 @@ public class MaxDoubleRule extends AbstractColumnRule {
 
     private final double max;
 
-    public MaxDoubleRule(int position, double max) {
-        super(position);
+    public MaxDoubleRule(int columnNumber, double max) {
+        super(columnNumber);
         this.max = max;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getDouble() <= max;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getDouble() <= max;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getDouble() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getDouble() != null;
     }
 }

@@ -38,12 +38,12 @@ final class LineValueImpl implements LineValue {
 
     private final int lineNumber;
     private final String content;
-    private final SortedSet<ColumnValue> columns;
+    private final SortedSet<ColumnValue> columnValues;
 
-    LineValueImpl(int lineNumber, String content, SortedSet<ColumnValue> columns) {
+    LineValueImpl(int lineNumber, String content, SortedSet<ColumnValue> columnValues) {
         this.lineNumber = lineNumber;
         this.content = content;
-        this.columns = Collections.unmodifiableSortedSet(columns);
+        this.columnValues = Collections.unmodifiableSortedSet(columnValues);
     }
 
     @Override
@@ -80,19 +80,19 @@ final class LineValueImpl implements LineValue {
     }
 
     @Override
-    public ColumnValue getColumnValue(int position) {
-        if (!columnsByPosition.containsKey(position)) {
-            Stream<ColumnValue> stream = getColumns().stream().filter(o -> o.getPosition() == position);
+    public ColumnValue getColumnValue(int columnNumber) {
+        if (!columnsByPosition.containsKey(columnNumber)) {
+            Stream<ColumnValue> stream = getColumnValues().stream().filter(o -> o.getColumnNumber() == columnNumber);
             ColumnValue column = stream.findFirst().orElseThrow(() -> new IllegalArgumentException(POSITION_ERROR));
-            columnsByPosition.put(position, column);
+            columnsByPosition.put(columnNumber, column);
         }
 
-        return columnsByPosition.get(position);
+        return columnsByPosition.get(columnNumber);
     }
 
     @Override
-    public SortedSet<ColumnValue> getColumns() {
-        return columns;
+    public SortedSet<ColumnValue> getColumnValues() {
+        return columnValues;
     }
 
 }

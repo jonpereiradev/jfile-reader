@@ -27,43 +27,49 @@ import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class LocalDateAfterRule extends AbstractColumnRule {
 
     private final DateTimeFormatter dateTimeFormatter;
     private final LocalDate min;
-    private final int refColumn;
+    private final int refColumnNumber;
 
-    public LocalDateAfterRule(int position, DateTimeFormatter dateTimeFormatter, LocalDate min) {
-        super(position);
+    public LocalDateAfterRule(int columnNumber, DateTimeFormatter dateTimeFormatter, LocalDate min) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
         this.min = min;
-        this.refColumn = -1;
+        this.refColumnNumber = -1;
     }
 
-    public LocalDateAfterRule(int position, DateTimeFormatter dateTimeFormatter, int refColumn) {
-        super(position);
+    public LocalDateAfterRule(int columnNumber, DateTimeFormatter dateTimeFormatter, int refColumnNumber) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
         this.min = null;
-        this.refColumn = refColumn;
+        this.refColumnNumber = refColumnNumber;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        LocalDate date = fileColumn.getLocalDate(dateTimeFormatter);
+    public boolean isValid(ColumnValue columnValue) {
+        LocalDate date = columnValue.getLocalDate(dateTimeFormatter);
         return date.compareTo(getComparingDate()) > 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getLocalDate(dateTimeFormatter) != null && getComparingDate() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getLocalDate(dateTimeFormatter) != null && getComparingDate() != null;
     }
 
     private LocalDate getComparingDate() {
-        if (refColumn == -1) {
+        if (refColumnNumber == -1) {
             return min;
         }
 
-        return getLineValue().getColumnValue(refColumn).getLocalDate(dateTimeFormatter);
+        try {
+            return getLineValue().getColumnValue(refColumnNumber).getLocalDate(dateTimeFormatter);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+
     }
 }

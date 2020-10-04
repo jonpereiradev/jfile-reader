@@ -31,13 +31,13 @@ public class RegexRule extends AbstractColumnRule {
 
     private final Pattern regex;
 
-    public RegexRule(int position, Pattern pattern) {
-        super(position);
+    public RegexRule(int columnNumber, Pattern pattern) {
+        super(columnNumber);
         this.regex = pattern;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return regex.matcher(fileColumn.getText()).matches();
+    public boolean isValid(ColumnValue columnValue) {
+        return regex.matcher(columnValue.getText()).matches();
     }
 }

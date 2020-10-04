@@ -31,18 +31,18 @@ public class DomainIntegerRule extends AbstractColumnRule {
 
     private final List<Integer> domains;
 
-    public DomainIntegerRule(int position, List<Integer> domains) {
-        super(position);
+    public DomainIntegerRule(int columnNumber, List<Integer> domains) {
+        super(columnNumber);
         this.domains = domains;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return domains.contains(fileColumn.getInt());
+    public boolean isValid(ColumnValue columnValue) {
+        return domains.contains(columnValue.getInt());
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getInt() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getInt() != null;
     }
 }

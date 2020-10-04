@@ -29,18 +29,18 @@ public class MinShortRule extends AbstractColumnRule {
 
     private final short min;
 
-    public MinShortRule(int position, short min) {
-        super(position);
+    public MinShortRule(int columnNumber, short min) {
+        super(columnNumber);
         this.min = min;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getShort() >= min;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getShort() >= min;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getShort() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getShort() != null;
     }
 }

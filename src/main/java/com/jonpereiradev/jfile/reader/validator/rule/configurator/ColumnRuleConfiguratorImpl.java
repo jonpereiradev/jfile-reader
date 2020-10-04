@@ -34,9 +34,9 @@ final class ColumnRuleConfiguratorImpl implements ColumnRuleConfigurator {
     }
 
     @Override
-    public GenericTypeConfigurator column(int position) {
+    public GenericTypeConfigurator column(int columnNumber) {
         return new GenericTypeConfiguratorImpl(
-            position,
+            columnNumber,
             configuration,
             configuration.getRuleRoot().getColumnRootNode()
         );

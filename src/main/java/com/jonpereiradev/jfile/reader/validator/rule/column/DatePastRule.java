@@ -33,21 +33,20 @@ public class DatePastRule extends AbstractColumnRule {
 
     private final DateFormat dateFormat;
 
-    public DatePastRule(int position, DateFormat dateFormat) {
-        super(position);
+    public DatePastRule(int columnNumber, DateFormat dateFormat) {
+        super(columnNumber);
         this.dateFormat = dateFormat;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        Date date = fileColumn.getDate(dateFormat);
+    public boolean isValid(ColumnValue columnValue) {
+        Date date = columnValue.getDate(dateFormat);
         Date current = Calendar.getInstance().getTime();
-
         return current.after(date);
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getDate(dateFormat) != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getDate(dateFormat) != null;
     }
 }

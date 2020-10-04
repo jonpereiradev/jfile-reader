@@ -27,8 +27,11 @@ import java.util.regex.Pattern;
 
 public class EmailRule extends RegexRule {
 
-    public EmailRule(int position) {
-        super(position, Pattern.compile("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"));
+    public EmailRule(int columnNumber) {
+        super(
+            columnNumber,
+            Pattern.compile("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+        );
     }
 
 }

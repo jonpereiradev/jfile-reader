@@ -45,10 +45,10 @@ public interface JFileValidator {
     /**
      * Validates all lines of the file with the configured rule.
      *
-     * @param line the object that will be validated.
+     * @param lineValue the object that will be validated.
      *
      * @return all violations of the file.
      */
-    ValidationReport validate(LineValue line);
+    ValidationReport validate(LineValue lineValue);
 
 }

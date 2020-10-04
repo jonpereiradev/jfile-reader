@@ -27,16 +27,16 @@ import java.util.SortedSet;
 
 public interface LineValue extends Comparable<LineValue> {
 
-    static LineValueImpl newLineValue(int lineNumber, String content, SortedSet<ColumnValue> fileColumns) {
-        return new LineValueImpl(lineNumber, content, fileColumns);
+    static LineValueImpl newLineValue(int lineNumber, String content, SortedSet<ColumnValue> columnValues) {
+        return new LineValueImpl(lineNumber, content, columnValues);
     }
 
     int getLineNumber();
 
     String getContent();
 
-    ColumnValue getColumnValue(int position);
+    ColumnValue getColumnValue(int columnNumber);
 
-    SortedSet<ColumnValue> getColumns();
+    SortedSet<ColumnValue> getColumnValues();
 
 }

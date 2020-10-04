@@ -33,19 +33,19 @@ public class MaxBigDecimalRule extends AbstractColumnRule {
     private final BigDecimal max;
     private final DecimalFormat decimalFormat;
 
-    public MaxBigDecimalRule(int position, BigDecimal max, DecimalFormat decimalFormat) {
-        super(position);
+    public MaxBigDecimalRule(int columnNumber, BigDecimal max, DecimalFormat decimalFormat) {
+        super(columnNumber);
         this.max = max;
         this.decimalFormat = decimalFormat;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getBigDecimal(decimalFormat).compareTo(max) <= 0;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getBigDecimal(decimalFormat).compareTo(max) <= 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getBigDecimal(decimalFormat) != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getBigDecimal(decimalFormat) != null;
     }
 }

@@ -31,18 +31,19 @@ public class DomainCharacterRule extends AbstractColumnRule {
 
     private final List<Character> domains;
 
-    public DomainCharacterRule(int position, List<Character> domains) {
-        super(position);
+    public DomainCharacterRule(int columnNumber, List<Character> domains) {
+        super(columnNumber);
         this.domains = domains;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return domains.contains(fileColumn.getCharacter());
+    public boolean isValid(ColumnValue columnValue) {
+        return domains.contains(columnValue.getCharacter());
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getCharacter() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getCharacter() != null;
     }
+
 }

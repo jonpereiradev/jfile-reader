@@ -29,18 +29,18 @@ public class MaxLongRule extends AbstractColumnRule {
 
     private final long max;
 
-    public MaxLongRule(int position, long max) {
-        super(position);
+    public MaxLongRule(int columnNumber, long max) {
+        super(columnNumber);
         this.max = max;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getLong() <= max;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getLong() <= max;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getLong() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getLong() != null;
     }
 }

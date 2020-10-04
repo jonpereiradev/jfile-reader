@@ -27,17 +27,21 @@ import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 public class BigIntegerTypeRule extends AbstractColumnRule {
 
-    public BigIntegerTypeRule(int position) {
-        super(position);
+    public BigIntegerTypeRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getText().isEmpty() || fileColumn.getBigInteger() != null;
+    public boolean isValid(ColumnValue columnValue) {
+        try {
+            return columnValue.getText().isEmpty() || columnValue.getBigInteger() != null;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

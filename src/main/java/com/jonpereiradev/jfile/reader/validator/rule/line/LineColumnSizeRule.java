@@ -34,6 +34,6 @@ public class LineColumnSizeRule implements LineRule {
     }
 
     public boolean isValid(LineValue lineValue) {
-        return lineValue.getColumns().size() == size;
+        return lineValue.getColumnValues().size() == size;
     }
 }

@@ -47,13 +47,13 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
     /**
      * Parses a line to the type of the class.
      *
-     * @param line the line that will be transformed in object.
+     * @param lineValue the line that will be transformed in object.
      * @param toClass the type of object to parse the line.
      * @param <T> the object type.
      *
      * @return the line parsed in object.
      */
-    <T> T parse(LineValue line, Class<T> toClass);
+    <T> T parse(LineValue lineValue, Class<T> toClass);
 
     /**
      * Iterates over the lines converting the line to the class type.

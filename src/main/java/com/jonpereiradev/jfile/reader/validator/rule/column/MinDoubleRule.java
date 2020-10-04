@@ -29,18 +29,18 @@ public class MinDoubleRule extends AbstractColumnRule {
 
     private final double min;
 
-    public MinDoubleRule(int position, double min) {
-        super(position);
+    public MinDoubleRule(int columnNumber, double min) {
+        super(columnNumber);
         this.min = min;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getDouble() >= min;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getDouble() >= min;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getDouble() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getDouble() != null;
     }
 }

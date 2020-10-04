@@ -34,7 +34,6 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
@@ -73,18 +72,18 @@ final class ColumnValueImpl implements ColumnValue {
 
     private final JFilePatternConfig patternConfig;
 
-    private final int position;
+    private final int columnNumber;
     private final String content;
 
-    ColumnValueImpl(JFilePatternConfig patternConfig, int position, String content) {
+    ColumnValueImpl(JFilePatternConfig patternConfig, int columnNumber, String content) {
         this.patternConfig = patternConfig;
-        this.position = position;
+        this.columnNumber = columnNumber;
         this.content = RuleUtils.trimToEmpty(content);
     }
 
     @Override
-    public int getPosition() {
-        return position;
+    public int getColumnNumber() {
+        return columnNumber;
     }
 
     @SuppressWarnings("unchecked")
@@ -103,14 +102,21 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public String[] getTextArray(Pattern pattern) {
-        return getArrayOf(pattern, array -> Arrays.stream(array).map(ColumnValueImpl::getText).toArray(String[]::new));
+    public String[] getTextArray(Pattern splitPattern) {
+        return getArrayOf(
+            splitPattern,
+            array -> Arrays.stream(array).map(ColumnValueImpl::getText).toArray(String[]::new)
+        );
     }
 
     @Override
     public Character getCharacter() {
-        if (RuleUtils.isBlank(content) || content.length() > 1) {
+        if (RuleUtils.isBlank(content)) {
             return null;
+        }
+
+        if (content.length() > 1) {
+            throw new IllegalStateException("The value '" + content + "' is not parsable to Character");
         }
 
         return content.charAt(0);
@@ -122,9 +128,9 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Character[] getCharacterArray(Pattern pattern) {
+    public Character[] getCharacterArray(Pattern splitPattern) {
         return getArrayOf(
-            pattern,
+            splitPattern,
             array -> Arrays.stream(array).map(ColumnValueImpl::getCharacter).toArray(Character[]::new)
         );
     }
@@ -135,11 +141,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return Short.valueOf(content);
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        return Short.valueOf(content);
     }
 
     @Override
@@ -148,8 +150,11 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Short[] getShortArray(Pattern pattern) {
-        return getArrayOf(pattern, array -> Arrays.stream(array).map(ColumnValueImpl::getShort).toArray(Short[]::new));
+    public Short[] getShortArray(Pattern splitPattern) {
+        return getArrayOf(
+            splitPattern,
+            array -> Arrays.stream(array).map(ColumnValueImpl::getShort).toArray(Short[]::new)
+        );
     }
 
     @Override
@@ -158,11 +163,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return Integer.valueOf(content);
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        return Integer.valueOf(content);
     }
 
     @Override
@@ -171,8 +172,11 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Integer[] getIntArray(Pattern pattern) {
-        return getArrayOf(pattern, array -> Arrays.stream(array).map(ColumnValueImpl::getInt).toArray(Integer[]::new));
+    public Integer[] getIntArray(Pattern splitPattern) {
+        return getArrayOf(
+            splitPattern,
+            array -> Arrays.stream(array).map(ColumnValueImpl::getInt).toArray(Integer[]::new)
+        );
     }
 
     @Override
@@ -181,11 +185,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return Long.valueOf(content);
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        return Long.valueOf(content);
     }
 
     @Override
@@ -194,8 +194,11 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Long[] getLongArray(Pattern pattern) {
-        return getArrayOf(pattern, array -> Arrays.stream(array).map(ColumnValueImpl::getLong).toArray(Long[]::new));
+    public Long[] getLongArray(Pattern splitPattern) {
+        return getArrayOf(
+            splitPattern,
+            array -> Arrays.stream(array).map(ColumnValueImpl::getLong).toArray(Long[]::new)
+        );
     }
 
     @Override
@@ -204,11 +207,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return Float.valueOf(content);
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        return Float.valueOf(content);
     }
 
     @Override
@@ -217,8 +216,11 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Float[] getFloatArray(Pattern pattern) {
-        return getArrayOf(pattern, array -> Arrays.stream(array).map(ColumnValueImpl::getFloat).toArray(Float[]::new));
+    public Float[] getFloatArray(Pattern splitPattern) {
+        return getArrayOf(
+            splitPattern,
+            array -> Arrays.stream(array).map(ColumnValueImpl::getFloat).toArray(Float[]::new)
+        );
     }
 
     @Override
@@ -227,11 +229,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return Double.valueOf(content);
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        return Double.valueOf(content);
     }
 
     @Override
@@ -240,9 +238,9 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Double[] getDoubleArray(Pattern pattern) {
+    public Double[] getDoubleArray(Pattern splitPattern) {
         return getArrayOf(
-            pattern,
+            splitPattern,
             array -> Arrays.stream(array).map(ColumnValueImpl::getDouble).toArray(Double[]::new)
         );
     }
@@ -270,9 +268,9 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Boolean[] getBooleanArray(Pattern pattern) {
+    public Boolean[] getBooleanArray(Pattern splitPattern) {
         return getArrayOf(
-            pattern,
+            splitPattern,
             array -> Arrays.stream(array).map(ColumnValueImpl::getBoolean).toArray(Boolean[]::new)
         );
     }
@@ -283,11 +281,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return new BigInteger(content);
-        } catch (NumberFormatException e) {
-            return null;
-        }
+        return new BigInteger(content);
     }
 
     @Override
@@ -296,9 +290,9 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public BigInteger[] getBigIntegerArray(Pattern pattern) {
+    public BigInteger[] getBigIntegerArray(Pattern splitPattern) {
         return getArrayOf(
-            pattern,
+            splitPattern,
             array -> Arrays.stream(array).map(ColumnValueImpl::getBigInteger).toArray(BigInteger[]::new)
         );
     }
@@ -317,7 +311,9 @@ final class ColumnValueImpl implements ColumnValue {
         try {
             return (BigDecimal) bigDecimalFormatter.parse(content);
         } catch (ParseException e) {
-            return null;
+            throw new NumberFormatException(
+                "The value '" + content + "' is not parsable to BigDecimal with current DecimalFormat"
+            );
         }
     }
 
@@ -327,14 +323,14 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public BigDecimal[] getBigDecimalArray(Pattern pattern) {
-        return getBigDecimalArray(pattern, patternConfig.getBigDecimalFormatter());
+    public BigDecimal[] getBigDecimalArray(Pattern splitPattern) {
+        return getBigDecimalArray(splitPattern, patternConfig.getBigDecimalFormatter());
     }
 
     @Override
-    public BigDecimal[] getBigDecimalArray(Pattern pattern, DecimalFormat bigDecimalFormatter) {
+    public BigDecimal[] getBigDecimalArray(Pattern splitPattern, DecimalFormat bigDecimalFormatter) {
         return getArrayOf(
-            pattern,
+            splitPattern,
             array -> Arrays.stream(array).map(o -> o.getBigDecimal(bigDecimalFormatter)).toArray(BigDecimal[]::new)
         );
     }
@@ -345,15 +341,17 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Date getDate(DateFormat pattern) {
+    public Date getDate(DateFormat dateFormat) {
         if (RuleUtils.isBlank(content)) {
             return null;
         }
 
         try {
-            return pattern.parse(content);
+            return dateFormat.parse(content);
         } catch (ParseException e) {
-            return null;
+            throw new IllegalStateException(
+                "The value '" + content + "' is not parsable to Date with current DateFormat"
+            );
         }
     }
 
@@ -363,13 +361,16 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public Date[] getDateArray(Pattern pattern) {
-        return getDateArray(pattern, patternConfig.getDateFormat());
+    public Date[] getDateArray(Pattern splitPattern) {
+        return getDateArray(splitPattern, patternConfig.getDateFormat());
     }
 
     @Override
-    public Date[] getDateArray(Pattern pattern, DateFormat dateFormat) {
-        return getArrayOf(pattern, array -> Arrays.stream(array).map(o -> o.getDate(dateFormat)).toArray(Date[]::new));
+    public Date[] getDateArray(Pattern splitPattern, DateFormat dateFormat) {
+        return getArrayOf(
+            splitPattern,
+            array -> Arrays.stream(array).map(o -> o.getDate(dateFormat)).toArray(Date[]::new)
+        );
     }
 
     @Override
@@ -383,11 +384,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return LocalDate.parse(content, dateTimeFormatter);
-        } catch (DateTimeParseException e) {
-            return null;
-        }
+        return LocalDate.parse(content, dateTimeFormatter);
     }
 
     @Override
@@ -396,14 +393,14 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public LocalDate[] getLocalDateArray(Pattern pattern) {
-        return getLocalDateArray(pattern, patternConfig.getLocalDateFormatter());
+    public LocalDate[] getLocalDateArray(Pattern splitPattern) {
+        return getLocalDateArray(splitPattern, patternConfig.getLocalDateFormatter());
     }
 
     @Override
-    public LocalDate[] getLocalDateArray(Pattern pattern, DateTimeFormatter dateTimeFormatter) {
+    public LocalDate[] getLocalDateArray(Pattern splitPattern, DateTimeFormatter dateTimeFormatter) {
         return getArrayOf(
-            pattern,
+            splitPattern,
             array -> Arrays.stream(array).map(o -> o.getLocalDate(dateTimeFormatter)).toArray(LocalDate[]::new)
         );
     }
@@ -419,11 +416,7 @@ final class ColumnValueImpl implements ColumnValue {
             return null;
         }
 
-        try {
-            return LocalDateTime.parse(content, dateTimeFormatter);
-        } catch (DateTimeParseException e) {
-            return null;
-        }
+        return LocalDateTime.parse(content, dateTimeFormatter);
     }
 
     @Override
@@ -432,14 +425,14 @@ final class ColumnValueImpl implements ColumnValue {
     }
 
     @Override
-    public LocalDateTime[] getLocalDateTimeArray(Pattern pattern) {
-        return getLocalDateTimeArray(pattern, patternConfig.getLocalDateTimeFormatter());
+    public LocalDateTime[] getLocalDateTimeArray(Pattern splitPattern) {
+        return getLocalDateTimeArray(splitPattern, patternConfig.getLocalDateTimeFormatter());
     }
 
     @Override
-    public LocalDateTime[] getLocalDateTimeArray(Pattern pattern, DateTimeFormatter dateTimeFormatter) {
+    public LocalDateTime[] getLocalDateTimeArray(Pattern splitPattern, DateTimeFormatter dateTimeFormatter) {
         return getArrayOf(
-            pattern,
+            splitPattern,
             array -> Arrays.stream(array).map(o -> o.getLocalDateTime(dateTimeFormatter)).toArray(LocalDateTime[]::new)
         );
     }
@@ -449,20 +442,25 @@ final class ColumnValueImpl implements ColumnValue {
         return patternConfig;
     }
 
-    private <T> T[] getArrayOf(Pattern pattern, Function<ColumnValueImpl[], T[]> function) {
-        String[] split = pattern.split(content);
-        return function.apply(Arrays.stream(split).map(s -> new ColumnValueImpl(patternConfig, position, s)).toArray(
-            ColumnValueImpl[]::new));
+    private <T> T[] getArrayOf(Pattern splitPattern, Function<ColumnValueImpl[], T[]> function) {
+        String[] split = splitPattern.split(content);
+
+        ColumnValueImpl[] columnValueStream = Arrays
+            .stream(split)
+            .map(content -> new ColumnValueImpl(patternConfig, columnNumber, content))
+            .toArray(ColumnValueImpl[]::new);
+
+        return function.apply(columnValueStream);
     }
 
     @Override
     public int compareTo(ColumnValue o) {
-        return Integer.compare(position, o.getPosition());
+        return Integer.compare(columnNumber, o.getColumnNumber());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position);
+        return Objects.hash(columnNumber);
     }
 
     @Override
@@ -470,7 +468,7 @@ final class ColumnValueImpl implements ColumnValue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ColumnValueImpl that = (ColumnValueImpl) o;
-        return position == that.position;
+        return columnNumber == that.columnNumber;
     }
 
 }

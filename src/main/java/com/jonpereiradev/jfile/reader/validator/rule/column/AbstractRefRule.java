@@ -29,30 +29,25 @@ import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 
 public abstract class AbstractRefRule implements RefRule {
 
-    private final int refPosition;
-    private final int position;
+    private final int columnNumber;
+    private final int refColumnNumber;
 
     private LineValue lineValue;
     private RuleNode<ColumnRule> ruleNode;
 
-    public AbstractRefRule(int refPosition, int position) {
-        this.refPosition = refPosition;
-        this.position = position;
+    public AbstractRefRule(int refColumnNumber, int columnNumber) {
+        this.columnNumber = columnNumber;
+        this.refColumnNumber = refColumnNumber;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
+    public boolean isValid(ColumnValue columnValue) {
         return true;
     }
 
     @Override
-    public int getRefPosition() {
-        return refPosition;
-    }
-
-    @Override
-    public int getPosition() {
-        return position;
+    public int getColumnNumber() {
+        return columnNumber;
     }
 
     @Override
@@ -73,5 +68,10 @@ public abstract class AbstractRefRule implements RefRule {
     @Override
     public void setRuleNode(RuleNode<ColumnRule> ruleNode) {
         this.ruleNode = ruleNode;
+    }
+
+    @Override
+    public int getRefColumnNumber() {
+        return refColumnNumber;
     }
 }

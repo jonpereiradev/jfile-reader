@@ -31,18 +31,22 @@ public class DateTypeRule extends AbstractColumnRule {
 
     private final DateFormat pattern;
 
-    public DateTypeRule(int position, DateFormat pattern) {
-        super(position);
+    public DateTypeRule(int columnNumber, DateFormat pattern) {
+        super(columnNumber);
         this.pattern = pattern;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getText().isEmpty() || fileColumn.getDate(pattern) != null;
+    public boolean isValid(ColumnValue columnValue) {
+        try {
+            return columnValue.getText().isEmpty() || columnValue.getDate(pattern) != null;
+        } catch (IllegalStateException e) {
+            return false;
+        }
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

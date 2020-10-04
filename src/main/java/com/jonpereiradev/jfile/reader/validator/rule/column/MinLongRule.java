@@ -29,18 +29,18 @@ public class MinLongRule extends AbstractColumnRule {
 
     private final long min;
 
-    public MinLongRule(int position, long min) {
-        super(position);
+    public MinLongRule(int columnNumber, long min) {
+        super(columnNumber);
         this.min = min;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getLong() >= min;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getLong() >= min;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getLong() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getLong() != null;
     }
 }

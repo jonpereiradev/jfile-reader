@@ -32,14 +32,14 @@ import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 public interface ColumnRule extends Rule<ColumnValue> {
 
     @Override
-    boolean isValid(ColumnValue fileColumn);
+    boolean isValid(ColumnValue columnValue);
 
     @Override
-    default boolean canValidate(ColumnValue fileColumn) {
-        return RuleUtils.isNotBlank(fileColumn.getText());
+    default boolean canValidate(ColumnValue columnValue) {
+        return RuleUtils.isNotBlank(columnValue.getText());
     }
 
-    int getPosition();
+    int getColumnNumber();
 
     LineValue getLineValue();
 

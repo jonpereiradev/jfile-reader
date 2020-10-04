@@ -33,21 +33,21 @@ public class DateFutureRule extends AbstractColumnRule {
 
     private final DateFormat dateFormat;
 
-    public DateFutureRule(int position, DateFormat dateFormat) {
-        super(position);
+    public DateFutureRule(int columnNumber, DateFormat dateFormat) {
+        super(columnNumber);
         this.dateFormat = dateFormat;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        Date date = fileColumn.getDate(dateFormat);
+    public boolean isValid(ColumnValue columnValue) {
+        Date date = columnValue.getDate(dateFormat);
         Date current = Calendar.getInstance().getTime();
-
         return current.before(date);
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getDate(dateFormat) != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getDate(dateFormat) != null;
     }
+
 }

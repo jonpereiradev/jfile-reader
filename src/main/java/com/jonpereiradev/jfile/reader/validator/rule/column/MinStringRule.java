@@ -29,13 +29,13 @@ public class MinStringRule extends AbstractColumnRule {
 
     private final int min;
 
-    public MinStringRule(int position, int min) {
-        super(position);
+    public MinStringRule(int columnNumber, int min) {
+        super(columnNumber);
         this.min = min;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getText().trim().length() >= min;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getText().trim().length() >= min;
     }
 }

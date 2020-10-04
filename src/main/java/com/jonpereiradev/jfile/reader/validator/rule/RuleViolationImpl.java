@@ -27,14 +27,14 @@ import java.util.Objects;
 
 public final class RuleViolationImpl implements RuleViolation {
 
-    private int row;
-    private int column;
+    private int lineNumber;
+    private int columnNumber;
     private String content;
     private String rule;
 
     @Override
     public int hashCode() {
-        return Objects.hash(row, column, rule);
+        return Objects.hash(lineNumber, columnNumber, rule);
     }
 
     @Override
@@ -42,25 +42,25 @@ public final class RuleViolationImpl implements RuleViolation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RuleViolationImpl that = (RuleViolationImpl) o;
-        return row == that.row &&
-            column == that.column &&
+        return lineNumber == that.lineNumber &&
+            columnNumber == that.columnNumber &&
             Objects.equals(rule, that.rule);
     }
 
-    public int getRow() {
-        return row;
+    public int getLineNumber() {
+        return lineNumber;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
     }
 
-    public int getColumn() {
-        return column;
+    public int getColumnNumber() {
+        return columnNumber;
     }
 
-    public void setColumn(int column) {
-        this.column = column;
+    public void setColumnNumber(int columnNumber) {
+        this.columnNumber = columnNumber;
     }
 
     public String getContent() {

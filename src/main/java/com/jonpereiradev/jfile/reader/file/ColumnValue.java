@@ -41,7 +41,7 @@ public interface ColumnValue extends Comparable<ColumnValue> {
         return new ColumnValueImpl(patternConfig, position, content);
     }
 
-    int getPosition();
+    int getColumnNumber();
 
     <T> T getContent(Class<T> clazz);
 
@@ -49,55 +49,55 @@ public interface ColumnValue extends Comparable<ColumnValue> {
 
     String[] getTextArray();
 
-    String[] getTextArray(Pattern pattern);
+    String[] getTextArray(Pattern splitPattern);
 
     Character getCharacter();
 
     Character[] getCharacterArray();
 
-    Character[] getCharacterArray(Pattern pattern);
+    Character[] getCharacterArray(Pattern splitPattern);
 
     Short getShort();
 
     Short[] getShortArray();
 
-    Short[] getShortArray(Pattern pattern);
+    Short[] getShortArray(Pattern splitPattern);
 
     Integer getInt();
 
     Integer[] getIntArray();
 
-    Integer[] getIntArray(Pattern pattern);
+    Integer[] getIntArray(Pattern splitPattern);
 
     Long getLong();
 
     Long[] getLongArray();
 
-    Long[] getLongArray(Pattern pattern);
+    Long[] getLongArray(Pattern splitPattern);
 
     Float getFloat();
 
     Float[] getFloatArray();
 
-    Float[] getFloatArray(Pattern pattern);
+    Float[] getFloatArray(Pattern splitPattern);
 
     Double getDouble();
 
     Double[] getDoubleArray();
 
-    Double[] getDoubleArray(Pattern pattern);
+    Double[] getDoubleArray(Pattern splitPattern);
 
     Boolean getBoolean();
 
     Boolean[] getBooleanArray();
 
-    Boolean[] getBooleanArray(Pattern pattern);
+    Boolean[] getBooleanArray(Pattern splitPattern);
 
     BigInteger getBigInteger();
 
     BigInteger[] getBigIntegerArray();
 
-    BigInteger[] getBigIntegerArray(Pattern pattern);
+    BigInteger[] getBigIntegerArray(Pattern splitPattern);
 
     BigDecimal getBigDecimal();
 
@@ -105,19 +105,19 @@ public interface ColumnValue extends Comparable<ColumnValue> {
 
     BigDecimal[] getBigDecimalArray();
 
-    BigDecimal[] getBigDecimalArray(Pattern pattern);
+    BigDecimal[] getBigDecimalArray(Pattern splitPattern);
 
-    BigDecimal[] getBigDecimalArray(Pattern pattern, DecimalFormat bigDecimalFormatter);
+    BigDecimal[] getBigDecimalArray(Pattern splitPattern, DecimalFormat bigDecimalFormatter);
 
     Date getDate();
 
-    Date getDate(DateFormat pattern);
+    Date getDate(DateFormat dateFormat);
 
     Date[] getDateArray();
 
-    Date[] getDateArray(Pattern pattern);
+    Date[] getDateArray(Pattern splitPattern);
 
-    Date[] getDateArray(Pattern pattern, DateFormat dateFormat);
+    Date[] getDateArray(Pattern splitPattern, DateFormat dateFormat);
 
     LocalDate getLocalDate();
 
@@ -125,9 +125,9 @@ public interface ColumnValue extends Comparable<ColumnValue> {
 
     LocalDate[] getLocalDateArray();
 
-    LocalDate[] getLocalDateArray(Pattern pattern);
+    LocalDate[] getLocalDateArray(Pattern splitPattern);
 
-    LocalDate[] getLocalDateArray(Pattern pattern, DateTimeFormatter dateTimeFormatter);
+    LocalDate[] getLocalDateArray(Pattern splitPattern, DateTimeFormatter dateTimeFormatter);
 
     LocalDateTime getLocalDateTime();
 
@@ -135,9 +135,9 @@ public interface ColumnValue extends Comparable<ColumnValue> {
 
     LocalDateTime[] getLocalDateTimeArray();
 
-    LocalDateTime[] getLocalDateTimeArray(Pattern pattern);
+    LocalDateTime[] getLocalDateTimeArray(Pattern splitPattern);
 
-    LocalDateTime[] getLocalDateTimeArray(Pattern pattern, DateTimeFormatter dateTimeFormatter);
+    LocalDateTime[] getLocalDateTimeArray(Pattern splitPattern, DateTimeFormatter dateTimeFormatter);
 
     JFilePatternConfig getPatternConfig();
 

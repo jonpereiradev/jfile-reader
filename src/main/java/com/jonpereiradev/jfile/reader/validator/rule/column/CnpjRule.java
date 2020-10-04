@@ -43,13 +43,13 @@ public class CnpjRule extends AbstractColumnRule {
         "99999999999999"
     );
 
-    public CnpjRule(int position) {
-        super(position);
+    public CnpjRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        String cnpj = fileColumn.getText();
+    public boolean isValid(ColumnValue columnValue) {
+        String cnpj = columnValue.getText();
 
         if (cnpj.length() != 14 || INVALID_CNPJS.contains(cnpj)) {
             return false;

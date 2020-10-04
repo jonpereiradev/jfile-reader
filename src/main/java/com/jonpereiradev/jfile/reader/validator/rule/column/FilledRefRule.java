@@ -27,13 +27,13 @@ import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 public class FilledRefRule extends AbstractRefRule {
 
-    public FilledRefRule(int refPosition, int position) {
-        super(refPosition, position);
+    public FilledRefRule(int refColumnNumber, int columnNumber) {
+        super(refColumnNumber, columnNumber);
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return new NotEmptyRule(fileColumn.getPosition()).isValid(fileColumn);
+    public boolean canValidate(ColumnValue columnValue) {
+        return new NotEmptyRule(columnValue.getColumnNumber()).isValid(columnValue);
     }
 
 }

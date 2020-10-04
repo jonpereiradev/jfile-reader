@@ -31,18 +31,18 @@ public class DomainLongRule extends AbstractColumnRule {
 
     private final List<Long> domains;
 
-    public DomainLongRule(int position, List<Long> domains) {
-        super(position);
+    public DomainLongRule(int columnNumber, List<Long> domains) {
+        super(columnNumber);
         this.domains = domains;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return domains.contains(fileColumn.getLong());
+    public boolean isValid(ColumnValue columnValue) {
+        return domains.contains(columnValue.getLong());
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getLong() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getLong() != null;
     }
 }

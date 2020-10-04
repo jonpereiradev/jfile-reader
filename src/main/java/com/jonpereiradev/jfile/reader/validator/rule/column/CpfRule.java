@@ -43,13 +43,13 @@ public class CpfRule extends AbstractColumnRule {
         "99999999999"
     );
 
-    public CpfRule(int position) {
-        super(position);
+    public CpfRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        String cpf = fileColumn.getText();
+    public boolean isValid(ColumnValue columnValue) {
+        String cpf = columnValue.getText();
 
         if (cpf.length() != 11 || INVALID_CPFS.contains(cpf)) {
             return false;

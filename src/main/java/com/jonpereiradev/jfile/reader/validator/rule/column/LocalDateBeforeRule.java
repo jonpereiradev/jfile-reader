@@ -32,38 +32,38 @@ public class LocalDateBeforeRule extends AbstractColumnRule {
 
     private final DateTimeFormatter dateTimeFormatter;
     private final LocalDate max;
-    private final int refColumn;
+    private final int refColumnNumber;
 
-    public LocalDateBeforeRule(int position, DateTimeFormatter dateTimeFormatter, LocalDate max) {
-        super(position);
+    public LocalDateBeforeRule(int columnNumber, DateTimeFormatter dateTimeFormatter, LocalDate max) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
         this.max = max;
-        this.refColumn = -1;
+        this.refColumnNumber = -1;
     }
 
-    public LocalDateBeforeRule(int position, DateTimeFormatter dateTimeFormatter, int refColumn) {
-        super(position);
+    public LocalDateBeforeRule(int columnNumber, DateTimeFormatter dateTimeFormatter, int refColumnNumber) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
         this.max = null;
-        this.refColumn = refColumn;
+        this.refColumnNumber = refColumnNumber;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        LocalDate date = fileColumn.getLocalDate(dateTimeFormatter);
+    public boolean isValid(ColumnValue columnValue) {
+        LocalDate date = columnValue.getLocalDate(dateTimeFormatter);
         return date.compareTo(getComparingDate()) < 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getLocalDate(dateTimeFormatter) != null && getComparingDate() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getLocalDate(dateTimeFormatter) != null && getComparingDate() != null;
     }
 
     private LocalDate getComparingDate() {
-        if (refColumn == -1) {
+        if (refColumnNumber == -1) {
             return max;
         }
 
-        return getLineValue().getColumnValue(refColumn).getLocalDate(dateTimeFormatter);
+        return getLineValue().getColumnValue(refColumnNumber).getLocalDate(dateTimeFormatter);
     }
 }

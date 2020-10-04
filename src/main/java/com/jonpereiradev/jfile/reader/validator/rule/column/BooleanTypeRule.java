@@ -27,17 +27,17 @@ import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 public class BooleanTypeRule extends AbstractColumnRule {
 
-    public BooleanTypeRule(int position) {
-        super(position);
+    public BooleanTypeRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getText().isEmpty() || fileColumn.getBoolean() != null;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getText().isEmpty() || columnValue.getBoolean() != null;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

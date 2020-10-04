@@ -19,6 +19,7 @@ This project provides an easy use and extensible API for read, validate, and par
 - [x] Removing commons-lang dependency
 - [x] Migrating documentation to Github Wiki
 - [x] Refactory JFileLine.getRow() to JFileLine.getLineNumber()
+- [x] Refactory JFileColumn.getPosition() to JFileColumn.getColumnNumber()
 - [x] Refactory JFileLine to LineValue
 - [x] Refactory JFileColumn to ColumnValue
 - [x] Moving JFileReader validate() to JFileValidator class
@@ -28,6 +29,7 @@ This project provides an easy use and extensible API for read, validate, and par
 - [X] Removing internal complexities
 - [X] Add throws IOException in some methods of JFileReaderFactory
 - [x] MIT License
+- [x] Removing exception suppress from ColumnValue getter methods
 - [] Enrich the API documentation
 
 **Version:** 0.7.0

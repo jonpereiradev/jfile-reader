@@ -30,23 +30,23 @@ import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
 public abstract class AbstractColumnRule implements ColumnRule {
 
-    private final int position;
+    private final int columnNumber;
 
     private LineValue lineValue;
     private RuleNode<ColumnRule> ruleNode;
 
-    public AbstractColumnRule(int position) {
-        this.position = position;
+    public AbstractColumnRule(int columnNumber) {
+        this.columnNumber = columnNumber;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return RuleUtils.isNotBlank(fileColumn.getText());
+    public boolean canValidate(ColumnValue columnValue) {
+        return RuleUtils.isNotBlank(columnValue.getText());
     }
 
     @Override
-    public int getPosition() {
-        return position;
+    public int getColumnNumber() {
+        return columnNumber;
     }
 
     @Override

@@ -28,17 +28,17 @@ import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
 public class NotNullRule extends AbstractColumnRule {
 
-    public NotNullRule(int position) {
-        super(position);
+    public NotNullRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return RuleUtils.isNotEmpty(fileColumn.getText());
+    public boolean isValid(ColumnValue columnValue) {
+        return RuleUtils.isNotEmpty(columnValue.getText());
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

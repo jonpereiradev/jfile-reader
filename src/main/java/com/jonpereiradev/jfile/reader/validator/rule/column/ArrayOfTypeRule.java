@@ -29,14 +29,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ArrayOfTypeRule extends AbstractColumnRule {
 
     private final Pattern pattern;
 
-    public ArrayOfTypeRule(int position, Pattern pattern) {
-        super(position);
+    public ArrayOfTypeRule(int columnNumber, Pattern pattern) {
+        super(columnNumber);
         this.pattern = pattern;
     }
 
@@ -52,12 +51,15 @@ public class ArrayOfTypeRule extends AbstractColumnRule {
 
     public List<ColumnValue> split(ColumnValue columnValue) {
         String[] values = pattern.split(columnValue.getText());
-        Stream<ColumnValue> stream = Arrays.stream(values).map(o -> getColumnValue(columnValue, o));
-        return stream.collect(Collectors.toList());
+
+        return Arrays
+            .stream(values)
+            .map(columnContent -> getColumnValue(columnValue, columnContent))
+            .collect(Collectors.toList());
     }
 
-    private ColumnValue getColumnValue(ColumnValue columnValue, String o) {
-        return ColumnValue.newColumnValue(columnValue.getPatternConfig(), getPosition(), o);
+    private ColumnValue getColumnValue(ColumnValue columnValue, String columnContent) {
+        return ColumnValue.newColumnValue(columnValue.getPatternConfig(), getColumnNumber(), columnContent);
     }
 
 }

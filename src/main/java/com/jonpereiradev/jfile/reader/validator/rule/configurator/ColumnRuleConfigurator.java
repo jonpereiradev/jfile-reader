@@ -41,10 +41,10 @@ public interface ColumnRuleConfigurator {
     /**
      * Creates the rule config for the column at the given position.
      *
-     * @param position the int number from the position of the column in a line.
+     * @param columnNumber the int number from the position of the column in a line.
      *
      * @return a configurator that configure rules for the selected column.
      */
-    GenericTypeConfigurator column(int position);
+    GenericTypeConfigurator column(int columnNumber);
 
 }

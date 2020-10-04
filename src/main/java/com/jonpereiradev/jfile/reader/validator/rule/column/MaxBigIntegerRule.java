@@ -31,18 +31,18 @@ public class MaxBigIntegerRule extends AbstractColumnRule {
 
     private final BigInteger max;
 
-    public MaxBigIntegerRule(int position, BigInteger max) {
-        super(position);
+    public MaxBigIntegerRule(int columnNumber, BigInteger max) {
+        super(columnNumber);
         this.max = max;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getBigInteger().compareTo(max) <= 0;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getBigInteger().compareTo(max) <= 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getBigInteger() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getBigInteger() != null;
     }
 }

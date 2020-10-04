@@ -32,38 +32,38 @@ public class LocalDateTimeBeforeRule extends AbstractColumnRule {
 
     private final DateTimeFormatter dateTimeFormatter;
     private final LocalDateTime max;
-    private final int refColumn;
+    private final int refColumnNumber;
 
-    public LocalDateTimeBeforeRule(int position, DateTimeFormatter dateTimeFormatter, LocalDateTime max) {
-        super(position);
+    public LocalDateTimeBeforeRule(int columnNumber, DateTimeFormatter dateTimeFormatter, LocalDateTime max) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
         this.max = max;
-        this.refColumn = -1;
+        this.refColumnNumber = -1;
     }
 
-    public LocalDateTimeBeforeRule(int position, DateTimeFormatter dateTimeFormatter, int refColumn) {
-        super(position);
+    public LocalDateTimeBeforeRule(int columnNumber, DateTimeFormatter dateTimeFormatter, int refColumnNumber) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
         this.max = null;
-        this.refColumn = refColumn;
+        this.refColumnNumber = refColumnNumber;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        LocalDateTime date = fileColumn.getLocalDateTime(dateTimeFormatter);
+    public boolean isValid(ColumnValue columnValue) {
+        LocalDateTime date = columnValue.getLocalDateTime(dateTimeFormatter);
         return date.compareTo(getComparingDate()) < 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getLocalDateTime(dateTimeFormatter) != null && getComparingDate() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getLocalDateTime(dateTimeFormatter) != null && getComparingDate() != null;
     }
 
     private LocalDateTime getComparingDate() {
-        if (refColumn == -1) {
+        if (refColumnNumber == -1) {
             return max;
         }
 
-        return getLineValue().getColumnValue(refColumn).getLocalDateTime(dateTimeFormatter);
+        return getLineValue().getColumnValue(refColumnNumber).getLocalDateTime(dateTimeFormatter);
     }
 }

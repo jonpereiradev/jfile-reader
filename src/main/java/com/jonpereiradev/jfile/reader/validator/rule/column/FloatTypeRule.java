@@ -27,17 +27,21 @@ import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 public class FloatTypeRule extends AbstractColumnRule {
 
-    public FloatTypeRule(int position) {
-        super(position);
+    public FloatTypeRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getText().isEmpty() || fileColumn.getFloat() != null;
+    public boolean isValid(ColumnValue columnValue) {
+        try {
+            return columnValue.getText().isEmpty() || columnValue.getFloat() != null;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

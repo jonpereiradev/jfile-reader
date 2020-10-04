@@ -32,38 +32,42 @@ public class DateAfterRule extends AbstractColumnRule {
 
     private final DateFormat dateFormat;
     private final Date min;
-    private final int columnPosition;
+    private final int afterColumnNumber;
 
-    public DateAfterRule(int position, DateFormat dateFormat, Date min) {
-        super(position);
+    public DateAfterRule(int afterColumnNumber, DateFormat dateFormat, Date min) {
+        super(afterColumnNumber);
         this.dateFormat = dateFormat;
         this.min = min;
-        this.columnPosition = -1;
+        this.afterColumnNumber = -1;
     }
 
-    public DateAfterRule(int position, DateFormat dateFormat, int columnPosition) {
-        super(position);
+    public DateAfterRule(int columnNumber, DateFormat dateFormat, int afterColumnNumber) {
+        super(columnNumber);
         this.dateFormat = dateFormat;
         this.min = null;
-        this.columnPosition = columnPosition;
+        this.afterColumnNumber = afterColumnNumber;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        Date date = fileColumn.getDate(dateFormat);
+    public boolean isValid(ColumnValue columnValue) {
+        Date date = columnValue.getDate(dateFormat);
         return date.compareTo(getComparingDate()) > 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getDate(dateFormat) != null && getComparingDate() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getDate(dateFormat) != null && getComparingDate() != null;
     }
 
     private Date getComparingDate() {
-        if (columnPosition == -1) {
+        if (afterColumnNumber == -1) {
             return min;
         }
 
-        return getLineValue().getColumnValue(columnPosition).getDate(dateFormat);
+        try {
+            return getLineValue().getColumnValue(afterColumnNumber).getDate(dateFormat);
+        } catch (IllegalStateException e) {
+            return null;
+        }
     }
 }

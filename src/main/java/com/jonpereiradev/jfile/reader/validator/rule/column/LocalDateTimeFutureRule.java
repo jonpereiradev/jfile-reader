@@ -32,21 +32,20 @@ public class LocalDateTimeFutureRule extends AbstractColumnRule {
 
     private final DateTimeFormatter dateTimeFormatter;
 
-    public LocalDateTimeFutureRule(int position, DateTimeFormatter dateTimeFormatter) {
-        super(position);
+    public LocalDateTimeFutureRule(int columnNumber, DateTimeFormatter dateTimeFormatter) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        LocalDateTime date = fileColumn.getLocalDateTime(dateTimeFormatter);
+    public boolean isValid(ColumnValue columnValue) {
+        LocalDateTime date = columnValue.getLocalDateTime(dateTimeFormatter);
         LocalDateTime current = LocalDateTime.now();
-
         return current.compareTo(date) < 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getLocalDateTime(dateTimeFormatter) != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getLocalDateTime(dateTimeFormatter) != null;
     }
 }

@@ -32,22 +32,22 @@ public class LocalDateTypeRule extends AbstractColumnRule {
 
     private final DateTimeFormatter dateTimeFormatter;
 
-    public LocalDateTypeRule(int position, DateTimeFormatter dateTimeFormatter) {
-        super(position);
+    public LocalDateTypeRule(int columnNumber, DateTimeFormatter dateTimeFormatter) {
+        super(columnNumber);
         this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
+    public boolean isValid(ColumnValue columnValue) {
         try {
-            return fileColumn.getText().isEmpty() || fileColumn.getLocalDate(dateTimeFormatter) != null;
+            return columnValue.getText().isEmpty() || columnValue.getLocalDate(dateTimeFormatter) != null;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

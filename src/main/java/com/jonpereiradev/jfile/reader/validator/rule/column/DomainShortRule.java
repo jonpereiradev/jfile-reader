@@ -31,18 +31,18 @@ public class DomainShortRule extends AbstractColumnRule {
 
     private final List<Short> domains;
 
-    public DomainShortRule(int position, List<Short> domains) {
-        super(position);
+    public DomainShortRule(int columnNumber, List<Short> domains) {
+        super(columnNumber);
         this.domains = domains;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return domains.contains(fileColumn.getShort());
+    public boolean isValid(ColumnValue columnValue) {
+        return domains.contains(columnValue.getShort());
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getShort() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getShort() != null;
     }
 }

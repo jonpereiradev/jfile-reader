@@ -33,15 +33,15 @@ public class DomainRefRule<T> extends AbstractRefRule {
     private final Class<T> clazz;
 
     @SuppressWarnings("unchecked")
-    public DomainRefRule(int refPosition, int position, List<T> domains) {
-        super(refPosition, position);
+    public DomainRefRule(int refColumnNumber, int columnNumber, List<T> domains) {
+        super(refColumnNumber, columnNumber);
         this.domains = domains;
         this.clazz = (Class<T>) domains.get(0).getClass();
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return domains.contains(fileColumn.getContent(clazz));
+    public boolean canValidate(ColumnValue columnValue) {
+        return domains.contains(columnValue.getContent(clazz));
     }
 
 }

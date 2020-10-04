@@ -29,18 +29,18 @@ public class MinFloatRule extends AbstractColumnRule {
 
     private final float min;
 
-    public MinFloatRule(int position, float min) {
-        super(position);
+    public MinFloatRule(int columnNumber, float min) {
+        super(columnNumber);
         this.min = min;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getFloat() >= min;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getFloat() >= min;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getFloat() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getFloat() != null;
     }
 }

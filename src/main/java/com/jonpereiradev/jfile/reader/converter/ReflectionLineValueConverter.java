@@ -58,9 +58,9 @@ public final class ReflectionLineValueConverter implements LineValueConverter {
         Map<Integer, GetterSetterPair> pair = getGetterSetterPair(classType);
         ReflectionObjectWriter reflectionObjectWriter = new ReflectionObjectWriter(readerConfig);
 
-        lineValue.getColumns().forEach(o -> {
-            if (pair.containsKey(o.getPosition())) {
-                reflectionObjectWriter.write(object, o, pair.get(o.getPosition()));
+        lineValue.getColumnValues().forEach(o -> {
+            if (pair.containsKey(o.getColumnNumber())) {
+                reflectionObjectWriter.write(object, o, pair.get(o.getColumnNumber()));
             }
         });
 

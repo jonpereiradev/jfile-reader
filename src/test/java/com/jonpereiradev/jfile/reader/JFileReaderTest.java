@@ -31,7 +31,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -42,7 +41,7 @@ public class JFileReaderTest extends AbstractFileReaderTest {
 
     @Test
     public void mustCreateImplementationPerFileType() throws IOException {
-        Path path = Files.createTempFile("tmp", "1");
+        Path path = createFileWithContent("1");
         JFileReaderConfig configuration = JFileReaderFactory.newUtf8ReaderConfig(".");
 
         try (JFileReader fileReader = JFileReaderFactory.newJFileReader(path, configuration)) {
@@ -64,7 +63,7 @@ public class JFileReaderTest extends AbstractFileReaderTest {
 
     @Test
     public void mustReportFileExists() throws IOException {
-        Path path = Files.createTempFile("tmp", "1");
+        Path path = createFileWithContent("1");
         JFileReaderConfig readerConfig = JFileReaderFactory.newUtf8ReaderConfig(".");
 
         try (JFileReader fileReader = JFileReaderFactory.newJFileReader(path, readerConfig)) {
@@ -89,7 +88,7 @@ public class JFileReaderTest extends AbstractFileReaderTest {
 
             LineValue lineValue = iterator.next();
             Assert.assertEquals("1;2;19121991", lineValue.getContent());
-            Assert.assertEquals(3, lineValue.getColumns().size());
+            Assert.assertEquals(3, lineValue.getColumnValues().size());
 
             Assert.assertFalse("Não deve retornar porque o arquivo só tem uma linha.", iterator.hasNext());
         }

@@ -47,11 +47,22 @@ final class JFileReaderEngine implements JFileReader {
     private final BufferedReader bufferedReader;
     private final Iterator<LineValue> iterator;
 
-    JFileReaderEngine(InputStream inputStream, JFileReaderConfig readerConfig) {
+    private JFileReaderEngine(InputStream inputStream, JFileReaderConfig readerConfig) {
         this.readerConfig = readerConfig;
         this.fileLineParser = readerConfig.getLineValueConverter();
         this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream, readerConfig.getCharset()));
         this.iterator = new JFileReaderIterator();
+    }
+
+    static JFileReaderEngine newInstance(InputStream inputStream, JFileReaderConfig readerConfig) throws IOException {
+        validateInputStream(inputStream);
+        return new JFileReaderEngine(inputStream, readerConfig);
+    }
+
+    private static void validateInputStream(InputStream inputStream) throws IOException {
+        if (inputStream.available() == 0) {
+            throw new IOException("InputStream doesn't have bytes to read");
+        }
     }
 
     @Override
@@ -60,8 +71,8 @@ final class JFileReaderEngine implements JFileReader {
     }
 
     @Override
-    public <T> T parse(LineValue line, Class<T> toClass) {
-        return fileLineParser.convert(line, toClass);
+    public <T> T parse(LineValue lineValue, Class<T> toClass) {
+        return fileLineParser.convert(lineValue, toClass);
     }
 
     @Override
@@ -87,15 +98,15 @@ final class JFileReaderEngine implements JFileReader {
             String contentCurrentLine = getContentCurrentLine();
             Pattern pattern = readerConfig.getPattern();
             String[] columns = pattern.split(contentCurrentLine);
-            SortedSet<ColumnValue> fileColumns = new TreeSet<>();
+            SortedSet<ColumnValue> columnValues = new TreeSet<>();
 
             for (int i = 0; i < columns.length; i++) {
                 int position = i + 1;
                 ColumnValue columnValue = newColumnValue(readerConfig, position, columns[i]);
-                fileColumns.add(columnValue);
+                columnValues.add(columnValue);
             }
 
-            return newLineValue(++lineNumber, contentCurrentLine, fileColumns);
+            return newLineValue(++lineNumber, contentCurrentLine, columnValues);
         }
 
         private void setCurrentLine() {

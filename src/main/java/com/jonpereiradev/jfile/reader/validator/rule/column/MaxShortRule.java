@@ -29,18 +29,18 @@ public class MaxShortRule extends AbstractColumnRule {
 
     private final short max;
 
-    public MaxShortRule(int position, short max) {
-        super(position);
+    public MaxShortRule(int columnNumber, short max) {
+        super(columnNumber);
         this.max = max;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getShort() <= max;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getShort() <= max;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getShort() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getShort() != null;
     }
 }

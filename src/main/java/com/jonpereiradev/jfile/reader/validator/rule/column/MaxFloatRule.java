@@ -29,18 +29,18 @@ public class MaxFloatRule extends AbstractColumnRule {
 
     private final float max;
 
-    public MaxFloatRule(int position, float max) {
-        super(position);
+    public MaxFloatRule(int columnNumber, float max) {
+        super(columnNumber);
         this.max = max;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getFloat() <= max;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getFloat() <= max;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getFloat() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getFloat() != null;
     }
 }

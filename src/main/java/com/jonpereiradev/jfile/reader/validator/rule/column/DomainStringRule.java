@@ -31,13 +31,13 @@ public class DomainStringRule extends AbstractColumnRule {
 
     private final List<String> domains;
 
-    public DomainStringRule(int position, List<String> domains) {
-        super(position);
+    public DomainStringRule(int columnNumber, List<String> domains) {
+        super(columnNumber);
         this.domains = domains;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return domains.contains(fileColumn.getText());
+    public boolean isValid(ColumnValue columnValue) {
+        return domains.contains(columnValue.getText());
     }
 }

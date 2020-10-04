@@ -27,21 +27,21 @@ import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 public class LongTypeRule extends AbstractColumnRule {
 
-    public LongTypeRule(int position) {
-        super(position);
+    public LongTypeRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
+    public boolean isValid(ColumnValue columnValue) {
         try {
-            return fileColumn.getText().isEmpty() || fileColumn.getLong() != null;
+            return columnValue.getText().isEmpty() || columnValue.getLong() != null;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

@@ -33,9 +33,9 @@ public interface ValidationReport {
 
     boolean isNotValid();
 
-    List<RuleViolation> getViolations(int row);
+    List<RuleViolation> getViolations(int lineNumber);
 
-    List<RuleViolation> getViolations(int row, int column);
+    List<RuleViolation> getViolations(int lineNumber, int columnNumber);
 
     List<RuleViolation> getViolations();
 

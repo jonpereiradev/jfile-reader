@@ -31,18 +31,18 @@ public class MinBigIntegerRule extends AbstractColumnRule {
 
     private final BigInteger min;
 
-    public MinBigIntegerRule(int position, BigInteger min) {
-        super(position);
+    public MinBigIntegerRule(int columnNumber, BigInteger min) {
+        super(columnNumber);
         this.min = min;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getBigInteger().compareTo(min) >= 0;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getBigInteger().compareTo(min) >= 0;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getBigInteger() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getBigInteger() != null;
     }
 }

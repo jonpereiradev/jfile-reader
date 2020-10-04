@@ -28,17 +28,17 @@ import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
 public class NotEmptyRule extends AbstractColumnRule {
 
-    public NotEmptyRule(int position) {
-        super(position);
+    public NotEmptyRule(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return RuleUtils.isNotBlank(fileColumn.getText());
+    public boolean isValid(ColumnValue columnValue) {
+        return RuleUtils.isNotBlank(columnValue.getText());
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
+    public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
 }

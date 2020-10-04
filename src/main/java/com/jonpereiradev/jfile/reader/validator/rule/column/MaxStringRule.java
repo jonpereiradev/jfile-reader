@@ -29,13 +29,13 @@ public class MaxStringRule extends AbstractColumnRule {
 
     private final int max;
 
-    public MaxStringRule(int position, int max) {
-        super(position);
+    public MaxStringRule(int columnNumber, int max) {
+        super(columnNumber);
         this.max = max;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getText().trim().length() <= max;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getText().trim().length() <= max;
     }
 }

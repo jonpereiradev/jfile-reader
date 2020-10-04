@@ -29,18 +29,18 @@ public class MinIntegerRule extends AbstractColumnRule {
 
     private final int min;
 
-    public MinIntegerRule(int position, int min) {
-        super(position);
+    public MinIntegerRule(int columnNumber, int min) {
+        super(columnNumber);
         this.min = min;
     }
 
     @Override
-    public boolean isValid(ColumnValue fileColumn) {
-        return fileColumn.getInt() >= min;
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getInt() >= min;
     }
 
     @Override
-    public boolean canValidate(ColumnValue fileColumn) {
-        return fileColumn.getInt() != null;
+    public boolean canValidate(ColumnValue columnValue) {
+        return columnValue.getInt() != null;
     }
 }
