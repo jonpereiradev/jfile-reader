@@ -1,127 +1,46 @@
 # JFile Reader
 
-This project helps you to build functionalities that needs to read and validate files.
+This project provides an easy use and extensible API for read, validate, and parse files into java objects.
 
 ## Installation
 
 ```xml
 <dependency>
-    <groupId>com.github.jonpereiradev</groupId>
-    <artifactId>jfile-reader</artifactId>
-    <version>0.7.0</version>
+  <groupId>com.github.jonpereiradev</groupId>
+  <artifactId>jfile-reader</artifactId>
+  <version>${jfile-reader.version}</version>
 </dependency>
 ```
 
-## JFileReaderFactory
+## Release Note
 
-The JFileReaderFactory provides an API to read a file and instanciate the right class to handle the 
-type of file:
+**Version:** 0.8.0
 
-**Example**
+- [x] Removing commons-lang dependency
+- [x] Refactory JFileLine.getRow() method to JFileLine.getLineNumber() method
+- [x] Refactory JFileColumn.getPosition() method to JFileColumn.getColumnNumber() method
+- [x] Refactory JFileLine class to LineValue class
+- [x] Refactory JFileColumn class to ColumnValue class
+- [x] Moving JFileReader validate() method to JFileValidator class
+- [X] Refactory Report class to ValidationReport class
+- [X] Refactory Report isInvalid method to isNotValid method
+- [X] Refactory ReaderConfiguration class to JFileReaderConfig class
+- [X] Add throws IOException in JFileReaderFactory methods
+- [x] Removing exception suppress from ColumnValue getter methods
+- [X] Removing internal complexities
+- [X] Removing JFileValidator.validate(fileReader) method
+- [X] Adding JFileReader.stream() non-parallel support
+- [X] String Rule for exactLength
+- [X] Rename rule min and max to minLength and maxLength for string types
+- [x] Enrich the API documentation
+- [x] MIT License
 
-```java
-public class Main {
-    
-    public static void main(String[] args) {
-        String regexColumnSeparator = "\\|";
-        Path path = Paths.get("path", "to", "file");
-        ReaderConfiguration readerConfiguration = ReaderConfiguration.utf8Reader(regexColumnSeparator);
-        JFileReader jFileReader = JFileReaderFactory.newInstance(path, readerConfiguration);
-    }
-}
-```
+**Version:** 0.7.0
 
-## Annotations
+- [x] Inclusion of method canValidate for Rules
+- [x] LocalDate and LocalDateTime validation Rules
+- [x] Benchmark implementation with JMH
 
-The annotations provided by the jfile reader are:
-
-- __FileColumn:__ to map a column to a wrapper field;
-- __DecimalFormatter:__ to map the pattern of a number object;
-- __DateTimeFormatter:__ to map the pattern of a date object;
-
-**Example**
-
-```java
-public class User {
-
-    @FileColumn(1)
-    private Integer type;
-    
-    @FileColumn(2)
-    private Boolean active;
-    
-    @FileColumn(3)
-    private String name;
-    
-    @FileColumn(4)
-    @DecimalFormatter("#,##0.0#")
-    private BigDecimal currency;
-    
-    @FileColumn(5)
-    @DateTimeFormatter("ddMMyyyy")
-    private LocalDate dateInactivation;
-
-}
-```
-
-```java
-public class Main {
-    
-    public static void main(String[] args) {
-        String regexColumnSeparator = "\\|";
-        Path path = Paths.get("path", "to", "file");
-        ReaderConfiguration readerConfiguration = ReaderConfiguration.utf8Reader(regexColumnSeparator);
-        
-        try (JFileReader jFileReader = JFileReaderFactory.newInstance(path, readerConfiguration)) {
-            jFileReader.forEach(User.class, user -> {
-               System.out.println(user.getType()); 
-               System.out.println(user.getActive()); 
-               System.out.println(user.getName()); 
-               System.out.println(user.getBigDecimal()); 
-               System.out.println(user.getDateInactivation()); 
-            });
-        }
-    }
-}
-```
-
-## Validations
-
-You can applly validations to the file using the class RuleConfigurator.
-
-**Example**
-
-```java
-public class Main {
-    
-    public static void main(String[] args) {
-        String regexColumnSeparator = "\\|";
-        Path path = Paths.get("path", "to", "file");
-        ReaderConfiguration readerConfiguration = ReaderConfiguration.utf8Reader(regexColumnSeparator);
-
-        RuleConfigurator
-            .defaultConfigurator(readerConfiguration)
-            .column(1)
-            .localDateType("dd/MM/yyyy")
-            .pastOrPresent()
-            .column(2)
-            .stringType()
-            .regex(Pattern.compile("\\d+"));
-        
-        try (JFileReader jFileReader = JFileReaderFactory.newInstance(path, readerConfiguration)) {
-            List<RuleViolation> violations = jFileReader.validate();
-            
-            if (!violations.isEmpty()) {
-                // handle violations
-            }
-
-            // it's ok? process lines
-            jFileReader.forEach(User.class, user -> System.out.println(user));
-        }
-    }
-}
-```
-
-# License
+## License
 
 JFile-Reader is available under the [MIT license](https://tldrlegal.com/license/mit-license).
