@@ -17,20 +17,19 @@ This project provides an easy use and extensible API for read, validate, and par
 **Version:** 0.8.0
 
 - [x] Removing commons-lang dependency
-- [x] Migrating documentation to Github Wiki
-- [x] Refactory JFileLine.getRow() to JFileLine.getLineNumber()
-- [x] Refactory JFileColumn.getPosition() to JFileColumn.getColumnNumber()
-- [x] Refactory JFileLine to LineValue
-- [x] Refactory JFileColumn to ColumnValue
-- [x] Moving JFileReader validate() to JFileValidator class
-- [X] Refactory Report to ValidatorReport
-- [X] Refactory Report isInvalid method to isNotValid
-- [X] Refactory ReaderConfiguration to JFileReaderConfig
-- [X] Removing internal complexities
-- [X] Add throws IOException in some methods of JFileReaderFactory
-- [x] MIT License
+- [x] Refactory JFileLine.getRow() method to JFileLine.getLineNumber() method
+- [x] Refactory JFileColumn.getPosition() method to JFileColumn.getColumnNumber() method
+- [x] Refactory JFileLine class to LineValue class
+- [x] Refactory JFileColumn class to ColumnValue class
+- [x] Moving JFileReader validate() method to JFileValidator class
+- [X] Refactory Report class to ValidationReport class
+- [X] Refactory Report isInvalid method to isNotValid method
+- [X] Refactory ReaderConfiguration class to JFileReaderConfig class
+- [X] Add throws IOException in JFileReaderFactory methods
 - [x] Removing exception suppress from ColumnValue getter methods
-- [] Enrich the API documentation
+- [X] Removing internal complexities
+- [x] Enrich the API documentation
+- [x] MIT License
 
 **Version:** 0.7.0
 
