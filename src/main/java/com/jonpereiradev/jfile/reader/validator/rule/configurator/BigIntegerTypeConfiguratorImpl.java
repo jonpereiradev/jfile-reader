@@ -35,19 +35,19 @@ final class BigIntegerTypeConfiguratorImpl
     extends AbstractRuleConfigurator<BigIntegerTypeConfigurator> implements BigIntegerTypeConfigurator {
 
     BigIntegerTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
     public BigIntegerTypeConfigurator min(BigInteger min) {
-        return rule(position -> new MinBigIntegerRule(position, min));
+        return rule(columnNumber -> new MinBigIntegerRule(columnNumber, min));
     }
 
     @Override
     public BigIntegerTypeConfigurator max(BigInteger max) {
-        return rule(position -> new MaxBigIntegerRule(position, max));
+        return rule(columnNumber -> new MaxBigIntegerRule(columnNumber, max));
     }
 }

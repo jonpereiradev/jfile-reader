@@ -42,53 +42,53 @@ final class LocalDateTypeConfiguratorImpl
     private final DateTimeFormatter dateTimeFormatter;
 
     LocalDateTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         DateTimeFormatter dateTimeFormatter,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode
     ) {
-        super(position, configuration, ruleNode);
+        super(columnNumber, configuration, ruleNode);
         this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
     public LocalDateTypeConfigurator future() {
-        return rule(position -> new LocalDateFutureRule(position, dateTimeFormatter));
+        return rule(columnNumber -> new LocalDateFutureRule(columnNumber, dateTimeFormatter));
     }
 
     @Override
     public LocalDateTypeConfigurator futureOrPresent() {
-        return rule(position -> new LocalDateFutureOrPresentRule(position, dateTimeFormatter));
+        return rule(columnNumber -> new LocalDateFutureOrPresentRule(columnNumber, dateTimeFormatter));
     }
 
     @Override
     public LocalDateTypeConfigurator past() {
-        return rule(position -> new LocalDatePastRule(position, dateTimeFormatter));
+        return rule(columnNumber -> new LocalDatePastRule(columnNumber, dateTimeFormatter));
     }
 
     @Override
     public LocalDateTypeConfigurator pastOrPresent() {
-        return rule(position -> new LocalDatePastOrPresentRule(position, dateTimeFormatter));
+        return rule(columnNumber -> new LocalDatePastOrPresentRule(columnNumber, dateTimeFormatter));
     }
 
     @Override
     public LocalDateTypeConfigurator after(LocalDate min) {
-        return rule(position -> new LocalDateAfterRule(position, dateTimeFormatter, min));
+        return rule(columnNumber -> new LocalDateAfterRule(columnNumber, dateTimeFormatter, min));
     }
 
     @Override
     public LocalDateTypeConfigurator after(int columnPosition) {
-        return rule(position -> new LocalDateAfterRule(position, dateTimeFormatter, columnPosition));
+        return rule(columnNumber -> new LocalDateAfterRule(columnNumber, dateTimeFormatter, columnPosition));
     }
 
     @Override
     public LocalDateTypeConfigurator before(LocalDate max) {
-        return rule(position -> new LocalDateBeforeRule(position, dateTimeFormatter, max));
+        return rule(columnNumber -> new LocalDateBeforeRule(columnNumber, dateTimeFormatter, max));
     }
 
     @Override
     public LocalDateTypeConfigurator before(int columnPosition) {
-        return rule(position -> new LocalDateBeforeRule(position, dateTimeFormatter, columnPosition));
+        return rule(columnNumber -> new LocalDateBeforeRule(columnNumber, dateTimeFormatter, columnPosition));
     }
 
 

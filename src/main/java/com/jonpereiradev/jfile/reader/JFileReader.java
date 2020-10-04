@@ -80,11 +80,9 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
      */
     default <T> void forEach(Class<T> clazz, Consumer<T> consumer) {
         Objects.requireNonNull(consumer);
-        Iterator<LineValue> iterator = iterator();
 
-        while (iterator.hasNext()) {
-            LineValue line = iterator.next();
-            T object = convert(line, clazz);
+        for (LineValue lineValue : this) {
+            T object = convert(lineValue, clazz);
             consumer.accept(object);
         }
     }
@@ -97,10 +95,8 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
      */
     default void forEach(JFileValidator fileValidator, BiConsumer<LineValue, ValidationReport> consumer) {
         Objects.requireNonNull(consumer);
-        Iterator<LineValue> iterator = iterator();
 
-        while (iterator.hasNext()) {
-            LineValue lineValue = iterator.next();
+        for (LineValue lineValue : this) {
             ValidationReport validationReport = fileValidator.validate(lineValue);
             consumer.accept(lineValue, validationReport);
         }
@@ -114,13 +110,12 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
      */
     default void forEachValid(JFileValidator fileValidator, Consumer<LineValue> consumer) {
         Objects.requireNonNull(consumer);
-        Iterator<LineValue> iterator = iterator();
 
-        while (iterator.hasNext()) {
-            LineValue line = iterator.next();
+        for (LineValue lineValue : this) {
+            ValidationReport validationReport = fileValidator.validate(lineValue);
 
-            if (fileValidator.validate(line).isValid()) {
-                consumer.accept(line);
+            if (validationReport.isValid()) {
+                consumer.accept(lineValue);
             }
         }
     }
@@ -133,15 +128,14 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
      * @param consumer the execution for each iteration.
      * @param <T> the type of the object.
      */
-    default <T> void forEachValid(Class<T> clazz, JFileValidator fileValidator, Consumer<T> consumer) {
+    default <T> void forEachValid(JFileValidator fileValidator, Class<T> clazz, Consumer<T> consumer) {
         Objects.requireNonNull(consumer);
-        Iterator<LineValue> iterator = iterator();
 
-        while (iterator.hasNext()) {
-            LineValue line = iterator.next();
+        for (LineValue lineValue : this) {
+            ValidationReport validationReport = fileValidator.validate(lineValue);
 
-            if (fileValidator.validate(line).isValid()) {
-                T object = convert(line, clazz);
+            if (validationReport.isValid()) {
+                T object = convert(lineValue, clazz);
                 consumer.accept(object);
             }
         }
@@ -153,15 +147,14 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
      * @param fileValidator the validator that applies validation to the line.
      * @param consumer the execution for each iteration.
      */
-    default void forEachNotValid(JFileValidator fileValidator, Consumer<LineValue> consumer) {
+    default void forEachNotValid(JFileValidator fileValidator, BiConsumer<LineValue, ValidationReport> consumer) {
         Objects.requireNonNull(consumer);
-        Iterator<LineValue> iterator = iterator();
 
-        while (iterator.hasNext()) {
-            LineValue line = iterator.next();
+        for (LineValue lineValue : this) {
+            ValidationReport validationReport = fileValidator.validate(lineValue);
 
-            if (fileValidator.validate(line).isNotValid()) {
-                consumer.accept(line);
+            if (validationReport.isNotValid()) {
+                consumer.accept(lineValue, validationReport);
             }
         }
     }

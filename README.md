@@ -30,6 +30,8 @@ This project provides an easy use and extensible API for read, validate, and par
 - [X] Removing internal complexities
 - [X] Removing JFileValidator.validate(fileReader) method
 - [X] Adding JFileReader.stream() non-parallel support
+- [X] String Rule for exactLength
+- [X] Rename rule min and max to minLength and maxLength for string types
 - [x] Enrich the API documentation
 - [x] MIT License
 

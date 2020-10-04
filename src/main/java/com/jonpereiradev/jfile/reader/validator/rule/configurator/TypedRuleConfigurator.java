@@ -61,22 +61,22 @@ public interface TypedRuleConfigurator<T extends TypedRuleConfigurator<?>> {
     T rule(Function<Integer, ColumnRule> rule);
 
     /**
-     * Creates the rule config for the column at position.
+     * Creates the rule config for the column at columnNumber.
      *
-     * @param position the position of the column in the line.
+     * @param columnNumber the columnNumber of the column in the line.
      *
      * @return the configurator to configure a column.
      */
-    GenericTypeConfigurator column(int position);
+    GenericTypeConfigurator column(int columnNumber);
 
     /**
      * Creates the dependency rule validation between columns.
      *
-     * @param position the position of the column in the line that the current column depends on.
+     * @param columnNumber the position of the column in the line that the current column depends on.
      *
      * @return the configurator for the Dependency rule.
      */
-    RefRuleConfigurator<T> depends(int position);
+    RefRuleConfigurator<T> depends(int columnNumber);
 
     /**
      * Changes the current node rule validation.

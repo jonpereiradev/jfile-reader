@@ -25,17 +25,17 @@ package com.jonpereiradev.jfile.reader.validator.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
-public class MinStringRule extends AbstractColumnRule {
+public class ExactLengthStringRule extends AbstractColumnRule {
 
-    private final int min;
+    private final int exactLength;
 
-    public MinStringRule(int columnNumber, int min) {
+    public ExactLengthStringRule(int columnNumber, int exactLength) {
         super(columnNumber);
-        this.min = min;
+        this.exactLength = exactLength;
     }
 
     @Override
     public boolean isValid(ColumnValue columnValue) {
-        return columnValue.getText().trim().length() >= min;
+        return columnValue.getText().trim().length() == exactLength;
     }
 }

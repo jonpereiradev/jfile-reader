@@ -35,12 +35,17 @@ public interface StringTypeConfigurator extends TypedRuleConfigurator<StringType
     /**
      * defines a min length rule validation.
      */
-    StringTypeConfigurator min(int min);
+    StringTypeConfigurator minLength(int minLength);
 
     /**
      * defines a max length rule validation.
      */
-    StringTypeConfigurator max(int max);
+    StringTypeConfigurator maxLength(int maxLength);
+
+    /**
+     * defines a exact length rule validation.
+     */
+    StringTypeConfigurator exactLength(int length);
 
     /**
      * defines a domain rule validation with possible values options.

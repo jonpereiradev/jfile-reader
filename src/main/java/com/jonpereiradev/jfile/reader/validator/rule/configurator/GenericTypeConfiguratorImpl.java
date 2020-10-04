@@ -51,89 +51,89 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     private static final Pattern DEFAULT_ARRAY_SEPARATOR = Pattern.compile(",\\s*");
 
-    private final int position;
+    private final int columnNumber;
     private final JFileValidatorConfig configuration;
     private final RuleNode<ColumnRule> ruleNode;
 
     GenericTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode) {
-        this.position = position;
+        this.columnNumber = columnNumber;
         this.configuration = configuration;
         this.ruleNode = ruleNode;
     }
 
     @Override
     public ShortTypeConfigurator shortType() {
-        ShortTypeRule rule = new ShortTypeRule(position);
+        ShortTypeRule rule = new ShortTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new ShortTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new ShortTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public IntegerTypeConfigurator integerType() {
-        IntegerTypeRule rule = new IntegerTypeRule(position);
+        IntegerTypeRule rule = new IntegerTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new IntegerTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new IntegerTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public LongTypeConfigurator longType() {
-        LongTypeRule rule = new LongTypeRule(position);
+        LongTypeRule rule = new LongTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new LongTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new LongTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public FloatTypeConfigurator floatType() {
-        FloatTypeRule rule = new FloatTypeRule(position);
+        FloatTypeRule rule = new FloatTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new FloatTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new FloatTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public DoubleTypeConfigurator doubleType() {
-        DoubleTypeRule rule = new DoubleTypeRule(position);
+        DoubleTypeRule rule = new DoubleTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new DoubleTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new DoubleTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public BooleanTypeConfigurator booleanType() {
-        BooleanTypeRule rule = new BooleanTypeRule(position);
+        BooleanTypeRule rule = new BooleanTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new BooleanTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new BooleanTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public CharacterTypeConfigurator characterType() {
-        CharacterTypeRule rule = new CharacterTypeRule(position);
+        CharacterTypeRule rule = new CharacterTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new CharacterTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new CharacterTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public StringTypeConfigurator stringType() {
-        StringTypeRule rule = new StringTypeRule(position);
+        StringTypeRule rule = new StringTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new StringTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new StringTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
     public BigIntegerTypeConfigurator bigIntegerType() {
-        BigIntegerTypeRule rule = new BigIntegerTypeRule(position);
+        BigIntegerTypeRule rule = new BigIntegerTypeRule(columnNumber);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new BigIntegerTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new BigIntegerTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
     @Override
@@ -143,10 +143,10 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public BigDecimalTypeConfigurator bigDecimalType(DecimalFormat decimalFormat) {
-        BigDecimalTypeRule rule = new BigDecimalTypeRule(position, decimalFormat);
+        BigDecimalTypeRule rule = new BigDecimalTypeRule(columnNumber, decimalFormat);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new BigDecimalTypeConfiguratorImpl(position, decimalFormat, configuration, rule.getRuleNode());
+        return new BigDecimalTypeConfiguratorImpl(columnNumber, decimalFormat, configuration, rule.getRuleNode());
     }
 
     @Override
@@ -156,10 +156,10 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public DateTypeConfigurator dateType(DateFormat dateFormat) {
-        DateTypeRule rule = new DateTypeRule(position, dateFormat);
+        DateTypeRule rule = new DateTypeRule(columnNumber, dateFormat);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new DateTypeConfiguratorImpl(position, dateFormat, configuration, rule.getRuleNode());
+        return new DateTypeConfiguratorImpl(columnNumber, dateFormat, configuration, rule.getRuleNode());
     }
 
     @Override
@@ -169,10 +169,10 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public LocalDateTypeConfigurator localDateType(DateTimeFormatter dateTimeFormatter) {
-        LocalDateTypeRule rule = new LocalDateTypeRule(position, dateTimeFormatter);
+        LocalDateTypeRule rule = new LocalDateTypeRule(columnNumber, dateTimeFormatter);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new LocalDateTypeConfiguratorImpl(position, dateTimeFormatter, configuration, rule.getRuleNode());
+        return new LocalDateTypeConfiguratorImpl(columnNumber, dateTimeFormatter, configuration, rule.getRuleNode());
     }
 
     @Override
@@ -182,10 +182,15 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public LocalDateTimeTypeConfigurator localDateTimeType(DateTimeFormatter dateTimeFormatter) {
-        LocalDateTimeTypeRule rule = new LocalDateTimeTypeRule(position, dateTimeFormatter);
+        LocalDateTimeTypeRule rule = new LocalDateTimeTypeRule(columnNumber, dateTimeFormatter);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new LocalDateTimeTypeConfiguratorImpl(position, dateTimeFormatter, configuration, rule.getRuleNode());
+        return new LocalDateTimeTypeConfiguratorImpl(
+            columnNumber,
+            dateTimeFormatter,
+            configuration,
+            rule.getRuleNode()
+        );
     }
 
     @Override
@@ -195,10 +200,10 @@ final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 
     @Override
     public ArrayTypeConfigurator arrayOf(Pattern pattern) {
-        ArrayOfTypeRule rule = new ArrayOfTypeRule(position, pattern);
+        ArrayOfTypeRule rule = new ArrayOfTypeRule(columnNumber, pattern);
         rule.setRuleNode(new RuleNodeImpl<>(rule.getClass(), ruleNode));
         ruleNode.add(rule);
-        return new ArrayTypeConfiguratorImpl(position, configuration, rule.getRuleNode());
+        return new ArrayTypeConfiguratorImpl(columnNumber, configuration, rule.getRuleNode());
     }
 
 }

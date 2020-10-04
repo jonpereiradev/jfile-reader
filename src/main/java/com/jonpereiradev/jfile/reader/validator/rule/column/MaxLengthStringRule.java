@@ -25,11 +25,11 @@ package com.jonpereiradev.jfile.reader.validator.rule.column;
 
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
-public class MaxStringRule extends AbstractColumnRule {
+public class MaxLengthStringRule extends AbstractColumnRule {
 
     private final int max;
 
-    public MaxStringRule(int columnNumber, int max) {
+    public MaxLengthStringRule(int columnNumber, int max) {
         super(columnNumber);
         this.max = max;
     }

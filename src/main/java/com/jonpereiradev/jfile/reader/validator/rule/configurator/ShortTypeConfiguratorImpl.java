@@ -34,22 +34,22 @@ import java.util.Arrays;
 
 final class ShortTypeConfiguratorImpl extends AbstractRuleConfigurator<ShortTypeConfigurator> implements ShortTypeConfigurator {
 
-    ShortTypeConfiguratorImpl(int position, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+    ShortTypeConfiguratorImpl(int columnNumber, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
     public ShortTypeConfigurator min(short min) {
-        return rule(position -> new MinShortRule(position, min));
+        return rule(columnNumber -> new MinShortRule(columnNumber, min));
     }
 
     @Override
     public ShortTypeConfigurator max(short max) {
-        return rule(position -> new MaxShortRule(position, max));
+        return rule(columnNumber -> new MaxShortRule(columnNumber, max));
     }
 
     @Override
     public ShortTypeConfigurator domain(Short... values) {
-        return rule(position -> new DomainShortRule(position, Arrays.asList(values)));
+        return rule(columnNumber -> new DomainShortRule(columnNumber, Arrays.asList(values)));
     }
 }

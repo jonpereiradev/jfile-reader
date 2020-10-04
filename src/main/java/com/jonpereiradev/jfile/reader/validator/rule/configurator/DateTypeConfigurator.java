@@ -73,11 +73,11 @@ public interface DateTypeConfigurator extends TypedRuleConfigurator<DateTypeConf
      * Defines after other column value rule validation.
      * Used for validate that a date must be after another date column in the line.
      *
-     * @param position an int position reference to other date column in the line.
+     * @param columnNumber an int columnNumber reference to other date column in the line.
      *
      * @return the configurator with the after column value rule configured.
      */
-    DateTypeConfigurator after(int position);
+    DateTypeConfigurator after(int columnNumber);
 
     /**
      * Defines a before date rule validation.
@@ -93,10 +93,10 @@ public interface DateTypeConfigurator extends TypedRuleConfigurator<DateTypeConf
      * Defines before other column value rule validation.
      * Used for validate that a date must be before another date column in the line.
      *
-     * @param position an int position reference to other date column in the line.
+     * @param columnNumber an int position reference to other date column in the line.
      *
      * @return the configurator with the before column value rule configured.
      */
-    DateTypeConfigurator before(int position);
+    DateTypeConfigurator before(int columnNumber);
 
 }

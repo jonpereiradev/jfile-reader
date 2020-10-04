@@ -30,8 +30,9 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.CpfRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.DomainStringRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.EmailRule;
-import com.jonpereiradev.jfile.reader.validator.rule.column.MaxStringRule;
-import com.jonpereiradev.jfile.reader.validator.rule.column.MinStringRule;
+import com.jonpereiradev.jfile.reader.validator.rule.column.ExactLengthStringRule;
+import com.jonpereiradev.jfile.reader.validator.rule.column.MaxLengthStringRule;
+import com.jonpereiradev.jfile.reader.validator.rule.column.MinLengthStringRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.NotEmptyRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.RegexRule;
 
@@ -40,8 +41,8 @@ import java.util.regex.Pattern;
 
 final class StringTypeConfiguratorImpl extends AbstractRuleConfigurator<StringTypeConfigurator> implements StringTypeConfigurator {
 
-    StringTypeConfiguratorImpl(int position, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+    StringTypeConfiguratorImpl(int columnNumber, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
@@ -50,18 +51,23 @@ final class StringTypeConfiguratorImpl extends AbstractRuleConfigurator<StringTy
     }
 
     @Override
-    public StringTypeConfigurator min(int min) {
-        return rule(position -> new MinStringRule(position, min));
+    public StringTypeConfigurator minLength(int minLength) {
+        return rule(columnNumber -> new MinLengthStringRule(columnNumber, minLength));
     }
 
     @Override
-    public StringTypeConfigurator max(int max) {
-        return rule(position -> new MaxStringRule(position, max));
+    public StringTypeConfigurator maxLength(int maxLength) {
+        return rule(columnNumber -> new MaxLengthStringRule(columnNumber, maxLength));
+    }
+
+    @Override
+    public StringTypeConfigurator exactLength(int length) {
+        return rule(columnNumber -> new ExactLengthStringRule(columnNumber, length));
     }
 
     @Override
     public StringTypeConfigurator domain(String... values) {
-        return rule(position -> new DomainStringRule(position, Arrays.asList(values)));
+        return rule(columnNumber -> new DomainStringRule(columnNumber, Arrays.asList(values)));
     }
 
     @Override
@@ -81,6 +87,6 @@ final class StringTypeConfiguratorImpl extends AbstractRuleConfigurator<StringTy
 
     @Override
     public StringTypeConfigurator regex(Pattern pattern) {
-        return rule(position -> new RegexRule(position, pattern));
+        return rule(columnNumber -> new RegexRule(columnNumber, pattern));
     }
 }

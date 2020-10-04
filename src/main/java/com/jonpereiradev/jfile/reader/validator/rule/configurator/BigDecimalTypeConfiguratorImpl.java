@@ -38,22 +38,22 @@ final class BigDecimalTypeConfiguratorImpl
     private final DecimalFormat decimalFormat;
 
     BigDecimalTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         DecimalFormat decimalFormat,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+        super(columnNumber, configuration, ruleNode);
         this.decimalFormat = decimalFormat;
     }
 
     @Override
     public BigDecimalTypeConfigurator min(BigDecimal min) {
-        return rule(position -> new MinBigDecimalRule(position, min, decimalFormat));
+        return rule(columnNumber -> new MinBigDecimalRule(columnNumber, min, decimalFormat));
     }
 
     @Override
     public BigDecimalTypeConfigurator max(BigDecimal max) {
-        return rule(position -> new MaxBigDecimalRule(position, max, decimalFormat));
+        return rule(columnNumber -> new MaxBigDecimalRule(columnNumber, max, decimalFormat));
     }
 
 }

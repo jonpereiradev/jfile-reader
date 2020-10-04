@@ -34,22 +34,22 @@ import java.util.Arrays;
 
 final class LongTypeConfiguratorImpl extends AbstractRuleConfigurator<LongTypeConfigurator> implements LongTypeConfigurator {
 
-    LongTypeConfiguratorImpl(int position, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+    LongTypeConfiguratorImpl(int columnNumber, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
     public LongTypeConfigurator min(long min) {
-        return rule(position -> new MinLongRule(position, min));
+        return rule(columnNumber -> new MinLongRule(columnNumber, min));
     }
 
     @Override
     public LongTypeConfigurator max(long max) {
-        return rule(position -> new MaxLongRule(position, max));
+        return rule(columnNumber -> new MaxLongRule(columnNumber, max));
     }
 
     @Override
     public LongTypeConfigurator domain(Long... values) {
-        return rule(position -> new DomainLongRule(position, Arrays.asList(values)));
+        return rule(columnNumber -> new DomainLongRule(columnNumber, Arrays.asList(values)));
     }
 }

@@ -118,8 +118,8 @@ final class JFileReaderEngine implements JFileReader {
             SortedSet<ColumnValue> columnValues = new TreeSet<>();
 
             for (int i = 0; i < columns.length; i++) {
-                int position = i + 1;
-                ColumnValue columnValue = newColumnValue(readerConfig, position, columns[i]);
+                int columnNumber = i + 1;
+                ColumnValue columnValue = newColumnValue(readerConfig, columnNumber, columns[i]);
                 columnValues.add(columnValue);
             }
 

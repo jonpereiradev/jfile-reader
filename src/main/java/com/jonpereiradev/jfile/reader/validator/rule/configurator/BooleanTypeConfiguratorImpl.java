@@ -33,14 +33,14 @@ import java.util.Arrays;
 final class BooleanTypeConfiguratorImpl extends AbstractRuleConfigurator<BooleanTypeConfigurator> implements BooleanTypeConfigurator {
 
     BooleanTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
     public BooleanTypeConfigurator domain(Character... domains) {
-        return rule(position -> new DomainCharacterRule(position, Arrays.asList(domains)));
+        return rule(columnNumber -> new DomainCharacterRule(columnNumber, Arrays.asList(domains)));
     }
 }

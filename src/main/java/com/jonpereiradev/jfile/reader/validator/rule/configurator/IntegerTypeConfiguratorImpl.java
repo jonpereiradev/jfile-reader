@@ -34,23 +34,23 @@ import java.util.Arrays;
 
 final class IntegerTypeConfiguratorImpl extends AbstractRuleConfigurator<IntegerTypeConfigurator> implements IntegerTypeConfigurator {
 
-    IntegerTypeConfiguratorImpl(int position, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+    IntegerTypeConfiguratorImpl(int columnNumber, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
     public IntegerTypeConfigurator min(int min) {
-        return rule(position -> new MinIntegerRule(position, min));
+        return rule(columnNumber -> new MinIntegerRule(columnNumber, min));
     }
 
     @Override
     public IntegerTypeConfigurator max(int max) {
-        return rule(position -> new MaxIntegerRule(position, max));
+        return rule(columnNumber -> new MaxIntegerRule(columnNumber, max));
     }
 
     @Override
     public IntegerTypeConfigurator domain(Integer... values) {
-        return rule(position -> new DomainIntegerRule(position, Arrays.asList(values)));
+        return rule(columnNumber -> new DomainIntegerRule(columnNumber, Arrays.asList(values)));
     }
 
 }

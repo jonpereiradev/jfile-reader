@@ -36,20 +36,20 @@ import java.util.Arrays;
 final class RefRuleConfiguratorImpl<T extends TypedRuleConfigurator<?>> implements RefRuleConfigurator<T> {
 
     private final int refPosition;
-    private final int position;
+    private final int columnNumber;
     private final T currentConfigurator;
     private final RuleNode<ColumnRule> rule;
 
-    RefRuleConfiguratorImpl(int refPosition, int position, RuleNode<ColumnRule> ruleNode, T currentConfigurator) {
+    RefRuleConfiguratorImpl(int refPosition, int columnNumber, RuleNode<ColumnRule> ruleNode, T currentConfigurator) {
         this.refPosition = refPosition;
-        this.position = position;
+        this.columnNumber = columnNumber;
         this.currentConfigurator = currentConfigurator;
         this.rule = ruleNode;
     }
 
     @Override
     public T filled() {
-        RefRule ref = new FilledRefRule(refPosition, position);
+        RefRule ref = new FilledRefRule(refPosition, columnNumber);
         ref.setRuleNode(new RuleNodeImpl<>(ref.getClass(), rule));
         rule.add(ref);
         currentConfigurator.setRuleNode(ref.getRuleNode());
@@ -59,7 +59,7 @@ final class RefRuleConfiguratorImpl<T extends TypedRuleConfigurator<?>> implemen
     @Override
     @SuppressWarnings("unchecked")
     public T filled(Object... values) {
-        RefRule ref = new DomainRefRule(refPosition, position, Arrays.asList(values));
+        RefRule ref = new DomainRefRule(refPosition, columnNumber, Arrays.asList(values));
         ref.setRuleNode(new RuleNodeImpl<>(ref.getClass(), rule));
         rule.add(ref);
         currentConfigurator.setRuleNode(ref.getRuleNode());
@@ -68,7 +68,7 @@ final class RefRuleConfiguratorImpl<T extends TypedRuleConfigurator<?>> implemen
 
     @Override
     public T empty() {
-        RefRule ref = new EmptyRefRule(refPosition, position);
+        RefRule ref = new EmptyRefRule(refPosition, columnNumber);
         ref.setRuleNode(new RuleNodeImpl<>(ref.getClass(), rule));
         rule.add(ref);
         currentConfigurator.setRuleNode(ref.getRuleNode());

@@ -41,50 +41,50 @@ final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeCo
     private final DateFormat dateFormat;
 
     DateTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         DateFormat dateFormat,
         JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+        super(columnNumber, configuration, ruleNode);
         this.dateFormat = dateFormat;
     }
 
     @Override
     public DateTypeConfigurator future() {
-        return rule(position -> new DateFutureRule(position, dateFormat));
+        return rule(columnNumber -> new DateFutureRule(columnNumber, dateFormat));
     }
 
     @Override
     public DateTypeConfigurator futureOrPresent() {
-        return rule(position -> new DateFutureOrPresentRule(position, dateFormat));
+        return rule(columnNumber -> new DateFutureOrPresentRule(columnNumber, dateFormat));
     }
 
     @Override
     public DateTypeConfigurator past() {
-        return rule(position -> new DatePastRule(position, dateFormat));
+        return rule(columnNumber -> new DatePastRule(columnNumber, dateFormat));
     }
 
     @Override
     public DateTypeConfigurator pastOrPresent() {
-        return rule(position -> new DatePastOrPresentRule(position, dateFormat));
+        return rule(columnNumber -> new DatePastOrPresentRule(columnNumber, dateFormat));
     }
 
     @Override
     public DateTypeConfigurator after(Date date) {
-        return rule(position -> new DateAfterRule(position, dateFormat, date));
+        return rule(columnNumber -> new DateAfterRule(columnNumber, dateFormat, date));
     }
 
     @Override
     public DateTypeConfigurator after(int columnPosition) {
-        return rule(position -> new DateAfterRule(position, dateFormat, columnPosition));
+        return rule(columnNumber -> new DateAfterRule(columnNumber, dateFormat, columnPosition));
     }
 
     @Override
     public DateTypeConfigurator before(Date date) {
-        return rule(position -> new DateBeforeRule(position, dateFormat, date));
+        return rule(columnNumber -> new DateBeforeRule(columnNumber, dateFormat, date));
     }
 
     @Override
     public DateTypeConfigurator before(int columnPosition) {
-        return rule(position -> new DateBeforeRule(position, dateFormat, columnPosition));
+        return rule(columnNumber -> new DateBeforeRule(columnNumber, dateFormat, columnPosition));
     }
 }

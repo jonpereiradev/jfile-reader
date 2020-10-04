@@ -36,10 +36,10 @@ final class ArrayTypeConfiguratorImpl implements ArrayTypeConfigurator {
     private final GenericTypeConfiguratorImpl genericTypeConfigurator;
 
     ArrayTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode) {
-        this.genericTypeConfigurator = new GenericTypeConfiguratorImpl(position, configuration, ruleNode);
+        this.genericTypeConfigurator = new GenericTypeConfiguratorImpl(columnNumber, configuration, ruleNode);
     }
 
     @Override

@@ -35,13 +35,13 @@ import java.util.function.Function;
 
 abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> implements TypedRuleConfigurator<T> {
 
-    private final int position;
+    private final int columnNumber;
     private final JFileValidatorConfig configuration;
 
     private RuleNode<ColumnRule> ruleNode;
 
-    AbstractRuleConfigurator(int position, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
-        this.position = position;
+    AbstractRuleConfigurator(int columnNumber, JFileValidatorConfig configuration, RuleNode<ColumnRule> ruleNode) {
+        this.columnNumber = columnNumber;
         this.configuration = configuration;
         this.ruleNode = ruleNode;
     }
@@ -69,27 +69,27 @@ abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> impl
     @Override
     @SuppressWarnings("unchecked")
     public T rule(Function<Integer, ColumnRule> rule) {
-        ColumnRule columnRule = rule.apply(position);
+        ColumnRule columnRule = rule.apply(columnNumber);
         columnRule.setRuleNode(new RuleNodeImpl<>(columnRule.getClass(), ruleNode));
         ruleNode.add(columnRule);
         return (T) this;
     }
 
     @Override
-    public GenericTypeConfigurator column(int position) {
-        return new GenericTypeConfiguratorImpl(position, configuration, getParentNode());
+    public GenericTypeConfigurator column(int columnNumber) {
+        return new GenericTypeConfiguratorImpl(columnNumber, configuration, getParentNode());
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public RefRuleConfigurator<T> depends(int position) {
+    public RefRuleConfigurator<T> depends(int columnNumber) {
         RuleNode<ColumnRule> parentNode = ruleNode;
 
         if (ruleNode.getParentNode() != null && RefRule.class.isAssignableFrom(ruleNode.getType())) {
             parentNode = ruleNode.getParentNode();
         }
 
-        return new RefRuleConfiguratorImpl<>(position, this.position, parentNode, (T) this);
+        return new RefRuleConfiguratorImpl<>(columnNumber, this.columnNumber, parentNode, (T) this);
     }
 
     @Override

@@ -37,8 +37,8 @@ import java.util.regex.Pattern;
 
 public interface ColumnValue extends Comparable<ColumnValue> {
 
-    static ColumnValue newColumnValue(JFilePatternConfig patternConfig, int position, String content) {
-        return new ColumnValueImpl(patternConfig, position, content);
+    static ColumnValue newColumnValue(JFilePatternConfig patternConfig, int columnNumber, String content) {
+        return new ColumnValueImpl(patternConfig, columnNumber, content);
     }
 
     int getColumnNumber();

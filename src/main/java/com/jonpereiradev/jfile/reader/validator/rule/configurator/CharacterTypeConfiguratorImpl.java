@@ -34,14 +34,14 @@ final class CharacterTypeConfiguratorImpl
     extends AbstractRuleConfigurator<CharacterTypeConfigurator> implements CharacterTypeConfigurator {
 
     CharacterTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
     public CharacterTypeConfigurator domain(Character... domains) {
-        return rule(position -> new DomainCharacterRule(position, Arrays.asList(domains)));
+        return rule(columnNumber -> new DomainCharacterRule(columnNumber, Arrays.asList(domains)));
     }
 }

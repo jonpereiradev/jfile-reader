@@ -21,31 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.jonpereiradev.jfile.reader.validator.rule.configurator;
+package com.jonpereiradev.jfile.reader.validator.rule.column;
 
-import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
-import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
-import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
-import com.jonpereiradev.jfile.reader.validator.rule.column.MaxFloatRule;
-import com.jonpereiradev.jfile.reader.validator.rule.column.MinFloatRule;
+import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
-final class FloatTypeConfiguratorImpl extends AbstractRuleConfigurator<FloatTypeConfigurator> implements FloatTypeConfigurator {
+public class MinLengthStringRule extends AbstractColumnRule {
 
-    FloatTypeConfiguratorImpl(
-        int columnNumber,
-        JFileValidatorConfig configuration,
-        RuleNode<ColumnRule> ruleNode) {
-        super(columnNumber, configuration, ruleNode);
+    private final int min;
+
+    public MinLengthStringRule(int columnNumber, int min) {
+        super(columnNumber);
+        this.min = min;
     }
 
     @Override
-    public FloatTypeConfigurator min(float min) {
-        return rule(columnNumber -> new MinFloatRule(columnNumber, min));
+    public boolean isValid(ColumnValue columnValue) {
+        return columnValue.getText().trim().length() >= min;
     }
-
-    @Override
-    public FloatTypeConfigurator max(float max) {
-        return rule(columnNumber -> new MaxFloatRule(columnNumber, max));
-    }
-
 }

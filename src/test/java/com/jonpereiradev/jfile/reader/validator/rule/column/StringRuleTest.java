@@ -57,21 +57,21 @@ public class StringRuleTest extends AbstractColumnRuleTest {
     @Test
     public void mustViolateMinRule() throws IOException {
         Path path = createFileWithContent("a| ab |c");
-        getRuleConfigurator().columns().column(2).stringType().min(3);
+        getRuleConfigurator().columns().column(2).stringType().minLength(3);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MinStringRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(MinLengthStringRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test
     public void mustViolateMaxRule() throws IOException {
         Path path = createFileWithContent("a| abcde |c");
-        getRuleConfigurator().columns().column(2).stringType().max(3);
+        getRuleConfigurator().columns().column(2).stringType().maxLength(3);
         List<RuleViolation> violations = validate(path);
 
         Assert.assertFalse(violations.isEmpty());
-        Assert.assertEquals(MaxStringRule.class.getName(), violations.get(0).getRule());
+        Assert.assertEquals(MaxLengthStringRule.class.getName(), violations.get(0).getRule());
     }
 
     @Test

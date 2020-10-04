@@ -32,19 +32,19 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.MinDoubleRule;
 final class DoubleTypeConfiguratorImpl extends AbstractRuleConfigurator<DoubleTypeConfigurator> implements DoubleTypeConfigurator {
 
     DoubleTypeConfiguratorImpl(
-        int position,
+        int columnNumber,
         JFileValidatorConfig configuration,
         RuleNode<ColumnRule> ruleNode) {
-        super(position, configuration, ruleNode);
+        super(columnNumber, configuration, ruleNode);
     }
 
     @Override
     public DoubleTypeConfigurator min(double min) {
-        return rule(position -> new MinDoubleRule(position, min));
+        return rule(columnNumber -> new MinDoubleRule(columnNumber, min));
     }
 
     @Override
     public DoubleTypeConfigurator max(double max) {
-        return rule(position -> new MaxDoubleRule(position, max));
+        return rule(columnNumber -> new MaxDoubleRule(columnNumber, max));
     }
 }
