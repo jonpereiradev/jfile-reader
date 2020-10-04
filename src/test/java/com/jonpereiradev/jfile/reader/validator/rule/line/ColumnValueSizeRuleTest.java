@@ -51,7 +51,7 @@ public class ColumnValueSizeRuleTest extends AbstractFileReaderTest {
 
         validatorConfig.files().lines().columnsSize(5);
 
-        List<RuleViolation> violations = validator.validate(reader).getViolations();
+        List<RuleViolation> violations = validator.validate(reader.iterator().next()).getViolations();
         Assert.assertFalse(violations.isEmpty());
     }
 
@@ -66,7 +66,7 @@ public class ColumnValueSizeRuleTest extends AbstractFileReaderTest {
 
         validatorConfig.files().lines().columnsSize(5);
 
-        List<RuleViolation> violations = validator.validate(reader).getViolations();
+        List<RuleViolation> violations = validator.validate(reader.iterator().next()).getViolations();
         Assert.assertTrue(violations.isEmpty());
     }
 

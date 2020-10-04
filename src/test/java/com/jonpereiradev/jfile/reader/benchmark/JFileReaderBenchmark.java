@@ -153,10 +153,12 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
 
         JFileReader reader = JFileReaderFactory.newJFileReader(pathToFakeFile, configuration);
         JFileValidator validator = JFileValidatorFactory.newJFileValidator(validatorConfig);
-        ValidationReport report = validator.validate(reader);
 
-        Assert.assertTrue(report.isNotValid());
-        Assert.assertFalse(report.getViolations().isEmpty());
+        reader.forEach(lineValue -> {
+            ValidationReport report = validator.validate(lineValue);
+            Assert.assertTrue(report.isNotValid());
+            Assert.assertFalse(report.getViolations().isEmpty());
+        });
     }
 
     @Benchmark
@@ -167,7 +169,7 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
         int countNumberOfLines = 0;
 
         for (LineValue line : reader) {
-            reader.parse(line, PerformanceObject.class);
+            reader.convert(line, PerformanceObject.class);
             countNumberOfLines++;
         }
 
@@ -195,7 +197,7 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
 
         for (LineValue line : reader) {
             validator.validate(line);
-            reader.parse(line, PerformanceObject.class);
+            reader.convert(line, PerformanceObject.class);
             countNumberOfLines++;
         }
 

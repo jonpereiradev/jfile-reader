@@ -43,13 +43,13 @@ import static com.jonpereiradev.jfile.reader.file.LineValue.newLineValue;
 final class JFileReaderEngine implements JFileReader {
 
     private final JFileReaderConfig readerConfig;
-    private final LineValueConverter fileLineParser;
+    private final LineValueConverter lineValueConverter;
     private final BufferedReader bufferedReader;
     private final Iterator<LineValue> iterator;
 
     private JFileReaderEngine(InputStream inputStream, JFileReaderConfig readerConfig) {
         this.readerConfig = readerConfig;
-        this.fileLineParser = readerConfig.getLineValueConverter();
+        this.lineValueConverter = readerConfig.getLineValueConverter();
         this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream, readerConfig.getCharset()));
         this.iterator = new JFileReaderIterator();
     }
@@ -71,8 +71,20 @@ final class JFileReaderEngine implements JFileReader {
     }
 
     @Override
-    public <T> T parse(LineValue lineValue, Class<T> toClass) {
-        return fileLineParser.convert(lineValue, toClass);
+    public <T> T converted(Class<T> toClass) {
+        JFileReaderIterator iterator = (JFileReaderIterator) iterator();
+        LineValue lastLineValue = iterator.lastLineValue;
+
+        if (lastLineValue == null) {
+            throw new NoSuchElementException("The iterator has no line value present");
+        }
+
+        return convert(lastLineValue, toClass);
+    }
+
+    @Override
+    public <T> T convert(LineValue lineValue, Class<T> toClass) {
+        return lineValueConverter.convert(lineValue, toClass);
     }
 
     @Override
@@ -84,6 +96,7 @@ final class JFileReaderEngine implements JFileReader {
 
         private int lineNumber;
         private String lastLineFromReader;
+        private LineValue lastLineValue;
 
         @Override
         public boolean hasNext() {
@@ -94,8 +107,12 @@ final class JFileReaderEngine implements JFileReader {
         @Override
         public LineValue next() {
             setCurrentLine();
-
             String contentCurrentLine = getContentCurrentLine();
+            lastLineValue = getCurrentLineValue(contentCurrentLine);
+            return lastLineValue;
+        }
+
+        private LineValue getCurrentLineValue(String contentCurrentLine) {
             Pattern pattern = readerConfig.getPattern();
             String[] columns = pattern.split(contentCurrentLine);
             SortedSet<ColumnValue> columnValues = new TreeSet<>();

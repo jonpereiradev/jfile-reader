@@ -25,11 +25,15 @@ package com.jonpereiradev.jfile.reader;
 
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.JFileValidator;
+import com.jonpereiradev.jfile.reader.validator.ValidationReport;
 
 import java.io.Closeable;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Point of access for file reading and validation.
@@ -45,15 +49,27 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
     Iterator<LineValue> iterator();
 
     /**
+     * Parses the current line to the type of the class.
+     *
+     * @param toClass the type of object to parse the line.
+     * @param <T> the object type.
+     *
+     * @return the line parsed into the object.
+     *
+     * @throws java.util.NoSuchElementException when no current line is present in the iterator
+     */
+    <T> T converted(Class<T> toClass);
+
+    /**
      * Parses a line to the type of the class.
      *
      * @param lineValue the line that will be transformed in object.
      * @param toClass the type of object to parse the line.
      * @param <T> the object type.
      *
-     * @return the line parsed in object.
+     * @return the line parsed into the object.
      */
-    <T> T parse(LineValue lineValue, Class<T> toClass);
+    <T> T convert(LineValue lineValue, Class<T> toClass);
 
     /**
      * Iterates over the lines converting the line to the class type.
@@ -68,8 +84,25 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
 
         while (iterator.hasNext()) {
             LineValue line = iterator.next();
-            T object = parse(line, clazz);
+            T object = convert(line, clazz);
             consumer.accept(object);
+        }
+    }
+
+    /**
+     * Iterates over the lines converting the line to the class type.
+     *
+     * @param fileValidator the validator that applies validation to the line.
+     * @param consumer the execution for each iteration.
+     */
+    default void forEach(JFileValidator fileValidator, BiConsumer<LineValue, ValidationReport> consumer) {
+        Objects.requireNonNull(consumer);
+        Iterator<LineValue> iterator = iterator();
+
+        while (iterator.hasNext()) {
+            LineValue lineValue = iterator.next();
+            ValidationReport validationReport = fileValidator.validate(lineValue);
+            consumer.accept(lineValue, validationReport);
         }
     }
 
@@ -108,7 +141,7 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
             LineValue line = iterator.next();
 
             if (fileValidator.validate(line).isValid()) {
-                T object = parse(line, clazz);
+                T object = convert(line, clazz);
                 consumer.accept(object);
             }
         }
@@ -131,6 +164,10 @@ public interface JFileReader extends Iterable<LineValue>, Closeable {
                 consumer.accept(line);
             }
         }
+    }
+
+    default Stream<LineValue> stream() {
+        return StreamSupport.stream(spliterator(), false);
     }
 
 }

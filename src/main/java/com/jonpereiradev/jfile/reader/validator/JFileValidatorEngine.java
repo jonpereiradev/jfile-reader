@@ -23,7 +23,6 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
-import com.jonpereiradev.jfile.reader.JFileReader;
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
@@ -35,9 +34,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.RefRule;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
 
@@ -47,27 +44,6 @@ final class JFileValidatorEngine implements JFileValidator {
 
     JFileValidatorEngine(JFileValidatorConfig validatorConfig) {
         this.validatorConfig = validatorConfig;
-    }
-
-    @Override
-    public ValidationReport validate(JFileReader fileReader) {
-        Objects.requireNonNull(validatorConfig.getRuleRoot(), "No rule config provided.");
-        Iterator<LineValue> iterator = fileReader.iterator();
-        ValidationReportImpl validationReport = new ValidationReportImpl();
-        int maxViolationSize = validatorConfig.getMaxViolationSize();
-
-        while (iterator.hasNext()) {
-            LineValue line = iterator.next();
-            List<RuleViolation> violations = validateLine(line);
-
-            validationReport.put(line.getLineNumber(), violations);
-
-            if (maxViolationSize > 0 && validationReport.getViolations().size() > maxViolationSize) {
-                break;
-            }
-        }
-
-        return validationReport;
     }
 
     @Override

@@ -28,6 +28,8 @@ This project provides an easy use and extensible API for read, validate, and par
 - [X] Add throws IOException in JFileReaderFactory methods
 - [x] Removing exception suppress from ColumnValue getter methods
 - [X] Removing internal complexities
+- [X] Removing JFileValidator.validate(fileReader) method
+- [X] Adding JFileReader.stream() non-parallel support
 - [x] Enrich the API documentation
 - [x] MIT License
 

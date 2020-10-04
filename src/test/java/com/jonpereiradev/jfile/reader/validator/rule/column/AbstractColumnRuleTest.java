@@ -36,6 +36,7 @@ import org.junit.Before;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 abstract class AbstractColumnRuleTest extends AbstractFileReaderTest {
@@ -54,7 +55,13 @@ abstract class AbstractColumnRuleTest extends AbstractFileReaderTest {
     protected List<RuleViolation> validate(Path path) throws IOException {
         JFileReader reader = JFileReaderFactory.newJFileReader(path, readerConfig);
         JFileValidator validator = JFileValidatorFactory.newJFileValidator(validatorConfig);
-        return validator.validate(reader).getViolations();
+        List<RuleViolation> ruleViolations = new ArrayList<>();
+
+        reader.forEach(lineValue -> {
+            ruleViolations.addAll(validator.validate(lineValue).getViolations());
+        });
+
+        return ruleViolations;
     }
 
     public LineRuleConfigurator getRuleConfigurator() {
