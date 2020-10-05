@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.file;
 
+
 import com.jonpereiradev.jfile.reader.JFilePatternConfig;
 
 import java.math.BigDecimal;
@@ -35,6 +36,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface ColumnValue extends Comparable<ColumnValue> {
 
     static ColumnValue newColumnValue(JFilePatternConfig patternConfig, int columnNumber, String content) {

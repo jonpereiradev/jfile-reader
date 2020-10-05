@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.file;
 
+
 import com.jonpereiradev.jfile.reader.JFilePatternConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
@@ -41,6 +42,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+
 
 final class ColumnValueImpl implements ColumnValue {
 

@@ -105,4 +105,5 @@ final class ReflectionObjectReader {
     private boolean isJavaBeanBooleanGetterMethod(Method method) {
         return method.getName().startsWith(PREFIX_IS_METHOD) && method.getParameters().length == 0;
     }
+
 }

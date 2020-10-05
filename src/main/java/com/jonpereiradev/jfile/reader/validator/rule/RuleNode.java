@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule;
 
+
 import java.util.List;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface RuleNode<T extends Rule<?>> extends Iterable<T> {
 
     Class<?> getType();

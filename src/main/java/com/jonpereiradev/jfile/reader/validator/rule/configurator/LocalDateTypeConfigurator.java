@@ -23,48 +23,78 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import java.time.LocalDate;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface LocalDateTypeConfigurator extends TypedRuleConfigurator<LocalDateTypeConfigurator> {
 
     /**
-     * defines a future rule validation.
+     * Defines a future rule validation.
+     *
+     * @return the object with the future rule configured.
      */
     LocalDateTypeConfigurator future();
 
     /**
-     * defines a future or present rule validation.
+     * Defines a future or present rule validation.
+     *
+     * @return the object with the future or present rule configured.
      */
     LocalDateTypeConfigurator futureOrPresent();
 
     /**
-     * defines a past rule validation.
+     * Defines a past rule validation.
+     *
+     * @return the object with the past rule configured.
      */
     LocalDateTypeConfigurator past();
 
     /**
-     * defines a past or present rule validation.
+     * Defines a past or present rule validation.
+     *
+     * @return the object with the past or present rule configured.
      */
     LocalDateTypeConfigurator pastOrPresent();
 
     /**
-     * defines a min date rule validation.
+     * Defines a minimum date rule validation.
+     *
+     * @param min the minimum value for the date.
+     *
+     * @return the object with the after rule configured.
      */
     LocalDateTypeConfigurator after(LocalDate min);
 
     /**
-     * defines a min date rule validation comparing to another column.
+     * Defines a minimum date rule validation comparing to another column.
+     *
+     * @param columnNumber the column number that is compared to the current column value.
+     *
+     * @return the object with the after rule configured.
      */
-    LocalDateTypeConfigurator after(int columnPosition);
+    LocalDateTypeConfigurator after(int columnNumber);
 
     /**
-     * defines a max date rule validation.
+     * Defines a maximum date rule validation.
+     *
+     * @param max the maximum value for the date.
+     *
+     * @return the object with the before rule configured.
      */
     LocalDateTypeConfigurator before(LocalDate max);
 
     /**
-     * defines a max date rule validation comparing to another column.
+     * Defines a maximum date rule validation comparing to another column.
+     *
+     * @param columnNumber the column number that is compared to the current column value.
+     *
+     * @return the object with the before rule configured.
      */
-    LocalDateTypeConfigurator before(int columnPosition);
+    LocalDateTypeConfigurator before(int columnNumber);
 
 }

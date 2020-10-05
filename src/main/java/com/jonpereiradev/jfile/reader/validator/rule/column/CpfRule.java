@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class CpfRule extends AbstractColumnRule {
 
     private static final List<String> INVALID_CPFS = Arrays.asList(
@@ -84,4 +90,5 @@ public class CpfRule extends AbstractColumnRule {
 
         return dv1 == foundDv[0] && dv2 == foundDv[1];
     }
+
 }

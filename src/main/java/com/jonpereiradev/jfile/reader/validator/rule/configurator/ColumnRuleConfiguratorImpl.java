@@ -23,7 +23,9 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
+
 
 final class ColumnRuleConfiguratorImpl implements ColumnRuleConfigurator {
 

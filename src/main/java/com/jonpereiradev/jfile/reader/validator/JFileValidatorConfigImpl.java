@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
+
 import com.jonpereiradev.jfile.reader.JFilePatternConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleRoot;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleRootImpl;
@@ -33,6 +34,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.configurator.LineRuleConfig
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
+
 
 final class JFileValidatorConfigImpl implements JFileValidatorConfig {
 

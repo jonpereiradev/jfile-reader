@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,94 +34,100 @@ import java.nio.file.Path;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+
 /**
- * Factory to create the {@link JFileReader} implementation.
+ * <p>Factory to produces {@link JFileReader} and {@link JFileReaderConfig} objects to configure and read files.</p>
+ *
+ * @author jonpereiradev
+ * @see JFileReader
+ * @see JFileReaderConfig
+ * @since 0.1.0
  */
 public final class JFileReaderFactory {
 
     private JFileReaderFactory() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Instantiation not supported");
     }
 
     /**
-     * Create a File Reader with the desired parameters.
+     * Creates a {@link JFileReader} object configured with file and regex split pattern.
      *
-     * @param file the file instance to creates the stream.
-     * @param regex the regex pattern to split the columns in a line.
+     * @param file the file instance used to create the {@link InputStream}.
+     * @param regex the pattern used to split a line into columns.
      *
-     * @return an instance of JFileReader for the file and config specified.
+     * @return a {@link JFileReader} object configured for file reading.
      *
-     * @throws IOException when the creation of the InputStream for the file fails.
+     * @throws IOException if a problem occurs when creating {@link InputStream} for the file.
      */
     public static JFileReader newUtf8JFileReader(File file, String regex) throws IOException {
         return newUtf8JFileReader(file.toPath(), regex);
     }
 
     /**
-     * Create a File Reader with the desired parameters.
+     * Creates a {@link JFileReader} object configured with file and configuration.
      *
-     * @param file the file instance to creates the stream.
-     * @param readerConfig the config that tells how to read the file.
+     * @param file the file instance used to create the {@link InputStream}.
+     * @param readerConfig the configuration for reading the file.
      *
-     * @return an instance of JFileReader for the file and config specified.
+     * @return a {@link JFileReader} object configured for file reading.
      *
-     * @throws IOException when the creation of the InputStream for the file fails.
+     * @throws IOException if a problem occurs when creating {@link InputStream} for the file.
      */
     public static JFileReader newJFileReader(File file, JFileReaderConfig readerConfig) throws IOException {
         return newJFileReader(file.toPath(), readerConfig);
     }
 
     /**
-     * Create a File Reader with the desired parameters.
+     * Creates a {@link JFileReader} object configured with file and configuration.
      *
-     * @param path the path instance to creates the stream.
-     * @param regex the regex pattern to split the columns in a line.
+     * @param path the path used to create the {@link InputStream}.
+     * @param regex the pattern used to split a line into columns.
      *
-     * @return an instance of JFileReader for the path and config specified.
+     * @return a {@link JFileReader} object configured for file reading.
      *
-     * @throws IOException when the creation of the InputStream for the path fails.
+     * @throws IOException if a problem occurs when creating {@link InputStream} for the path.
      */
     public static JFileReader newUtf8JFileReader(Path path, String regex) throws IOException {
         return newUtf8JFileReader(Files.newInputStream(path), regex);
     }
 
     /**
-     * Create a File Reader with the desired parameters.
+     * Creates a {@link JFileReader} object configured with file and configuration.
      *
-     * @param path the path instance to creates the stream.
-     * @param readerConfig the config that tells how to read the file.
+     * @param path the path used to create the {@link InputStream}.
+     * @param readerConfig the configuration for reading the file.
      *
-     * @return an instance of JFileReader for the path and config specified.
+     * @return a {@link JFileReader} object configured for file reading.
      *
-     * @throws IOException when the creation of the InputStream for the path fails.
+     * @throws IOException if a problem occurs when creating {@link InputStream} for the path.
      */
     public static JFileReader newJFileReader(Path path, JFileReaderConfig readerConfig) throws IOException {
         return newJFileReader(Files.newInputStream(path), readerConfig);
     }
 
     /**
-     * Create a File Reader for UTF-8 encoding with the desired parameters.
+     * Creates a {@link JFileReader} object configured with file and configuration.
      *
-     * @param inputStream the file instance to creates the stream.
-     * @param regex the regex pattern to split the columns in a line.
+     * @param inputStream the stream to read the file content.
+     * @param regex the pattern used to split a line into columns.
      *
-     * @return an instance of JFileReader for the input stream and config specified.
+     * @return a {@link JFileReader} object configured for file reading.
      *
-     * @throws IOException when the creation of the InputStream for the file fails.
+     * @throws IOException if a problem occurs when creating {@link InputStream} for the path.
      */
     public static JFileReader newUtf8JFileReader(InputStream inputStream, String regex) throws IOException {
         return newJFileReader(inputStream, newUtf8ReaderConfig(regex));
     }
 
     /**
-     * Create a File Reader with the desired parameters.
+     * Creates a {@link JFileReader} object configured with file and configuration.
      *
      * @param inputStream the file instance to creates the stream.
-     * @param readerConfig the config that tells how to read the file.
+     * @param readerConfig the configuration for reading the file.
      *
-     * @return an instance of JFileReader for the input stream and config speciJFileReaderTestfied.
+     * @return a {@link JFileReader} object configured for file reading.
      *
-     * @throws IOException when the creation of the InputStream for the file fails.
+     * @throws IOException if a problem occurs when validating the {@link InputStream}.
      */
     public static JFileReader newJFileReader(
         InputStream inputStream,
@@ -131,23 +138,23 @@ public final class JFileReaderFactory {
     }
 
     /**
-     * Creates a JFileReaderConfig with UTF-8 charset encode.
+     * Creates a {@link JFileReaderConfig} object configured with UTF-8 encoding.
      *
-     * @param regex the regex pattern to split the columns in a line.
+     * @param regex the pattern used to split a line into columns.
      *
-     * @return a file reader config to read the file.
+     * @return a {@link JFileReaderConfig} object configured with UTF-8 encoding.
      */
     public static JFileReaderConfig newUtf8ReaderConfig(String regex) {
         return newReaderConfig(regex, StandardCharsets.UTF_8);
     }
 
     /**
-     * Creates a JFileReaderConfig with the specified charset encode.
+     * Creates a {@link JFileReaderConfig} object configured with regex and charset.
      *
-     * @param regex the regex pattern to split the columns in a line.
-     * @param charset the encode charset to read the line and columns.
+     * @param regex the pattern used to split a line into columns.
+     * @param charset the encode of the file content.
      *
-     * @return a file reader config to read the file.
+     * @return a {@link JFileReaderConfig} object.
      */
     public static JFileReaderConfig newReaderConfig(String regex, Charset charset) {
         return new JFileReaderConfigImpl(Pattern.compile(regex), charset);

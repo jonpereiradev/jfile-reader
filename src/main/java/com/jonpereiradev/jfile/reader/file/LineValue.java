@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.file;
 
+
 import java.util.SortedSet;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface LineValue extends Comparable<LineValue> {
 
     static LineValueImpl newLineValue(int lineNumber, String content, SortedSet<ColumnValue> columnValues) {

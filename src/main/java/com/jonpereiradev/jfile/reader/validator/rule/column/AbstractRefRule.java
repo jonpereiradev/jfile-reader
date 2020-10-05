@@ -23,10 +23,16 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public abstract class AbstractRefRule implements RefRule {
 
     private final int columnNumber;
@@ -74,4 +80,5 @@ public abstract class AbstractRefRule implements RefRule {
     public int getRefColumnNumber() {
         return refColumnNumber;
     }
+
 }

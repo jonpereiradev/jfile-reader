@@ -23,6 +23,11 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface RefRule extends ColumnRule {
 
     int getRefColumnNumber();

@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class MinDoubleRule extends AbstractColumnRule {
 
     private final double min;
@@ -43,4 +49,5 @@ public class MinDoubleRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return columnValue.getDouble() != null;
     }
+
 }

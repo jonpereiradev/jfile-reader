@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.RuleViolation;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,6 +36,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
 
 public class LocalDateRuleTest extends AbstractColumnRuleTest {
 

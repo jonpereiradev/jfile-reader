@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.util.Arrays;
@@ -30,6 +31,11 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class ArrayOfTypeRule extends AbstractColumnRule {
 
     private final Pattern pattern;

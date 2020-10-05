@@ -23,9 +23,15 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class NotEmptyRule extends AbstractColumnRule {
 
     public NotEmptyRule(int columnNumber) {
@@ -41,4 +47,5 @@ public class NotEmptyRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
+
 }

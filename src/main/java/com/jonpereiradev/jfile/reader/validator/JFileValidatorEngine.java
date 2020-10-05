@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
@@ -37,6 +38,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
+
 
 final class JFileValidatorEngine implements JFileValidator {
 

@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNodeImpl;
@@ -32,6 +33,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.OnlyNullRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.RefRule;
 
 import java.util.function.Function;
+
 
 abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> implements TypedRuleConfigurator<T> {
 
@@ -106,4 +108,5 @@ abstract class AbstractRuleConfigurator<T extends TypedRuleConfigurator<?>> impl
 
         return node;
     }
+
 }

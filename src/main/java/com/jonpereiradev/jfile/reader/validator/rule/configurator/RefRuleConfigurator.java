@@ -23,25 +23,37 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 /**
  * Configurate the reference column rule.
  *
  * @param <T> the type of rule configurator returned.
+ *
+ * @author jonpereiradev
+ * @since 0.1.0
  */
 public interface RefRuleConfigurator<T extends TypedRuleConfigurator<?>> {
 
     /**
-     * creates a rule for not empty column.
+     * Creates a rule for not empty column.
+     *
+     * @return the object with the rule filled configured.
      */
     T filled();
 
     /**
-     * creates a rule for column with specific values.
+     * Creates a rule for column with specific values.
+     *
+     * @param values the values that the column must have to activate the ref rule.
+     *
+     * @return the object with the rule filled configured.
      */
     T filled(Object... values);
 
     /**
-     * creates a rule for column with empty value.
+     * Creates a rule for column with empty value.
+     *
+     * @return the object with the rule empty configured.
      */
     T empty();
 

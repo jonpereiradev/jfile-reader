@@ -23,6 +23,11 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface CharacterTypeConfigurator extends TypedRuleConfigurator<CharacterTypeConfigurator> {
 
     /**

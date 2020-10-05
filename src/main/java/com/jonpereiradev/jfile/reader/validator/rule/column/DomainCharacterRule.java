@@ -23,10 +23,16 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.util.List;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class DomainCharacterRule extends AbstractColumnRule {
 
     private final List<Character> domains;

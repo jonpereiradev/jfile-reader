@@ -23,10 +23,16 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.math.BigInteger;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class MaxBigIntegerRule extends AbstractColumnRule {
 
     private final BigInteger max;
@@ -45,4 +51,5 @@ public class MaxBigIntegerRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return columnValue.getBigInteger() != null;
     }
+
 }

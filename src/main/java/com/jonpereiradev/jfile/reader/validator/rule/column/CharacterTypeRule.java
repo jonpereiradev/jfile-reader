@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class CharacterTypeRule extends AbstractColumnRule {
 
     public CharacterTypeRule(int columnNumber) {
@@ -44,4 +50,5 @@ public class CharacterTypeRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
+
 }

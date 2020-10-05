@@ -23,11 +23,13 @@
  */
 package com.jonpereiradev.jfile.reader.converter;
 
+
 import com.jonpereiradev.jfile.reader.JFileReaderConfig;
 import com.jonpereiradev.jfile.reader.file.LineValue;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 public final class ReflectionLineValueConverter implements LineValueConverter {
 
@@ -83,4 +85,5 @@ public final class ReflectionLineValueConverter implements LineValueConverter {
             throw new IllegalArgumentException(e);
         }
     }
+
 }

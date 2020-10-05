@@ -23,10 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.configurator.ColumnRuleConfigurator;
 import com.jonpereiradev.jfile.reader.validator.rule.configurator.FileRuleConfigurator;
 import com.jonpereiradev.jfile.reader.validator.rule.configurator.LineRuleConfigurator;
 
+
+/**
+ * @author jonpereiradev
+ * @see JFileValidator
+ * @since 0.1.0
+ */
 public interface JFileRuleConfig {
 
     FileRuleConfigurator files();

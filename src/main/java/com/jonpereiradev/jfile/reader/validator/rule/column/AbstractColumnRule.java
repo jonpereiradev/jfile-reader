@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public abstract class AbstractColumnRule implements ColumnRule {
 
     private final int columnNumber;
@@ -68,4 +74,5 @@ public abstract class AbstractColumnRule implements ColumnRule {
     public void setRuleNode(RuleNode<ColumnRule> ruleNode) {
         this.ruleNode = ruleNode;
     }
+
 }

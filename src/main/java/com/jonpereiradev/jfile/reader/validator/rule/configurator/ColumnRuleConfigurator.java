@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface ColumnRuleConfigurator {
 
     /**

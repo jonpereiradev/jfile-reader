@@ -23,9 +23,24 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule;
 
-import com.jonpereiradev.jfile.reader.validator.rule.column.*;
+
+import com.jonpereiradev.jfile.reader.validator.rule.column.BigDecimalRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.BigIntegerRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.BooleanRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.CharacterRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.DateRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.DoubleRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.FloatRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.IntegerRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.LocalDateRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.LocalDateTimeRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.LongRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.RefRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.ShortRuleTest;
+import com.jonpereiradev.jfile.reader.validator.rule.column.StringRuleTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -45,4 +60,5 @@ import org.junit.runners.Suite;
     RefRuleTest.class
 })
 public class ColumnRuleSuiteTests {
+
 }

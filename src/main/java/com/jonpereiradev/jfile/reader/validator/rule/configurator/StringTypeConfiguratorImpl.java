@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.column.CnpjRule;
@@ -38,6 +39,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.RegexRule;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
+
 
 final class StringTypeConfiguratorImpl extends AbstractRuleConfigurator<StringTypeConfigurator> implements StringTypeConfigurator {
 
@@ -89,4 +91,5 @@ final class StringTypeConfiguratorImpl extends AbstractRuleConfigurator<StringTy
     public StringTypeConfigurator regex(Pattern pattern) {
         return rule(columnNumber -> new RegexRule(columnNumber, pattern));
     }
+
 }

@@ -23,11 +23,21 @@
  */
 package com.jonpereiradev.jfile.reader;
 
+
 import com.jonpereiradev.jfile.reader.converter.LineValueConverter;
 
 import java.nio.charset.Charset;
 import java.util.regex.Pattern;
 
+
+/**
+ * <p>Class to configure and customize the execution of a {@link JFileReader}.</p>
+ *
+ * @author jonpereiradev
+ * @see JFileReader
+ * @see JFileReaderFactory
+ * @since 0.1.0
+ */
 public interface JFileReaderConfig extends JFilePatternConfig<JFileReaderConfig> {
 
     /**
@@ -36,7 +46,7 @@ public interface JFileReaderConfig extends JFilePatternConfig<JFileReaderConfig>
     Pattern getPattern();
 
     /**
-     * @return the charset of the string lines.
+     * @return the charset of the file content.
      */
     Charset getCharset();
 
@@ -44,7 +54,5 @@ public interface JFileReaderConfig extends JFilePatternConfig<JFileReaderConfig>
      * @return the converter responsible to transform a line into an object.
      */
     LineValueConverter getLineValueConverter();
-
-
 
 }

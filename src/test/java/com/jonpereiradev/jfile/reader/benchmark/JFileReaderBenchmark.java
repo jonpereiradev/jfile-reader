@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.benchmark;
 
+
 import com.jonpereiradev.jfile.reader.JFileReader;
 import com.jonpereiradev.jfile.reader.JFileReaderConfig;
 import com.jonpereiradev.jfile.reader.JFileReaderFactory;
@@ -52,6 +53,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
+
 
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
@@ -271,5 +273,7 @@ public class JFileReaderBenchmark extends AbstractFileReaderTest {
         public void setSix(String six) {
             this.six = six;
         }
+
     }
+
 }

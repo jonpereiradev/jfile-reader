@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.RuleViolation;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 
 final class ValidationReportImpl implements ValidationReport {
 
@@ -111,6 +113,7 @@ final class ValidationReportImpl implements ValidationReport {
         void addAll(List<RuleViolation> ruleViolations) {
             this.ruleViolations.addAll(ruleViolations);
         }
+
     }
 
 }

@@ -23,14 +23,21 @@
  */
 package com.jonpereiradev.jfile.reader;
 
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 
+
 /**
- * Config class to configure everything related to data patterns.
+ * <p>Class to configure everything related to data patterns.</p>
  *
  * @param <T> the type of class returned by the method to allow fluent builder.
+ *
+ * @author jonpereiradev
+ * @see JFileReaderConfig
+ * @see com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig
+ * @since 0.1.0
  */
 public interface JFilePatternConfig<T extends JFilePatternConfig<T>> {
 
@@ -44,7 +51,7 @@ public interface JFilePatternConfig<T extends JFilePatternConfig<T>> {
     T dateFormatter(DateFormat dateFormat);
 
     /**
-     * @return the date formatter for {@link java.util.Date}
+     * @return the date formatter for {@link java.util.Date}.
      */
     DateFormat getDateFormat();
 

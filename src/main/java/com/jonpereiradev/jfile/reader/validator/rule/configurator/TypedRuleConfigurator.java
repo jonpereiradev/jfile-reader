@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
 
 import java.util.function.Function;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface TypedRuleConfigurator<T extends TypedRuleConfigurator<?>> {
 
     /**

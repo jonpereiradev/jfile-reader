@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class MaxBigDecimalRule extends AbstractColumnRule {
 
     private final BigDecimal max;
@@ -48,4 +54,5 @@ public class MaxBigDecimalRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return columnValue.getBigDecimal(decimalFormat) != null;
     }
+
 }
