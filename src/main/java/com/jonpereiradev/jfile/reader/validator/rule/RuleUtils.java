@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule;
 
+
 public class RuleUtils {
 
     private RuleUtils() {

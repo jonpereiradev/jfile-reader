@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader;
 
+
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.JFileValidator;
 import com.jonpereiradev.jfile.reader.validator.ValidationReport;
@@ -35,8 +36,14 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+
 /**
  * Point of access for file reading and validation.
+ *
+ * @author jonpereiradev
+ * @see JFileReaderConfig
+ * @see JFileReaderFactory
+ * @since 0.1.0
  */
 public interface JFileReader extends Iterable<LineValue>, Closeable {
 

@@ -23,15 +23,28 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface DoubleTypeConfigurator extends TypedRuleConfigurator<DoubleTypeConfigurator> {
 
     /**
-     * defines a min value rule validation.
+     * Defines a min value rule validation.
+     *
+     * @param min the minimum value that is valid to the column.
+     *
+     * @return the object with the min rule configured.
      */
     DoubleTypeConfigurator min(double min);
 
     /**
-     * defines a max value rule validation.
+     * Defines a max value rule validation.
+     *
+     * @param max the maximum value that is valid to the column.
+     *
+     * @return the object with the max rule configured.
      */
     DoubleTypeConfigurator max(double max);
 

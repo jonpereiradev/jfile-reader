@@ -23,45 +23,48 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import java.util.Date;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface DateTypeConfigurator extends TypedRuleConfigurator<DateTypeConfigurator> {
 
     /**
-     * Defines a future value rule validation.
-     * Used for validate that a date must be after the present date.
+     * Defines a future value rule validation. Used for validate that a date must be after the present date.
      *
      * @return the configurator with the future rule configured.
      */
     DateTypeConfigurator future();
 
     /**
-     * Defines a future or present value rule validation.
-     * Used for validate that a date must be equal or after the present date.
+     * Defines a future or present value rule validation. Used for validate that a date must be equal or after the
+     * present date.
      *
      * @return the configurator with the future or present rule configured.
      */
     DateTypeConfigurator futureOrPresent();
 
     /**
-     * Defines a past value rule validation.
-     * Used for validate that a date must be before the present date.
+     * Defines a past value rule validation. Used for validate that a date must be before the present date.
      *
      * @return the configurator with the before rule configured.
      */
     DateTypeConfigurator past();
 
     /**
-     * Defines a before or present value rule validation.
-     * Used for validate that a date must be before or equal the present date.
+     * Defines a before or present value rule validation. Used for validate that a date must be before or equal the
+     * present date.
      *
      * @return the configurator with the before or present rule configured.
      */
     DateTypeConfigurator pastOrPresent();
 
     /**
-     * Defines a after date rule validation.
-     * Used for validate that a date must be after the date parameter.
+     * Defines a after date rule validation. Used for validate that a date must be after the date parameter.
      *
      * @param date the date that is used to compare in the rule.
      *
@@ -70,8 +73,8 @@ public interface DateTypeConfigurator extends TypedRuleConfigurator<DateTypeConf
     DateTypeConfigurator after(Date date);
 
     /**
-     * Defines after other column value rule validation.
-     * Used for validate that a date must be after another date column in the line.
+     * Defines after other column value rule validation. Used for validate that a date must be after another date column
+     * in the line.
      *
      * @param columnNumber an int columnNumber reference to other date column in the line.
      *
@@ -80,8 +83,7 @@ public interface DateTypeConfigurator extends TypedRuleConfigurator<DateTypeConf
     DateTypeConfigurator after(int columnNumber);
 
     /**
-     * Defines a before date rule validation.
-     * Used for validate that a date must be before the date parameter.
+     * Defines a before date rule validation. Used for validate that a date must be before the date parameter.
      *
      * @param date the date that is used to compare in the rule.
      *
@@ -90,8 +92,8 @@ public interface DateTypeConfigurator extends TypedRuleConfigurator<DateTypeConf
     DateTypeConfigurator before(Date date);
 
     /**
-     * Defines before other column value rule validation.
-     * Used for validate that a date must be before another date column in the line.
+     * Defines before other column value rule validation. Used for validate that a date must be before another date
+     * column in the line.
      *
      * @param columnNumber an int position reference to other date column in the line.
      *

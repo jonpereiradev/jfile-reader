@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.RuleViolation;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
+
 
 public class StringRuleTest extends AbstractColumnRuleTest {
 

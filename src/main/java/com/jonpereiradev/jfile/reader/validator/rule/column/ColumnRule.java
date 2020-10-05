@@ -23,12 +23,18 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.rule.Rule;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface ColumnRule extends Rule<ColumnValue> {
 
     @Override
@@ -48,4 +54,5 @@ public interface ColumnRule extends Rule<ColumnValue> {
     RuleNode<ColumnRule> getRuleNode();
 
     void setRuleNode(RuleNode<ColumnRule> ruleNode);
+
 }

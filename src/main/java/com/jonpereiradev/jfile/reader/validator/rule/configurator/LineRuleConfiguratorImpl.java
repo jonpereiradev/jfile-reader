@@ -23,8 +23,10 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.line.LineColumnSizeRule;
+
 
 final class LineRuleConfiguratorImpl implements LineRuleConfigurator {
 

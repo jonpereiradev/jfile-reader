@@ -23,9 +23,11 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
 import com.jonpereiradev.jfile.reader.validator.rule.file.FileRule;
 import com.jonpereiradev.jfile.reader.validator.rule.line.LineRule;
+
 
 public final class RuleRootImpl implements RuleRoot {
 
@@ -47,4 +49,5 @@ public final class RuleRootImpl implements RuleRoot {
     public RuleNode<ColumnRule> getColumnRootNode() {
         return columnRuleNode;
     }
+
 }

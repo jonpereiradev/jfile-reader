@@ -23,7 +23,9 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule;
 
+
 import java.util.Objects;
+
 
 public final class RuleViolationImpl implements RuleViolation {
 

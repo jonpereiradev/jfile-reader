@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.RuleViolation;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,6 +33,7 @@ import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.util.List;
+
 
 public class BigDecimalRuleTest extends AbstractColumnRuleTest {
 

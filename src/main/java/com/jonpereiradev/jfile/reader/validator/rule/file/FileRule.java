@@ -23,10 +23,16 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.file;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.Rule;
 
 import java.io.File;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface FileRule extends Rule<File> {
 
 }

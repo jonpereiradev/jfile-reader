@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.converter;
 
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DateTimeFormatter {

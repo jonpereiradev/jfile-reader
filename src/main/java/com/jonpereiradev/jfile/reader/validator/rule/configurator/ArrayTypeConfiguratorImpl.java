@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
@@ -30,6 +31,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
+
 
 final class ArrayTypeConfiguratorImpl implements ArrayTypeConfigurator {
 

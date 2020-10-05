@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader;
 
+
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.infrastructure.AbstractFileReaderTest;
 import com.jonpereiradev.jfile.reader.model.Example;
@@ -36,6 +37,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+
 
 public class JFileReaderTest extends AbstractFileReaderTest {
 
@@ -114,4 +116,5 @@ public class JFileReaderTest extends AbstractFileReaderTest {
             });
         }
     }
+
 }

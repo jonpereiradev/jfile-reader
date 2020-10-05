@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader;
 
+
 import com.jonpereiradev.jfile.reader.converter.LineValueConverter;
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 import com.jonpereiradev.jfile.reader.file.LineValue;
@@ -39,6 +40,7 @@ import java.util.regex.Pattern;
 
 import static com.jonpereiradev.jfile.reader.file.ColumnValue.newColumnValue;
 import static com.jonpereiradev.jfile.reader.file.LineValue.newLineValue;
+
 
 final class JFileReaderEngine implements JFileReader {
 

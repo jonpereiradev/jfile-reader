@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNodeImpl;
@@ -46,6 +47,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
+
 
 final class GenericTypeConfiguratorImpl implements GenericTypeConfigurator {
 

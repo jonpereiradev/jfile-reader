@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface GenericTypeConfigurator {
 
     /**

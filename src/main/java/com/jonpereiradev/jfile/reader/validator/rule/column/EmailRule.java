@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import java.util.regex.Pattern;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class EmailRule extends RegexRule {
 
     public EmailRule(int columnNumber) {

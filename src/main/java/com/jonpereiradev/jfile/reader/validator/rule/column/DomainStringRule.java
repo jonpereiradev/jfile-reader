@@ -23,10 +23,16 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.util.List;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class DomainStringRule extends AbstractColumnRule {
 
     private final List<String> domains;
@@ -40,4 +46,5 @@ public class DomainStringRule extends AbstractColumnRule {
     public boolean isValid(ColumnValue columnValue) {
         return domains.contains(columnValue.getText());
     }
+
 }

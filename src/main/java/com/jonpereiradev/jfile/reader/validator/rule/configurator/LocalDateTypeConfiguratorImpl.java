@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
@@ -35,6 +36,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.LocalDatePastRule;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 
 final class LocalDateTypeConfiguratorImpl
     extends AbstractRuleConfigurator<LocalDateTypeConfigurator> implements LocalDateTypeConfigurator {
@@ -77,8 +79,8 @@ final class LocalDateTypeConfiguratorImpl
     }
 
     @Override
-    public LocalDateTypeConfigurator after(int columnPosition) {
-        return rule(columnNumber -> new LocalDateAfterRule(columnNumber, dateTimeFormatter, columnPosition));
+    public LocalDateTypeConfigurator after(int columnNumber) {
+        return rule(number -> new LocalDateAfterRule(number, dateTimeFormatter, columnNumber));
     }
 
     @Override
@@ -87,8 +89,8 @@ final class LocalDateTypeConfiguratorImpl
     }
 
     @Override
-    public LocalDateTypeConfigurator before(int columnPosition) {
-        return rule(columnNumber -> new LocalDateBeforeRule(columnNumber, dateTimeFormatter, columnPosition));
+    public LocalDateTypeConfigurator before(int columnNumber) {
+        return rule(number -> new LocalDateBeforeRule(number, dateTimeFormatter, columnNumber));
     }
 
 

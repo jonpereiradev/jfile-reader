@@ -23,12 +23,18 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class DatePastRule extends AbstractColumnRule {
 
     private final DateFormat dateFormat;
@@ -49,4 +55,5 @@ public class DatePastRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return columnValue.getDate(dateFormat) != null;
     }
+
 }

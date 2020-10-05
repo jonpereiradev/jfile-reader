@@ -23,7 +23,9 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
+
 import com.jonpereiradev.jfile.reader.JFilePatternConfig;
+
 
 /**
  * Factory to create the {@link JFileValidator} implementation.

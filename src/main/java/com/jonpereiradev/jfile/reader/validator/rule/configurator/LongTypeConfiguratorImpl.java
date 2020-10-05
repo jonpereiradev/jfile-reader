@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
@@ -31,6 +32,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.MaxLongRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.MinLongRule;
 
 import java.util.Arrays;
+
 
 final class LongTypeConfiguratorImpl extends AbstractRuleConfigurator<LongTypeConfigurator> implements LongTypeConfigurator {
 
@@ -52,4 +54,5 @@ final class LongTypeConfiguratorImpl extends AbstractRuleConfigurator<LongTypeCo
     public LongTypeConfigurator domain(Long... values) {
         return rule(columnNumber -> new DomainLongRule(columnNumber, Arrays.asList(values)));
     }
+
 }

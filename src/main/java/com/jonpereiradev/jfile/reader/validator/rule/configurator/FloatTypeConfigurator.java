@@ -23,15 +23,28 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface FloatTypeConfigurator extends TypedRuleConfigurator<FloatTypeConfigurator> {
 
     /**
-     * defines a min value rule validation.
+     * Defines a min value rule validation.
+     *
+     * @param min the minimum value that is valid to the column.
+     *
+     * @return the object with the min rule configured.
      */
     FloatTypeConfigurator min(float min);
 
     /**
-     * defines a max value rule validation.
+     * Defines a max value rule validation.
+     *
+     * @param max the maximum value that is valid to the column.
+     *
+     * @return the object with the max rule configured.
      */
     FloatTypeConfigurator max(float max);
 

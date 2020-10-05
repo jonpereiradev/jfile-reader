@@ -23,14 +23,22 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
+
 import com.jonpereiradev.jfile.reader.JFilePatternConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleRoot;
 
+
+/**
+ * @author jonpereiradev
+ * @see JFileValidator
+ * @see JFileValidatorFactory
+ * @since 0.1.0
+ */
 public interface JFileValidatorConfig extends JFilePatternConfig<JFileValidatorConfig>, JFileRuleConfig {
 
     /**
-     * Configure the max violation size to limit the number of errors that a file
-     * can have before stops the validation. The default is to not have a limit.
+     * Configure the max violation size to limit the number of errors that a file can have before stops the validation.
+     * The default is to not have a limit.
      *
      * @param maxViolationSize an int number for the max violation size.
      *

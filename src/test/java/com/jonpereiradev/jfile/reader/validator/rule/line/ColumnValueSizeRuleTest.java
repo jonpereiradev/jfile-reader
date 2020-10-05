@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.line;
 
+
 import com.jonpereiradev.jfile.reader.JFileReader;
 import com.jonpereiradev.jfile.reader.JFileReaderConfig;
 import com.jonpereiradev.jfile.reader.JFileReaderFactory;
@@ -37,6 +38,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+
 
 public class ColumnValueSizeRuleTest extends AbstractFileReaderTest {
 

@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface FileRuleConfigurator {
 
     static FileRuleConfigurator defaultConfigurator(JFileValidatorConfig configuration) {
@@ -32,7 +38,9 @@ public interface FileRuleConfigurator {
     }
 
     /**
-     * creates the rule configurator for lines.
+     * Creates the rule configurator for lines.
+     *
+     * @return the configurator to configure lines rules.
      */
     LineRuleConfigurator lines();
 

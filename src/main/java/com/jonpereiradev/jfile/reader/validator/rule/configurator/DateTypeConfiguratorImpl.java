@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
@@ -35,6 +36,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.DatePastRule;
 
 import java.text.DateFormat;
 import java.util.Date;
+
 
 final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeConfigurator> implements DateTypeConfigurator {
 
@@ -74,8 +76,8 @@ final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeCo
     }
 
     @Override
-    public DateTypeConfigurator after(int columnPosition) {
-        return rule(columnNumber -> new DateAfterRule(columnNumber, dateFormat, columnPosition));
+    public DateTypeConfigurator after(int columnNumber) {
+        return rule(number -> new DateAfterRule(number, dateFormat, columnNumber));
     }
 
     @Override
@@ -84,7 +86,8 @@ final class DateTypeConfiguratorImpl extends AbstractRuleConfigurator<DateTypeCo
     }
 
     @Override
-    public DateTypeConfigurator before(int columnPosition) {
-        return rule(columnNumber -> new DateBeforeRule(columnNumber, dateFormat, columnPosition));
+    public DateTypeConfigurator before(int columnNumber) {
+        return rule(number -> new DateBeforeRule(number, dateFormat, columnNumber));
     }
+
 }

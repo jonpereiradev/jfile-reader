@@ -23,10 +23,16 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.line;
 
+
 import com.jonpereiradev.jfile.reader.file.LineValue;
 import com.jonpereiradev.jfile.reader.validator.rule.Rule;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleUtils;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface LineRule extends Rule<LineValue> {
 
     @Override

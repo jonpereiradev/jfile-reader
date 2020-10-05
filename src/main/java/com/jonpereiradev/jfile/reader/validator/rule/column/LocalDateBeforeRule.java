@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class LocalDateBeforeRule extends AbstractColumnRule {
 
     private final DateTimeFormatter dateTimeFormatter;
@@ -66,4 +72,5 @@ public class LocalDateBeforeRule extends AbstractColumnRule {
 
         return getLineValue().getColumnValue(refColumnNumber).getLocalDate(dateTimeFormatter);
     }
+
 }

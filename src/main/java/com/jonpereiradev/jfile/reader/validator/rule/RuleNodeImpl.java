@@ -23,10 +23,12 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
 
 public class RuleNodeImpl<T extends Rule<?>> implements RuleNode<T> {
 

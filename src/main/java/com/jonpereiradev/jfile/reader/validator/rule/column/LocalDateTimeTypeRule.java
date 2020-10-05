@@ -23,11 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class LocalDateTimeTypeRule extends AbstractColumnRule {
 
     private final DateTimeFormatter dateTimeFormatter;
@@ -50,4 +56,5 @@ public class LocalDateTimeTypeRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return true;
     }
+
 }

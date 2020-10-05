@@ -23,12 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.file;
 
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.stream.Stream;
+
 
 final class LineValueImpl implements LineValue {
 

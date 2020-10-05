@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import java.math.BigInteger;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface BigIntegerTypeConfigurator extends TypedRuleConfigurator<BigIntegerTypeConfigurator> {
 
     /**

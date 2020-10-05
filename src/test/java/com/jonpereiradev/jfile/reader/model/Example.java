@@ -23,12 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.model;
 
+
 import com.jonpereiradev.jfile.reader.converter.DateTimeFormatter;
 import com.jonpereiradev.jfile.reader.converter.DecimalFormatter;
 import com.jonpereiradev.jfile.reader.converter.FileColumn;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 
 public class Example {
 
@@ -122,4 +124,5 @@ public class Example {
     public void setJustificativa(String justificativa) {
         this.justificativa = justificativa;
     }
+
 }

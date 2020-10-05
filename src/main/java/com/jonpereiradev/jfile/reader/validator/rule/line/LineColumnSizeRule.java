@@ -23,7 +23,9 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.line;
 
+
 import com.jonpereiradev.jfile.reader.file.LineValue;
+
 
 public class LineColumnSizeRule implements LineRule {
 
@@ -36,4 +38,5 @@ public class LineColumnSizeRule implements LineRule {
     public boolean isValid(LineValue lineValue) {
         return lineValue.getColumnValues().size() == size;
     }
+
 }

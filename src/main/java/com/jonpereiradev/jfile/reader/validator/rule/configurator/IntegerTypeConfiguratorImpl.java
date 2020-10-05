@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
@@ -31,6 +32,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.MaxIntegerRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.MinIntegerRule;
 
 import java.util.Arrays;
+
 
 final class IntegerTypeConfiguratorImpl extends AbstractRuleConfigurator<IntegerTypeConfigurator> implements IntegerTypeConfigurator {
 

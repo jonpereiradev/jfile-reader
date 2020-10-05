@@ -23,8 +23,14 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.JFileValidatorConfig;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface LineRuleConfigurator {
 
     static LineRuleConfigurator defaultConfigurator(JFileValidatorConfig configuration) {
@@ -32,12 +38,18 @@ public interface LineRuleConfigurator {
     }
 
     /**
-     * define the number of columns for one line.
+     * Define the number of columns for one line.
+     *
+     * @param size the number of columns that is valid to the line.
+     *
+     * @return the object with the column size rule configured.
      */
     LineRuleConfigurator columnsSize(int size);
 
     /**
-     * creates the rule config for the column at position.
+     * Creates the rule config for the column at position.
+     *
+     * @return the configurator to configure column rules.
      */
     ColumnRuleConfigurator columns();
 

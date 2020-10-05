@@ -28,6 +28,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 final class GetterSetterPair {
 
     private Field field;

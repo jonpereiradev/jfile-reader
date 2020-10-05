@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader;
 
+
 import com.jonpereiradev.jfile.reader.converter.LineValueConverter;
 import com.jonpereiradev.jfile.reader.converter.ReflectionLineValueConverter;
 
@@ -31,6 +32,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
+
 
 final class JFileReaderConfigImpl implements JFileReaderConfig {
 

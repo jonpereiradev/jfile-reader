@@ -23,52 +23,86 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import java.util.regex.Pattern;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface StringTypeConfigurator extends TypedRuleConfigurator<StringTypeConfigurator> {
 
     /**
-     * defines a not empty rule validation.
+     * Defines a not empty rule validation.
+     *
+     * @return the object with the not empty rule configured.
      */
     StringTypeConfigurator notEmpty();
 
     /**
-     * defines a min length rule validation.
+     * Defines a min length rule validation.
+     *
+     * @param minLength the minimum length of the string.
+     *
+     * @return the object with the min length rule configured.
      */
     StringTypeConfigurator minLength(int minLength);
 
     /**
-     * defines a max length rule validation.
+     * Defines a max length rule validation.
+     *
+     * @param maxLength the maximum length of the string.
+     *
+     * @return the object with the max length rule configured.
      */
     StringTypeConfigurator maxLength(int maxLength);
 
     /**
-     * defines a exact length rule validation.
+     * Defines a exact length rule validation.
+     *
+     * @param length the exact length of the string.
+     *
+     * @return the object with the exact length rule configured.
      */
     StringTypeConfigurator exactLength(int length);
 
     /**
-     * defines a domain rule validation with possible values options.
+     * Defines a domain rule validation with possible values options.
+     *
+     * @param values the possible values to a column.
+     *
+     * @return the object with the domain rule configured.
      */
     StringTypeConfigurator domain(String... values);
 
     /**
-     * defines an email rule validation.
+     * Defines an email rule validation.
+     *
+     * @return the object with the email rule configured.
      */
     StringTypeConfigurator email();
 
     /**
-     * defines a brazilian document CPF rule validation.
+     * Defines a brazilian document CPF rule validation.
+     *
+     * @return the object with the cpf rule configured.
      */
     StringTypeConfigurator cpf();
 
     /**
-     * defines a brazilian document CNPJ rule validation.
+     * Defines a brazilian document CNPJ rule validation.
+     *
+     * @return the object with the cnpj rule configured.
      */
     StringTypeConfigurator cnpj();
 
     /**
-     * defines a pattern rule validation.
+     * Defines a pattern rule validation.
+     *
+     * @param pattern a pattern to define valid string state.
+     *
+     * @return the object with the pattern rule configured.
      */
     StringTypeConfigurator regex(Pattern pattern);
 

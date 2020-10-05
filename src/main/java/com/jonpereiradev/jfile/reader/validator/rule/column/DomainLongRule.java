@@ -23,10 +23,16 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.column;
 
+
 import com.jonpereiradev.jfile.reader.file.ColumnValue;
 
 import java.util.List;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public class DomainLongRule extends AbstractColumnRule {
 
     private final List<Long> domains;
@@ -45,4 +51,5 @@ public class DomainLongRule extends AbstractColumnRule {
     public boolean canValidate(ColumnValue columnValue) {
         return columnValue.getLong() != null;
     }
+
 }

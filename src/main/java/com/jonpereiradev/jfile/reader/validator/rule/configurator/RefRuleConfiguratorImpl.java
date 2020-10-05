@@ -23,6 +23,7 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNode;
 import com.jonpereiradev.jfile.reader.validator.rule.RuleNodeImpl;
 import com.jonpereiradev.jfile.reader.validator.rule.column.ColumnRule;
@@ -32,6 +33,7 @@ import com.jonpereiradev.jfile.reader.validator.rule.column.FilledRefRule;
 import com.jonpereiradev.jfile.reader.validator.rule.column.RefRule;
 
 import java.util.Arrays;
+
 
 final class RefRuleConfiguratorImpl<T extends TypedRuleConfigurator<?>> implements RefRuleConfigurator<T> {
 
@@ -74,4 +76,5 @@ final class RefRuleConfiguratorImpl<T extends TypedRuleConfigurator<?>> implemen
         currentConfigurator.setRuleNode(ref.getRuleNode());
         return currentConfigurator;
     }
+
 }

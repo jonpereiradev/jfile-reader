@@ -23,6 +23,11 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface Rule<T> {
 
     boolean isValid(T object);

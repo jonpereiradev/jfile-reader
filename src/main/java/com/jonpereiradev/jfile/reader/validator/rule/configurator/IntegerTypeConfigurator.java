@@ -23,20 +23,37 @@
  */
 package com.jonpereiradev.jfile.reader.validator.rule.configurator;
 
+
+/**
+ * @author jonpereiradev
+ * @since 0.1.0
+ */
 public interface IntegerTypeConfigurator extends TypedRuleConfigurator<IntegerTypeConfigurator> {
 
     /**
-     * defines a min value rule validation.
+     * Defines a min value rule validation.
+     *
+     * @param min the minimum value that is valid to the column.
+     *
+     * @return the object with the min rule configured.
      */
     IntegerTypeConfigurator min(int min);
 
     /**
-     * defines a max value rule validation.
+     * Defines a max value rule validation.
+     *
+     * @param max the maximum value that is valid to the column.
+     *
+     * @return the object with the max rule configured.
      */
     IntegerTypeConfigurator max(int max);
 
     /**
-     * defines a domain rule validation with possible values options.
+     * Defines a domain rule validation with possible values options.
+     *
+     * @param values the possible values to a column.
+     *
+     * @return the object with the domain rule configured.
      */
     IntegerTypeConfigurator domain(Integer... values);
 

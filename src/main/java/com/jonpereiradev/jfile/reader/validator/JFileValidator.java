@@ -23,10 +23,17 @@
  */
 package com.jonpereiradev.jfile.reader.validator;
 
+
 import com.jonpereiradev.jfile.reader.file.LineValue;
+
 
 /**
  * Point of access for file validation.
+ *
+ * @author jonpereiradev
+ * @see JFileValidatorFactory
+ * @see JFileValidatorConfig
+ * @since 0.1.0
  */
 public interface JFileValidator {
 
